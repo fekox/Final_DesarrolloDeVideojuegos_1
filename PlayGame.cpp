@@ -7,23 +7,45 @@ void startGame()
     int screenWidth = 1024;
     int screenHeight = 768;
 
-    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.1");
+    initGame(screenWidth, screenHeight);
 
-    SetTargetFPS(60);
+    gameLoop();
+
+    quitGame();
+}
+
+void initGame(int screenWidth, int screenHeight)
+{
+    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.1");
+}
+
+void gameLoop()
+{
+    SetExitKey(NULL);
 
     while (!WindowShouldClose())
     {
-        // Update
+        update();
 
-        // Draw
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-        EndDrawing();
+        draw();
     }
+}
 
+void update()
+{
+
+}
+
+void draw()
+{
+    BeginDrawing();
+
+    ClearBackground(RAYWHITE);
+
+    EndDrawing();
+}
+
+void quitGame()
+{
     CloseWindow();
 }
