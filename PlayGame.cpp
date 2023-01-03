@@ -41,19 +41,14 @@ void gameLoop()
 
 void update()
 {
-    collisions();
-}
 
-void collisions()
-{
-    playerCollisionLimit(player, GetScreenWidth(), GetScreenHeight());
 }
 
 void draw()
 {
     BeginDrawing();
 
-    ClearBackground(BLACK);
+    ClearBackground(RAYWHITE);
 
     drawPlayer(player);
 

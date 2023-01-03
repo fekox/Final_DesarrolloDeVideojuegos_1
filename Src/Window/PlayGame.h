@@ -8,6 +8,8 @@ void gameLoop();
 
 void update();
 
+void collisions();
+
 void draw();
 
 void quitGame();

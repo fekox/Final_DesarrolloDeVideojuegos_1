@@ -19,18 +19,27 @@
     <Filter Include="Src\Window">
       <UniqueIdentifier>{5e00e572-7c1a-45ec-aa20-931d45f44516}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Objects">
+      <UniqueIdentifier>{32b8e39c-28a3-4ebc-a77e-45d931607294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Main.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGame.cpp">
+    <ClCompile Include="Src\Objects\Player.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Window\PlayGame.cpp">
       <Filter>Src\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Window\PlayGame.h">
       <Filter>Src\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Objects\Player.h">
+      <Filter>Src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
