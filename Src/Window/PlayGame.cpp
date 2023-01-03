@@ -4,6 +4,7 @@
 
 #include "Objects/Player.h"
 #include "Objects/Platform.h"
+#include "Objects/Wall.h"
 
 //Collisions
 bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2w, float r2h);
@@ -16,6 +17,9 @@ void PlayerJump(Player& player);
 Player player;
 
 Platform platform;
+
+int const maxWalls = 2;
+Wall wall[maxWalls];
 
 void StartGame()
 {
@@ -38,6 +42,25 @@ void InitGame(int screenWidth, int screenHeight)
 
     //Platform
     platform = CreatePlatform(screenWidth, screenHeight);
+
+    //Wall
+    for (int i = 0; i < maxWalls; i++)
+    {
+        wall[i] = CreateWall();
+    }
+    //Right Wall
+    wall[0].pos.x = static_cast<float>(screenWidth / 1.25f);
+    wall[0].pos.y = -2;
+
+    wall[0].width = 40;
+    wall[0].height = 770;
+
+    //Left Wall
+    wall[1].pos.x = static_cast<float>(screenWidth / 6);
+    wall[1].pos.y = -2;
+
+    wall[1].width = 40;
+    wall[1].height = 770;
 }
 
 void GameLoop()
@@ -60,7 +83,9 @@ void Update()
 
 void Collisions()
 {
-    PlayerCollisionLimit(player, GetScreenWidth(), GetScreenHeight());
+    PlayerCollisionLimitLeft(player, wall[0]);
+    PlayerCollisionLimitRight(player, wall[1]);
+    
     PlayerCollision();
 }
 
@@ -73,6 +98,11 @@ void Draw()
     DrawPlatform(platform);
 
     DrawPlayer(player);
+
+    for (int i = 0; i < maxWalls; i++)
+    {
+        DrawWall(wall[i]);
+    }
 
     EndDrawing();
 }

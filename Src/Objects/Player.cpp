@@ -30,23 +30,18 @@ void DrawPlayer(Player& player)
 	DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), RED);
 }
 
-void PlayerCollisionLimit(Player& player, int screenWidth, int screenHeight)
+void PlayerCollisionLimitLeft(Player& player, Wall& wall)
 {
-	if (player.pos.x > screenWidth - player.width)
+	if (player.pos.x > wall.pos.x - wall.width)
 	{
-		player.pos.x = screenWidth - player.width;
+		player.pos.x = wall.pos.x - wall.width;
 	}
-	if (player.pos.x < screenWidth / screenWidth)
-	{
-		player.pos.x = static_cast<float>(screenWidth / screenWidth);
-	}
+}
 
-	if (player.pos.y > screenHeight - player.height)
+void PlayerCollisionLimitRight(Player& player, Wall& wall)
+{
+	if (player.pos.x < wall.pos.x + wall.width)
 	{
-		player.pos.y = screenHeight - player.height;
-	}
-	if (player.pos.y < screenHeight / screenHeight)
-	{
-		player.pos.y = static_cast<float>(screenHeight / screenHeight);
+		player.pos.x = wall.pos.x + wall.width;
 	}
 }

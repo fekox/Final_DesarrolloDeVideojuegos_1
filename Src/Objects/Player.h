@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+#include "Objects/Wall.h"
+
 struct Player
 {
 	Vector2 pos;
@@ -30,4 +32,5 @@ Player CreatePlayer(int screenWidth, int screenHeight);
 
 void DrawPlayer(Player& player);
 
-void PlayerCollisionLimit(Player& player, int screenWidth, int screenHeight);
+void PlayerCollisionLimitLeft(Player& player, Wall& wall);
+void PlayerCollisionLimitRight(Player& player, Wall& wall);
