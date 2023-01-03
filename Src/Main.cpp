@@ -1,6 +1,8 @@
 #include <iostream>
 
-int main()
+#include "Window/PlayGame.h"
+
+int main(void)
 {
-    std::cout << "Hello World!\n";
+    startGame();
 }
