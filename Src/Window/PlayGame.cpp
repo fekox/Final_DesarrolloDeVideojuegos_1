@@ -4,6 +4,9 @@
 
 #include "Objects/Player.h"
 
+void playerMovement(Player& player);
+void playerJump(Player& player);
+
 Player player;
 
 void startGame()
@@ -41,6 +44,7 @@ void gameLoop()
 
 void update()
 {
+    playerMovement(player);
     collisions();
 }
 
@@ -63,4 +67,42 @@ void draw()
 void quitGame()
 {
     CloseWindow();
+}
+
+void playerMovement(Player& players)
+{
+    if (players.isActive == true)
+    {
+        if (IsKeyDown(KEY_A))
+        {
+            players.pos.x -= players.speed * GetFrameTime();
+        }
+
+        if (IsKeyDown(KEY_D))
+        {
+            players.pos.x += players.speed * GetFrameTime();
+        }
+
+        if (IsKeyDown(KEY_W) && players.isJumping == false)
+        {
+            playerJump(players);
+        }
+
+        if (players.isJumping == true)
+        {
+            players.gravity = players.gravity + players.jumpForce * GetFrameTime();
+            players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+        }
+    }
+}
+
+void playerJump(Player& players)
+{
+    players.gravity = -250;
+    players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+
+    if (players.pos.y < 650)
+    {
+        players.isJumping = true;
+    }
 }

@@ -20,6 +20,7 @@ struct Player
 
 	bool isJumping;
 	bool isCollision;
+	bool isActive;
 
 	Texture tex;
 	Color color;

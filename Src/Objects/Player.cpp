@@ -18,6 +18,7 @@ Player createPlayer(int screenWidth, int screenHeight)
 
 	player.isJumping = false;
 	player.isCollision = false;
+	player.isActive = true;
 
 	player.color = WHITE;
 
@@ -31,23 +32,21 @@ void drawPlayer(Player& player)
 
 void playerCollisionLimit(Player& player, int screenWidth, int screenHeight)
 {
-	if (player.pos.x < 0)
+	if (player.pos.x > screenWidth - player.width)
 	{
-		player.pos.x = player.pos.x + screenWidth;
+		player.pos.x = screenWidth - player.width;
+	}
+	if (player.pos.x < screenWidth / screenWidth)
+	{
+		player.pos.x = static_cast<float>(screenWidth / screenWidth);
 	}
 
-	if (player.pos.x >= screenWidth)
+	if (player.pos.y > screenHeight - player.height)
 	{
-		player.pos.x = player.pos.x - screenWidth;
+		player.pos.y = screenHeight - player.height;
 	}
-
-	if (player.pos.y < 0)
+	if (player.pos.y < screenHeight / screenHeight)
 	{
-		player.pos.y = player.pos.y + screenHeight;
-	}
-
-	if (player.pos.y >= screenHeight)
-	{
-		player.pos.y = player.pos.y - screenHeight;
+		player.pos.y = static_cast<float>(screenHeight / screenHeight);
 	}
 }
