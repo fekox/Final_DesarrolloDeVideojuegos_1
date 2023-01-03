@@ -1,6 +1,6 @@
 #include "Objects/Player.h"
 
-Player createPlayer(int screenWidth, int screenHeight)
+Player CreatePlayer(int screenWidth, int screenHeight)
 {
 	Player player;
 
@@ -25,12 +25,12 @@ Player createPlayer(int screenWidth, int screenHeight)
 	return player;
 }
 
-void drawPlayer(Player& player)
+void DrawPlayer(Player& player)
 {
 	DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), RED);
 }
 
-void playerCollisionLimit(Player& player, int screenWidth, int screenHeight)
+void PlayerCollisionLimit(Player& player, int screenWidth, int screenHeight)
 {
 	if (player.pos.x > screenWidth - player.width)
 	{

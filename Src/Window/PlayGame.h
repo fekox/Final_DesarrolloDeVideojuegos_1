@@ -1,15 +1,15 @@
 #pragma once
 
-void startGame();
+void StartGame();
 
-void initGame(int screenWidth, int screenHeight);
+void InitGame(int screenWidth, int screenHeight);
 
-void gameLoop();
+void GameLoop();
 
-void update();
+void Update();
 
-void collisions();
+void Collisions();
 
-void draw();
+void Draw();
 
-void quitGame();
+void QuitGame();

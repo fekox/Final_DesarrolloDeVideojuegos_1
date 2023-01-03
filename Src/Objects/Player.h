@@ -26,8 +26,8 @@ struct Player
 	Color color;
 };
 
-Player createPlayer(int screenWidth, int screenHeight);
+Player CreatePlayer(int screenWidth, int screenHeight);
 
-void drawPlayer(Player& player);
+void DrawPlayer(Player& player);
 
-void playerCollisionLimit(Player& player, int screenWidth, int screenHeight);
+void PlayerCollisionLimit(Player& player, int screenWidth, int screenHeight);

@@ -4,72 +4,72 @@
 
 #include "Objects/Player.h"
 
-void playerMovement(Player& player);
-void playerJump(Player& player);
+void PlayerMovement(Player& player);
+void PlayerJump(Player& player);
 
 Player player;
 
-void startGame()
+void StartGame()
 {
     int screenWidth = 1024;
     int screenHeight = 768;
 
-    initGame(screenWidth, screenHeight);
+    InitGame(screenWidth, screenHeight);
 
-    gameLoop();
+    GameLoop();
 
-    quitGame();
+    QuitGame();
 }
 
-void initGame(int screenWidth, int screenHeight)
+void InitGame(int screenWidth, int screenHeight)
 {
     InitWindow(screenWidth, screenHeight, "Pingu Climber V0.1");
 
     //Player
 
-    player = createPlayer(screenWidth, screenHeight);
+    player = CreatePlayer(screenWidth, screenHeight);
 }
 
-void gameLoop()
+void GameLoop()
 {
     SetExitKey(NULL);
 
     while (!WindowShouldClose())
     {
-        update();
+        Update();
 
-        draw();
+        Draw();
     }
 }
 
-void update()
+void Update()
 {
-    playerMovement(player);
-    collisions();
+    PlayerMovement(player);
+    Collisions();
 }
 
-void collisions()
+void Collisions()
 {
-    playerCollisionLimit(player, GetScreenWidth(), GetScreenHeight());
+    PlayerCollisionLimit(player, GetScreenWidth(), GetScreenHeight());
 }
 
-void draw()
+void Draw()
 {
     BeginDrawing();
 
     ClearBackground(BLACK);
 
-    drawPlayer(player);
+    DrawPlayer(player);
 
     EndDrawing();
 }
 
-void quitGame()
+void QuitGame()
 {
     CloseWindow();
 }
 
-void playerMovement(Player& players)
+void PlayerMovement(Player& players)
 {
     if (players.isActive == true)
     {
@@ -85,7 +85,7 @@ void playerMovement(Player& players)
 
         if (IsKeyDown(KEY_W) && players.isJumping == false)
         {
-            playerJump(players);
+            PlayerJump(players);
         }
 
         if (players.isJumping == true)
@@ -96,7 +96,7 @@ void playerMovement(Player& players)
     }
 }
 
-void playerJump(Player& players)
+void PlayerJump(Player& players)
 {
     players.gravity = -250;
     players.pos.y = players.pos.y + players.gravity * GetFrameTime();
