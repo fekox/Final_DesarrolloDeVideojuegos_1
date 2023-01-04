@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-struct Platform
+struct Ground
 {
 	Vector2 pos;
 
@@ -14,6 +14,6 @@ struct Platform
 	Color color;
 };
 
-Platform CreatePlatform();
+Ground CreateGround(int screenWidth, int screenHeight);
 
-void DrawPlatform(Platform& platform);
+void DrawGround(Ground& platform);

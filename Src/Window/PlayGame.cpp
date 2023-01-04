@@ -3,6 +3,7 @@
 #include "Window/PlayGame.h"
 
 #include "Objects/Player.h"
+#include "Objects/Ground.h"
 #include "Objects/Platform.h"
 #include "Objects/Wall.h"
 
@@ -16,7 +17,8 @@ void PlayerJump(Player& player);
 
 Player player;
 
-Platform platform;
+int const maxPlatforms = 6;
+Platform platform[maxPlatforms];
 
 int const maxWalls = 2;
 Wall wall[maxWalls];
@@ -41,7 +43,24 @@ void InitGame(int screenWidth, int screenHeight)
     player = CreatePlayer(screenWidth, screenHeight);
 
     //Platform
-    platform = CreatePlatform(screenWidth, screenHeight);
+    for (int i = 0; i < maxPlatforms; i++)
+    {
+        platform[i] = CreatePlatform();
+    }
+
+    platform[0].pos.x = static_cast<float>(screenWidth / screenWidth);
+    platform[0].pos.y = static_cast<float>(screenHeight / 1.1f);
+    platform[0].width = static_cast<float>(screenWidth);
+    platform[0].height = 70;
+
+    platform[1].pos.x = static_cast<float>(screenWidth / 5);
+    platform[1].pos.y = static_cast<float>(screenHeight / 1.5);
+
+    platform[2].pos.x = static_cast<float>(screenWidth / 2.2);
+    platform[2].pos.y = static_cast<float>(screenHeight / 2);
+
+    platform[3].pos.x = static_cast<float>(screenWidth / 3.8);
+    platform[3].pos.y = static_cast<float>(screenHeight / 3.5);
 
     //Wall
     for (int i = 0; i < maxWalls; i++)
@@ -95,7 +114,10 @@ void Draw()
 
     ClearBackground(BLACK);
 
-    DrawPlatform(platform);
+    for (int i = 0; i < maxPlatforms; i++)
+    {
+        DrawPlatform(platform[i]);
+    }
 
     DrawPlayer(player);
 
@@ -126,10 +148,13 @@ bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2
 
 void PlayerCollision()
 {
-    if (CheckCollisionRecRec(player.pos, player.width, player.height, platform.pos, platform.width, platform.height))
+    for (int i = 0; i < maxPlatforms; i++)
     {
-        player.isJumping = false;
-        player.gravity = 0;
+        if (CheckCollisionRecRec(player.pos, player.width, player.height, platform[i].pos, platform[i].width, platform[i].height))
+        {
+            player.canJump = false;
+            player.gravity = 0;
+        }
     }
 }
 
@@ -147,26 +172,32 @@ void PlayerMovement(Player& players)
             players.pos.x += players.speed * GetFrameTime();
         }
 
-        if (IsKeyDown(KEY_W) && players.isJumping == false)
+        if (IsKeyDown(KEY_W) && player.canJump == false)
         {
-            PlayerJump(players);
+            PlayerJump(player);
         }
 
-        if (players.isJumping == true && player.pos.y < platform.pos.y)
+        for (int i = 0; i < maxPlatforms; i++)
         {
-            players.gravity = players.gravity + players.jumpForce * GetFrameTime();
-            players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+            if (player.pos.y < platform[i].pos.y)
+            {
+                players.gravity = players.gravity + players.jumpForce * GetFrameTime();
+                players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+
+                players.canJump = true;
+
+                if(player.pos.y > platform[i].pos.y)
+                {
+                    players.gravity = 0;
+                    players.canJump = false;
+                }
+            }
         }
     }
 }
 
 void PlayerJump(Player& players)
 {
-    players.gravity = -250;
+    players.gravity = -350;
     players.pos.y = players.pos.y + players.gravity * GetFrameTime();
-
-    if (players.pos.y < 650)
-    {
-        players.isJumping = true;
-    }
 }

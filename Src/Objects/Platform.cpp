@@ -1,14 +1,14 @@
 #include "Objects/Platform.h"
 
-Platform CreatePlatform(int screenWidth, int screenHeight)
+Platform CreatePlatform()
 {
 	Platform platform;
 
-	platform.pos.x = static_cast<float>(screenWidth / screenWidth);
-	platform.pos.y = static_cast<float>(screenHeight / 1.1f);
+	platform.pos.x = 0;
+	platform.pos.y = 0;
 
-	platform.width = static_cast<float>(screenWidth);
-	platform.height = 70;
+	platform.width = 140;
+	platform.height = 30;
 
 	platform.color = YELLOW;
 

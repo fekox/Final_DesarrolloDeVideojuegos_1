@@ -20,7 +20,7 @@ struct Player
 
 	int points;
 
-	bool isJumping;
+	bool canJump;
 	bool isCollision;
 	bool isActive;
 
