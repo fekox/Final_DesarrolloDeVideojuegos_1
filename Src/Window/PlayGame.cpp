@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "raylib.h"
 
 #include "Window/PlayGame.h"
@@ -6,6 +8,8 @@
 #include "Objects/Ground.h"
 #include "Objects/Platform.h"
 #include "Objects/Wall.h"
+
+using namespace std;
 
 //Collisions
 bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2w, float r2h);
@@ -22,6 +26,8 @@ Platform platform[maxPlatforms];
 
 int const maxWalls = 2;
 Wall wall[maxWalls];
+
+float cont = 1.0f;
 
 void StartGame()
 {
@@ -152,10 +158,12 @@ void PlayerCollision()
     {
         if (CheckCollisionRecRec(player.pos, player.width, player.height, platform[i].pos, platform[i].width, platform[i].height))
         {
-            player.canJump = false;
             player.gravity = 0;
+            player.canJump = true;
+            cont = 1;
         }
     }
+
 }
 
 void PlayerMovement(Player& players)
@@ -172,25 +180,30 @@ void PlayerMovement(Player& players)
             players.pos.x += players.speed * GetFrameTime();
         }
 
-        if (IsKeyDown(KEY_W) && player.canJump == false)
+        if (IsKeyDown(KEY_W))
         {
-            PlayerJump(player);
+            players.canJump = false;
+
+            if (players.canJump == false)
+            {
+                PlayerJump(player);
+            }
         }
 
-        for (int i = 0; i < maxPlatforms; i++)
+        if (cont > 0)
         {
-            if (player.pos.y < platform[i].pos.y)
+            cont = cont - GetFrameTime();
+        }
+
+        if (cont <= 0)
+        {
+            players.canJump = false;
+
+            if (players.canJump == false)
             {
+                players.gravity = 350;
                 players.gravity = players.gravity + players.jumpForce * GetFrameTime();
                 players.pos.y = players.pos.y + players.gravity * GetFrameTime();
-
-                players.canJump = true;
-
-                if(player.pos.y > platform[i].pos.y)
-                {
-                    players.gravity = 0;
-                    players.canJump = false;
-                }
             }
         }
     }

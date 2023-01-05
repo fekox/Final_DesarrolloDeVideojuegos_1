@@ -16,7 +16,7 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 
 	player.jumpForce = 300;
 
-	player.canJump = false;
+	player.canJump = true;
 	player.isCollision = false;
 	player.isActive = true;
 
