@@ -9,6 +9,8 @@ struct Platform
 	float width;
 	float height;
 
+	bool isActive;
+
 	Texture tex;
 
 	Color color;

@@ -45,3 +45,16 @@ void PlayerCollisionLimitRight(Player& player, Wall& wall)
 		player.pos.x = wall.pos.x + wall.width;
 	}
 }
+
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight)
+{
+	if (player.pos.y > static_cast<float>(screenHeight))
+	{
+		player.pos.y = static_cast<float>(screenHeight / screenHeight);
+	}
+
+	if (player.pos.y < static_cast<float>(screenHeight / screenHeight))
+	{
+		player.pos.y = static_cast<float>(screenHeight);
+	}
+}

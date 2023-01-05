@@ -22,7 +22,7 @@ void PlayerJump(Player& player);
 Player player;
 float cont = 0.6f;
 
-int const maxPlatforms = 6;
+int const maxPlatforms = 5;
 Platform platform[maxPlatforms];
 
 int const maxWalls = 2;
@@ -48,12 +48,11 @@ void InitGame(int screenWidth, int screenHeight)
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
 
-    //Platform
+    //Platforms level 1
     for (int i = 0; i < maxPlatforms; i++)
     {
         platform[i] = CreatePlatform();
     }
-
     platform[0].pos.x = static_cast<float>(screenWidth / screenWidth);
     platform[0].pos.y = static_cast<float>(screenHeight / 1.1f);
     platform[0].width = static_cast<float>(screenWidth);
@@ -113,6 +112,7 @@ void Collisions()
 {
     PlayerCollisionLimitLeft(player, wall[0]);
     PlayerCollisionLimitRight(player, wall[1]);
+    PlayerCollisionLimitUpAndDown(player, GetScreenHeight());
     
     PlayerCollision();
 }
@@ -125,7 +125,10 @@ void Draw()
 
     for (int i = 0; i < maxPlatforms; i++)
     {
-        DrawPlatform(platform[i]);
+        if (platform[i].isActive == true)
+        {
+            DrawPlatform(platform[i]);
+        }
     }
 
     DrawPlayer(player);
@@ -159,11 +162,14 @@ void PlayerCollision()
 {
     for (int i = 0; i < maxPlatforms; i++)
     {
-        if (CheckCollisionRecRec(player.pos, player.width, player.height, platform[i].pos, platform[i].width, platform[i].height))
+        if (platform[i].isActive == true)
         {
-            player.gravity = 0;
-            player.canJump = true;
-            cont = 0.6f;
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platform[i].pos, platform[i].width, platform[i].height))
+            {
+                player.gravity = 0;
+                player.canJump = true;
+                cont = 0.6f;
+            }
         }
     }
 }

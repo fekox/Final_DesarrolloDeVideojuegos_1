@@ -10,6 +10,8 @@ Platform CreatePlatform()
 	platform.width = 140;
 	platform.height = 30;
 
+	platform.isActive = true;
+
 	platform.color = YELLOW;
 
 	return platform;
