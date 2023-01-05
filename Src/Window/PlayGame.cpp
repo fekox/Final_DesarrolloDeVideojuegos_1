@@ -20,6 +20,7 @@ void PlayerMovement(Player& player);
 void PlayerJump(Player& player);
 
 Player player;
+float cont = 0.6f;
 
 int const maxPlatforms = 6;
 Platform platform[maxPlatforms];
@@ -27,7 +28,6 @@ Platform platform[maxPlatforms];
 int const maxWalls = 2;
 Wall wall[maxWalls];
 
-float cont = 1.0f;
 
 void StartGame()
 {
@@ -62,11 +62,14 @@ void InitGame(int screenWidth, int screenHeight)
     platform[1].pos.x = static_cast<float>(screenWidth / 5);
     platform[1].pos.y = static_cast<float>(screenHeight / 1.5);
 
-    platform[2].pos.x = static_cast<float>(screenWidth / 2.2);
+    platform[2].pos.x = static_cast<float>(screenWidth / 2);
     platform[2].pos.y = static_cast<float>(screenHeight / 2);
 
     platform[3].pos.x = static_cast<float>(screenWidth / 3.8);
-    platform[3].pos.y = static_cast<float>(screenHeight / 3.5);
+    platform[3].pos.y = static_cast<float>(screenHeight / 4);
+
+    platform[4].pos.x = static_cast<float>(screenWidth / 1.7);
+    platform[4].pos.y = static_cast<float>(screenHeight / 10);
 
     //Wall
     for (int i = 0; i < maxWalls; i++)
@@ -160,10 +163,9 @@ void PlayerCollision()
         {
             player.gravity = 0;
             player.canJump = true;
-            cont = 1;
+            cont = 0.6f;
         }
     }
-
 }
 
 void PlayerMovement(Player& players)
@@ -184,7 +186,7 @@ void PlayerMovement(Player& players)
         {
             players.canJump = false;
 
-            if (players.canJump == false)
+            if (players.canJump == false && cont > 0)
             {
                 PlayerJump(player);
             }
