@@ -126,7 +126,7 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv3[2].pos.x = static_cast<float>(screenWidth / 3);
     platformLv3[2].pos.y = static_cast<float>(screenHeight / 4);
 
-    //Walls
+    //Walls 
     for (int i = 0; i < maxWalls; i++)
     {
         wall[i] = CreateWall();

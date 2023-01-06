@@ -13,6 +13,8 @@ Enemy CreateEnemy()
 	enemy.speed = 0;
 
 	enemy.color = PURPLE;
+
+	return enemy;
 }
 
 void EnemyMovement()
