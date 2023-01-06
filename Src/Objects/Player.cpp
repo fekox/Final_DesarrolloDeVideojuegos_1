@@ -1,5 +1,7 @@
 #include "Objects/Player.h"
 
+#include "Window/LevelManager.h"
+
 Player CreatePlayer(int screenWidth, int screenHeight)
 {
 	Player player;
@@ -17,7 +19,6 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 	player.jumpForce = 300;
 
 	player.canJump = true;
-	player.isCollision = false;
 	player.isActive = true;
 
 	player.color = WHITE;
@@ -46,15 +47,48 @@ void PlayerCollisionLimitRight(Player& player, Wall& wall)
 	}
 }
 
-void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight)
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, int& lvCounter)
 {
 	if (player.pos.y > static_cast<float>(screenHeight))
 	{
 		player.pos.y = static_cast<float>(screenHeight / screenHeight);
+
+		lvCounter--;
+
+		if (lvCounter == 1)
+		{
+			lv1.isLvActive = true;
+			lv2.isLvActive = false;
+			lv3.isLvActive = false;
+		}
+
+		if (lvCounter == 2)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = true;
+			lv3.isLvActive = false;
+		}
 	}
 
 	if (player.pos.y < static_cast<float>(screenHeight / screenHeight))
 	{
 		player.pos.y = static_cast<float>(screenHeight);
+
+		lvCounter++;
+
+		if (lvCounter == 2)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = true;
+			lv3.isLvActive = false;
+		}
+		
+		if (lvCounter == 3)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = false;
+			lv3.isLvActive = true;
+		}
+
 	}
 }

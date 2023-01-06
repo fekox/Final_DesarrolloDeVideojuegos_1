@@ -4,6 +4,8 @@
 
 #include "Objects/Wall.h"
 
+#include "Window/LevelManager.h"
+
 struct Player
 {
 	Vector2 pos;
@@ -21,7 +23,6 @@ struct Player
 	int points;
 
 	bool canJump;
-	bool isCollision;
 	bool isActive;
 
 	Texture tex;
@@ -34,4 +35,5 @@ void DrawPlayer(Player& player);
 
 void PlayerCollisionLimitLeft(Player& player, Wall& wall);
 void PlayerCollisionLimitRight(Player& player, Wall& wall);
-void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight);
+
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, int& lvCounter);
