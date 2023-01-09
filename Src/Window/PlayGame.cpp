@@ -48,7 +48,7 @@ Platform platformLv2[maxPlatformsLv2];
 
 //Level 3
 Level lv3;
-int const maxPlatformsLv3 = 3;
+int const maxPlatformsLv3 = 4;
 Platform platformLv3[maxPlatformsLv3];
 
 //Walls
@@ -108,13 +108,13 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv1[1].pos.x = static_cast<float>(screenWidth / 5);
     platformLv1[1].pos.y = static_cast<float>(screenHeight / 1.5f);
 
-    platformLv1[2].pos.x = static_cast<float>(screenWidth / 2);
+    platformLv1[2].pos.x = static_cast<float>(screenWidth / 2.1);
     platformLv1[2].pos.y = static_cast<float>(screenHeight / 2);
 
     platformLv1[3].pos.x = static_cast<float>(screenWidth / 3.8f);
     platformLv1[3].pos.y = static_cast<float>(screenHeight / 4);
 
-    platformLv1[4].pos.x = static_cast<float>(screenWidth / 1.7f);
+    platformLv1[4].pos.x = static_cast<float>(screenWidth / 1.9f);
     platformLv1[4].pos.y = static_cast<float>(screenHeight / 10);
 
     //Platforms level 2
@@ -150,11 +150,14 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv3[0].pos.y = static_cast<float>(screenHeight / 1.2f);
     platformLv3[0].width = 450;
 
-    platformLv3[1].pos.x = static_cast<float>(screenWidth / 1.5);
+    platformLv3[1].pos.x = static_cast<float>(screenWidth / 1.5f);
     platformLv3[1].pos.y = static_cast<float>(screenHeight / 2);
 
-    platformLv3[2].pos.x = static_cast<float>(screenWidth / 3);
-    platformLv3[2].pos.y = static_cast<float>(screenHeight / 4);
+    platformLv3[2].pos.x = static_cast<float>(screenWidth / 2.5f);
+    platformLv3[2].pos.y = static_cast<float>(screenHeight / 3.3);
+
+    platformLv3[3].pos.x = static_cast<float>(screenWidth / 5.5);
+    platformLv3[3].pos.y = static_cast<float>(screenHeight / 7);
 
     //Walls 
     for (int i = 0; i < maxWalls; i++)
