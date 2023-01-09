@@ -79,7 +79,7 @@ void StartGame()
 
 void InitGame(int screenWidth, int screenHeight)
 {
-    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.1");
+    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.2");
 
     //Ui
     ui = CreateUi();
