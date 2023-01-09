@@ -318,7 +318,7 @@ void Draw()
         DrawWall(wall[i]);
     }
 
-    DrawText(TextFormat("Level: %i", lvCounter), 0, 0, 40, WHITE);
+    DrawUi(ui, lvCounter);
 
     EndDrawing();
 }

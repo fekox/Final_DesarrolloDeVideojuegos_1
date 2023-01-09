@@ -8,3 +8,11 @@ Ui CreateUi()
 
 	return ui;
 }
+
+void DrawUi(Ui& ui, int lvCounter)
+{
+	if (ui.isActive == true)
+	{
+		DrawText(TextFormat("Level: %i", lvCounter), 0, 0, 40, WHITE);
+	}
+}
