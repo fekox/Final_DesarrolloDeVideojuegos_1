@@ -23,6 +23,8 @@ void PlayerMovement(Player& player);
 void PlayerJump(Player& player);
 void EnemyMovement(Enemy& enemy, Level& lv);
 
+void RestartGame();
+
 //Player
 Player player;
 float cont = 0.6f;
@@ -80,16 +82,13 @@ void InitGame(int screenWidth, int screenHeight)
 
     enemy[0].pos.x = static_cast<float>(screenWidth / 2.1f);
     enemy[0].pos.y = static_cast<float>(screenHeight / 1.37f);
-
-    enemy[0].hitPos.x = enemy[0].pos.x;
-    enemy[0].hitPos.y = enemy[0].pos.y;
+    enemy[0].hitPos.x = enemy[0].pos.x + enemy[0].heightHit;
+    enemy[0].hitPos.y = enemy[0].pos.y - enemy[0].heightHit;
 
     enemy[1].pos.x = static_cast<float>(screenWidth / 2.1f);
     enemy[1].pos.y = static_cast<float>(screenHeight / 2.68f);
-
-    enemy[1].hitPos.x = enemy[1].pos.x;
-    enemy[1].hitPos.y = enemy[1].pos.y;
-
+    enemy[1].hitPos.x = enemy[1].pos.x + enemy[1].heightHit;
+    enemy[1].hitPos.y = enemy[1].pos.y - enemy[1].heightHit;
     enemy[1].dir = MoveDir::Left;
 
     //Platforms level 1
@@ -315,6 +314,23 @@ void PlayerCollision()
                 cont = 0.6f;
             }
         }
+
+        for (int i = 0; i < maxEnemies; i++)
+        {
+            if (enemy[i].isActive == true)
+            {
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemy[i].hitPos, enemy[i].widthHit, enemy[i].heightHit))
+                {
+                    enemy[i].isActive = false;
+                }
+
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemy[i].pos, enemy[i].width, enemy[i].height))
+                {
+                    player.isActive = false;
+                    RestartGame();
+                }
+            }
+        }
     }
 
     if (lv3.isLvActive == true)
@@ -396,7 +412,6 @@ void PlayerJump(Player& players)
     players.pos.y = players.pos.y + players.gravity * GetFrameTime();
 }
 
-
 void EnemyMovement(Enemy& enemys, Level& lv)
 {
     if (enemys.isActive == true && lv.isLvActive == true)
@@ -413,4 +428,24 @@ void EnemyMovement(Enemy& enemys, Level& lv)
             enemys.hitPos.x += enemys.speed * GetFrameTime();
         }
     }
+}
+
+void RestartGame()
+{
+    lvCounter = 1;
+    cont = 0.6f;
+
+    lv1.isLvActive = true;
+    lv2.isLvActive = false;
+    lv3.isLvActive = false;
+
+    player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
+    player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
+
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        enemy[i].isActive = true;
+    }
+
+    player.isActive = true;
 }

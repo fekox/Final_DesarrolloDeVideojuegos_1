@@ -13,7 +13,7 @@ Enemy CreateEnemy()
 	enemy.hitPos.x = 0;
 	enemy.hitPos.y = 0;
 
-	enemy.widthHit = 120;
+	enemy.widthHit = 80;
 	enemy.heightHit = 20;
 
 	enemy.dir = MoveDir::Right;

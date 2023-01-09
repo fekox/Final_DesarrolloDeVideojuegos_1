@@ -89,6 +89,5 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = false;
 			lv3.isLvActive = true;
 		}
-
 	}
 }
