@@ -45,6 +45,9 @@
     <ClCompile Include="Src\Objects\Enemy.cpp">
       <Filter>Src\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Objects\Obstacle.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Window\PlayGame.h">
@@ -63,6 +66,9 @@
       <Filter>Src\Window</Filter>
     </ClInclude>
     <ClInclude Include="Src\Objects\Enemy.h">
+      <Filter>Src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Objects\Obstacle.h">
       <Filter>Src\Objects</Filter>
     </ClInclude>
   </ItemGroup>

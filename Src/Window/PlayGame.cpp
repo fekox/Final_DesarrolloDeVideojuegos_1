@@ -10,6 +10,7 @@
 #include "Objects/Platform.h"
 #include "Objects/Wall.h"
 #include "Objects/Enemy.h"
+#include "Objects/Obstacle.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ void EnemyCollision();
 void PlayerMovement(Player& player);
 void PlayerJump(Player& player);
 void EnemyMovement(Enemy& enemy, Level& lv);
+void ObstacleMovement(Obstacle& obstacle, Level& lv);
 
 void RestartGame();
 
@@ -30,8 +32,12 @@ Player player;
 float cont = 0.3f;
 
 //Enemy
-int const maxEnemies = 2;
-Enemy enemy[maxEnemies];
+int const maxEnemiesLv2 = 2;
+Enemy enemyLv2[maxEnemiesLv2];
+
+//Obstacle
+int const maxObstaclesLv3 = 2;
+Obstacle obstacleLv3[maxObstaclesLv3];
 
 //Level
 int lvCounter = 1;
@@ -75,21 +81,33 @@ void InitGame(int screenWidth, int screenHeight)
     player = CreatePlayer(screenWidth, screenHeight);
 
     //Enemy
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        enemy[i] = CreateEnemy();
+        enemyLv2[i] = CreateEnemy();
     }
 
-    enemy[0].pos.x = static_cast<float>(screenWidth / 2.1f);
-    enemy[0].pos.y = static_cast<float>(screenHeight / 1.37f);
-    enemy[0].hitPos.x = enemy[0].pos.x + enemy[0].heightHit;
-    enemy[0].hitPos.y = enemy[0].pos.y - enemy[0].heightHit;
+    enemyLv2[0].pos.x = static_cast<float>(screenWidth / 2.1f);
+    enemyLv2[0].pos.y = static_cast<float>(screenHeight / 1.37f);
+    enemyLv2[0].hitPos.x = enemyLv2[0].pos.x + enemyLv2[0].heightHit;
+    enemyLv2[0].hitPos.y = enemyLv2[0].pos.y - enemyLv2[0].heightHit;
 
-    enemy[1].pos.x = static_cast<float>(screenWidth / 2.1f);
-    enemy[1].pos.y = static_cast<float>(screenHeight / 2.68f);
-    enemy[1].hitPos.x = enemy[1].pos.x + enemy[1].heightHit;
-    enemy[1].hitPos.y = enemy[1].pos.y - enemy[1].heightHit;
-    enemy[1].dir = MoveDir::Left;
+    enemyLv2[1].pos.x = static_cast<float>(screenWidth / 2.1f);
+    enemyLv2[1].pos.y = static_cast<float>(screenHeight / 2.68f);
+    enemyLv2[1].hitPos.x = enemyLv2[1].pos.x + enemyLv2[1].heightHit;
+    enemyLv2[1].hitPos.y = enemyLv2[1].pos.y - enemyLv2[1].heightHit;
+    enemyLv2[1].dir = MoveDir::Left;
+
+    //Obstacle
+    for (int i = 0; i < maxObstaclesLv3; i++)
+    {
+        obstacleLv3[i] = CreateObstacle();
+    }
+
+    obstacleLv3[0].pos.x = static_cast<float>(screenWidth / 1.7);
+    obstacleLv3[0].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv3[1].pos.x = static_cast<float>(screenWidth / 3);
+    obstacleLv3[1].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Platforms level 1
     lv1 = CreateLevel();
@@ -196,9 +214,14 @@ void Update()
 {
     PlayerMovement(player);
 
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        EnemyMovement(enemy[i], lv2);
+        EnemyMovement(enemyLv2[i], lv2);
+    }
+
+    for (int i = 0; i < maxObstaclesLv3; i++)
+    {
+        ObstacleMovement(obstacleLv3[i], lv3);
     }
 
     Collisions();
@@ -211,11 +234,19 @@ void Collisions()
 
     PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lvCounter);
 
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        if (enemy[i].isActive == true)
+        if (enemyLv2[i].isActive == true)
         {
             EnemyCollision();
+        }
+    }
+
+    for (int i = 0; i < maxObstaclesLv3; i++)
+    {
+        if (obstacleLv3[i].isActive == true)
+        {
+            ObstacleCollisionLimit(obstacleLv3[i], GetScreenHeight());
         }
     }
     
@@ -258,11 +289,20 @@ void Draw()
     DrawPlayer(player);
 
     //Enemy
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        if (enemy[i].isActive == true)
+        if (enemyLv2[i].isActive == true)
         {
-            DrawEnemy(enemy[i], lv2);
+            DrawEnemy(enemyLv2[i], lv2);
+        }
+    }
+
+    //Obstacle
+    for (int i = 0; i < maxObstaclesLv3; i++)
+    {
+        if (obstacleLv3[i].isActive == true)
+        {
+            DrawObstacle(obstacleLv3[i], lv3);
         }
     }
 
@@ -328,16 +368,16 @@ void PlayerCollision()
             }
         }
 
-        for (int i = 0; i < maxEnemies; i++)
+        for (int i = 0; i < maxEnemiesLv2; i++)
         {
-            if (enemy[i].isActive == true)
+            if (enemyLv2[i].isActive == true)
             {
-                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemy[i].hitPos, enemy[i].widthHit, enemy[i].heightHit))
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemyLv2[i].hitPos, enemyLv2[i].widthHit, enemyLv2[i].heightHit))
                 {
-                    enemy[i].isActive = false;
+                    enemyLv2[i].isActive = false;
                 }
 
-                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemy[i].pos, enemy[i].width, enemy[i].height))
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemyLv2[i].pos, enemyLv2[i].width, enemyLv2[i].height))
                 {
                     player.isActive = false;
                     RestartGame();
@@ -357,21 +397,30 @@ void PlayerCollision()
                 cont = 0.3f;
             }
         }
+
+        for (int i = 0; i < maxObstaclesLv3; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, obstacleLv3[i].pos, obstacleLv3[i].width, obstacleLv3[i].height))
+            {
+                player.isActive = false;
+                RestartGame();
+            }
+        }
     }
 }
 
 void EnemyCollision()
 {
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        if (CheckCollisionRecRec(enemy[i].pos, enemy[i].width, enemy[i].height, wall[0].pos, wall[0].width, wall[0].height))
+        if (CheckCollisionRecRec(enemyLv2[i].pos, enemyLv2[i].width, enemyLv2[i].height, wall[0].pos, wall[0].width, wall[0].height))
         {
-            enemy[i].dir = MoveDir::Left;
+            enemyLv2[i].dir = MoveDir::Left;
         }
 
-        if (CheckCollisionRecRec(enemy[i].pos, enemy[i].width, enemy[i].height, wall[1].pos, wall[1].width, wall[1].height))
+        if (CheckCollisionRecRec(enemyLv2[i].pos, enemyLv2[i].width, enemyLv2[i].height, wall[1].pos, wall[1].width, wall[1].height))
         {
-            enemy[i].dir = MoveDir::Right;
+            enemyLv2[i].dir = MoveDir::Right;
         }
     }
 }
@@ -451,6 +500,17 @@ void EnemyMovement(Enemy& enemys, Level& lv)
     }
 }
 
+void ObstacleMovement(Obstacle& obstacles, Level& lv)
+{
+    if (lv.isLvActive == true)
+    {
+        for (int i = 0; i < maxObstaclesLv3; i++)
+        {
+            obstacles.pos.y += obstacles.speed * GetFrameTime();
+        }
+    }
+}
+
 void RestartGame()
 {
     lvCounter = 1;
@@ -463,9 +523,14 @@ void RestartGame()
     player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
     player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
 
-    for (int i = 0; i < maxEnemies; i++)
+    for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        enemy[i].isActive = true;
+        enemyLv2[i].isActive = true;
+    }
+
+    for (int i = 0; i < maxObstaclesLv3; i++)
+    {
+        obstacleLv3[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
     }
 
     player.isActive = true;

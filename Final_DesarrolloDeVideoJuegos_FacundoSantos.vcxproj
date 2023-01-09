@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Objects\Enemy.cpp" />
+    <ClCompile Include="Src\Objects\Obstacle.cpp" />
     <ClCompile Include="Src\Objects\Platform.cpp" />
     <ClCompile Include="Src\Objects\Player.cpp" />
     <ClCompile Include="Src\Objects\Wall.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Objects\Enemy.h" />
+    <ClInclude Include="Src\Objects\Obstacle.h" />
     <ClInclude Include="Src\Objects\Platform.h" />
     <ClInclude Include="Src\Objects\Player.h" />
     <ClInclude Include="Src\Objects\Wall.h" />
