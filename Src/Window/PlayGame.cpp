@@ -27,7 +27,7 @@ void RestartGame();
 
 //Player
 Player player;
-float cont = 0.6f;
+float cont = 0.3f;
 
 //Enemy
 int const maxEnemies = 2;
@@ -298,8 +298,18 @@ void PlayerCollision()
             {
                 player.gravity = 0;
                 player.canJump = true;
-                cont = 0.6f;
+                cont = 0.3f;
             }
+        }
+
+        if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv1[0].pos, platformLv1[0].width, platformLv1[0].height))
+        {
+            player.canGoDown = false;
+        }
+
+        else
+        {
+            player.canGoDown = true;
         }
     }
 
@@ -311,7 +321,7 @@ void PlayerCollision()
             {
                 player.gravity = 0;
                 player.canJump = true;
-                cont = 0.6f;
+                cont = 0.3f;
             }
         }
 
@@ -341,7 +351,7 @@ void PlayerCollision()
             {
                 player.gravity = 0;
                 player.canJump = true;
-                cont = 0.6f;
+                cont = 0.3f;
             }
         }
     }
@@ -387,6 +397,14 @@ void PlayerMovement(Player& players)
             }
         }
 
+        if (player.canGoDown == true)
+        {
+            if (IsKeyDown(KEY_S))
+            {
+                players.pos.y -= players.jumpForce * GetFrameTime();
+            }
+        }
+
         if (cont > 0)
         {
             cont = cont - GetFrameTime();
@@ -399,7 +417,7 @@ void PlayerMovement(Player& players)
             if (players.canJump == false)
             {
                 players.gravity = 350;
-                players.gravity = players.gravity + players.jumpForce * GetFrameTime();
+                players.gravity += players.gravity * GetFrameTime();
                 players.pos.y = players.pos.y + players.gravity * GetFrameTime();
             }
         }
@@ -409,7 +427,7 @@ void PlayerMovement(Player& players)
 void PlayerJump(Player& players)
 {
     players.gravity = -350;
-    players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+    players.pos.y = players.pos.y + players.jumpForce * GetFrameTime();
 }
 
 void EnemyMovement(Enemy& enemys, Level& lv)
@@ -433,7 +451,7 @@ void EnemyMovement(Enemy& enemys, Level& lv)
 void RestartGame()
 {
     lvCounter = 1;
-    cont = 0.6f;
+    cont = 0.3f;
 
     lv1.isLvActive = true;
     lv2.isLvActive = false;

@@ -24,6 +24,7 @@ struct Player
 
 	bool canJump;
 	bool isActive;
+	bool canGoDown;
 
 	Texture tex;
 	Color color;

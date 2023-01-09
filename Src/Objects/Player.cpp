@@ -12,14 +12,15 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 	player.width = 40;
 	player.height = 60;
 
-	player.speed = 210;
+	player.speed = 250;
 
 	player.gravity = 0;
 
-	player.jumpForce = 300;
+	player.jumpForce = -650;
 
 	player.canJump = true;
 	player.isActive = true;
+	player.canGoDown = false;
 
 	player.color = WHITE;
 
