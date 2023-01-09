@@ -27,6 +27,7 @@
     <ClCompile Include="Src\Objects\Wall.cpp" />
     <ClCompile Include="Src\Window\LevelManager.cpp" />
     <ClCompile Include="Src\Window\PlayGame.cpp" />
+    <ClCompile Include="Src\Window\Ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Objects\Enemy.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Src\Objects\Wall.h" />
     <ClInclude Include="Src\Window\LevelManager.h" />
     <ClInclude Include="Src\Window\PlayGame.h" />
+    <ClInclude Include="Src\Window\Ui.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

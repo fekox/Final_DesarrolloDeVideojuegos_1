@@ -4,6 +4,7 @@
 
 #include "Window/PlayGame.h"
 #include "Window/LevelManager.h"
+#include "Window/Ui.h"
 
 #include "Objects/Player.h"
 #include "Objects/Ground.h"
@@ -26,6 +27,9 @@ void EnemyMovement(Enemy& enemy, Level& lv);
 void ObstacleMovement(Obstacle& obstacle, Level& lv);
 
 void RestartGame();
+
+//UI
+Ui ui;
 
 //Player
 Player player;
@@ -76,6 +80,9 @@ void StartGame()
 void InitGame(int screenWidth, int screenHeight)
 {
     InitWindow(screenWidth, screenHeight, "Pingu Climber V0.1");
+
+    //Ui
+    ui = CreateUi();
 
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
@@ -310,6 +317,8 @@ void Draw()
     {
         DrawWall(wall[i]);
     }
+
+    DrawText(TextFormat("Level: %i", lvCounter), 0, 0, 40, WHITE);
 
     EndDrawing();
 }
