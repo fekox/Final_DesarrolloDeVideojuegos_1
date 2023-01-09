@@ -9,20 +9,27 @@
 #include "Objects/Ground.h"
 #include "Objects/Platform.h"
 #include "Objects/Wall.h"
+#include "Objects/Enemy.h"
 
 using namespace std;
 
 //Collisions
 bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2w, float r2h);
 void PlayerCollision();
+void EnemyCollision();
 
 //Movement
 void PlayerMovement(Player& player);
 void PlayerJump(Player& player);
+void EnemyMovement(Enemy& enemy, Level& lv);
 
 //Player
 Player player;
 float cont = 0.6f;
+
+//Enemy
+int const maxEnemies = 2;
+Enemy enemy[maxEnemies];
 
 //Level
 int lvCounter = 1;
@@ -65,13 +72,35 @@ void InitGame(int screenWidth, int screenHeight)
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
 
+    //Enemy
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        enemy[i] = CreateEnemy();
+    }
+
+    enemy[0].pos.x = static_cast<float>(screenWidth / 2.1f);
+    enemy[0].pos.y = static_cast<float>(screenHeight / 1.37f);
+
+    enemy[0].hitPos.x = enemy[0].pos.x;
+    enemy[0].hitPos.y = enemy[0].pos.y;
+
+    enemy[1].pos.x = static_cast<float>(screenWidth / 2.1f);
+    enemy[1].pos.y = static_cast<float>(screenHeight / 2.68f);
+
+    enemy[1].hitPos.x = enemy[1].pos.x;
+    enemy[1].hitPos.y = enemy[1].pos.y;
+
+    enemy[1].dir = MoveDir::Left;
+
     //Platforms level 1
     lv1 = CreateLevel();
     lv1.isLvActive = true;
+
     for (int i = 0; i < maxPlatformsLv1; i++)
     {
         platformLv1[i] = CreatePlatform();
     }
+
     platformLv1[0].pos.x = static_cast<float>(screenWidth / screenWidth);
     platformLv1[0].pos.y = static_cast<float>(screenHeight / 1.1f);
     platformLv1[0].width = static_cast<float>(screenWidth);
@@ -97,6 +126,7 @@ void InitGame(int screenWidth, int screenHeight)
     {
         platformLv2[i] = CreatePlatform();
     }
+
     platformLv2[0].pos.x = static_cast<float>(screenWidth / 6);
     platformLv2[0].pos.y = static_cast<float>(screenHeight / 1.2f);
     platformLv2[0].width = 650;
@@ -116,6 +146,7 @@ void InitGame(int screenWidth, int screenHeight)
     {
         platformLv3[i] = CreatePlatform();
     }
+
     platformLv3[0].pos.x = static_cast<float>(screenWidth / 2.6f);
     platformLv3[0].pos.y = static_cast<float>(screenHeight / 1.2f);
     platformLv3[0].width = 450;
@@ -131,6 +162,7 @@ void InitGame(int screenWidth, int screenHeight)
     {
         wall[i] = CreateWall();
     }
+
     //Right Wall
     wall[0].pos.x = static_cast<float>(screenWidth / 1.25f);
     wall[0].pos.y = -2;
@@ -161,6 +193,12 @@ void GameLoop()
 void Update()
 {
     PlayerMovement(player);
+
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        EnemyMovement(enemy[i], lv2);
+    }
+
     Collisions();
 }
 
@@ -170,6 +208,14 @@ void Collisions()
     PlayerCollisionLimitRight(player, wall[1]);
 
     PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lvCounter);
+
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        if (enemy[i].isActive == true)
+        {
+            EnemyCollision();
+        }
+    }
     
     PlayerCollision();
 }
@@ -208,6 +254,15 @@ void Draw()
     }
 
     DrawPlayer(player);
+
+    //Enemy
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        if (enemy[i].isActive == true)
+        {
+            DrawEnemy(enemy[i], lv2);
+        }
+    }
 
     for (int i = 0; i < maxWalls; i++)
     {
@@ -276,6 +331,22 @@ void PlayerCollision()
     }
 }
 
+void EnemyCollision()
+{
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        if (CheckCollisionRecRec(enemy[i].pos, enemy[i].width, enemy[i].height, wall[0].pos, wall[0].width, wall[0].height))
+        {
+            enemy[i].dir = MoveDir::Left;
+        }
+
+        if (CheckCollisionRecRec(enemy[i].pos, enemy[i].width, enemy[i].height, wall[1].pos, wall[1].width, wall[1].height))
+        {
+            enemy[i].dir = MoveDir::Right;
+        }
+    }
+}
+
 void PlayerMovement(Player& players)
 {
     if (players.isActive == true)
@@ -323,4 +394,23 @@ void PlayerJump(Player& players)
 {
     players.gravity = -350;
     players.pos.y = players.pos.y + players.gravity * GetFrameTime();
+}
+
+
+void EnemyMovement(Enemy& enemys, Level& lv)
+{
+    if (enemys.isActive == true && lv.isLvActive == true)
+    {
+        if (enemys.dir == MoveDir::Left)
+        {
+            enemys.pos.x -= enemys.speed * GetFrameTime();
+            enemys.hitPos.x -= enemys.speed * GetFrameTime();
+        }
+
+        if (enemys.dir == MoveDir::Right)
+        {
+            enemys.pos.x += enemys.speed * GetFrameTime();
+            enemys.hitPos.x += enemys.speed * GetFrameTime();
+        }
+    }
 }
