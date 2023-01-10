@@ -48,7 +48,7 @@ void PlayerCollisionLimitRight(Player& player, Wall& wall)
 	}
 }
 
-void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, Level& lv5, int& lvCounter)
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, Level& lv5, Level& lv6, int& lvCounter)
 {
 	if (player.pos.y > static_cast<float>(screenHeight))
 	{
@@ -63,6 +63,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 
 		if (lvCounter == 2)
@@ -72,6 +73,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 
 		if (lvCounter == 3)
@@ -81,6 +83,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = true;
 			lv4.isLvActive = false;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 
 		if (lvCounter == 4)
@@ -90,6 +93,17 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = true;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
+		}
+
+		if (lvCounter == 5)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = false;
+			lv3.isLvActive = false;
+			lv4.isLvActive = false;
+			lv5.isLvActive = true;
+			lv6.isLvActive = false;
 		}
 	}
 
@@ -106,6 +120,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 		
 		if (lvCounter == 3)
@@ -115,6 +130,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = true;
 			lv4.isLvActive = false;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 
 		if (lvCounter == 4)
@@ -124,6 +140,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = true;
 			lv5.isLvActive = false;
+			lv6.isLvActive = false;
 		}
 
 		if (lvCounter == 5)
@@ -133,6 +150,17 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
 			lv5.isLvActive = true;
+			lv6.isLvActive = false;
+		}
+
+		if (lvCounter == 6)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = false;
+			lv3.isLvActive = false;
+			lv4.isLvActive = false;
+			lv5.isLvActive = false;
+			lv6.isLvActive = true;
 		}
 	}
 }

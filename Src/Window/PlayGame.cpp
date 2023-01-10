@@ -55,6 +55,9 @@ Obstacle obstacleLv4[maxObstaclesLv4];
 int const maxObstaclesLv5 = 2;
 Obstacle obstacleLv5[maxObstaclesLv5];
 
+int const maxObstaclesLv6 = 4;
+Obstacle obstacleLv6[maxObstaclesLv6];
+
 //Level
 int lvCounter = 1;
 
@@ -82,6 +85,11 @@ Platform platformLv4[maxPlatformsLv4];
 Level lv5;
 int const maxPlatformsLv5 = 5;
 Platform platformLv5[maxPlatformsLv5];
+
+//Level 6
+Level lv6;
+int const maxPlatformsLv6 = 6;
+Platform platformLv6[maxPlatformsLv6];
 
 //Walls
 int const maxWalls = 2;
@@ -189,6 +197,24 @@ void InitGame(int screenWidth, int screenHeight)
 
     obstacleLv5[1].pos.x = static_cast<float>(screenWidth / 2.5f);
     obstacleLv5[1].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    //Lv6
+    for (int i = 0; i < maxObstaclesLv6; i++)
+    {
+        obstacleLv6[i] = CreateObstacle();
+    }
+
+    obstacleLv6[0].pos.x = static_cast<float>(screenWidth / 1.8f);
+    obstacleLv6[0].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv6[1].pos.x = static_cast<float>(screenWidth / 2.5f);
+    obstacleLv6[1].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv6[2].pos.x = static_cast<float>(screenWidth / 4.5f);
+    obstacleLv6[2].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv6[3].pos.x = static_cast<float>(screenWidth / 1.4f);
+    obstacleLv6[3].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Platforms level 1
     lv1 = CreateLevel();
@@ -308,6 +334,33 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv5[4].pos.x = static_cast<float>(screenWidth / 2.3f);
     platformLv5[4].pos.y = static_cast<float>(screenHeight / 6);
 
+    //Platforms level 6
+    lv6 = CreateLevel();
+    lv6.isLvActive = false;
+
+    for (int i = 0; i < maxPlatformsLv6; i++)
+    {
+        platformLv6[i] = CreatePlatform();
+    }
+
+    platformLv6[0].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platformLv6[0].pos.y = static_cast<float>(screenHeight / 1.2f);
+
+    platformLv6[1].pos.x = static_cast<float>(screenWidth / 6);
+    platformLv6[1].pos.y = static_cast<float>(screenHeight / 1.6f);
+
+    platformLv6[2].pos.x = static_cast<float>(screenWidth / 1.45f);
+    platformLv6[2].pos.y = static_cast<float>(screenHeight / 1.6f);
+
+    platformLv6[3].pos.x = static_cast<float>(screenWidth / 6);
+    platformLv6[3].pos.y = static_cast<float>(screenHeight / 3.5f);
+
+    platformLv6[4].pos.x = static_cast<float>(screenWidth / 1.45f);
+    platformLv6[4].pos.y = static_cast<float>(screenHeight / 3.5f);
+
+    platformLv6[5].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platformLv6[5].pos.y = static_cast<float>(screenHeight / 5);
+
     //Walls 
     for (int i = 0; i < maxWalls; i++)
     {
@@ -375,6 +428,11 @@ void Update()
         ObstacleMovement(obstacleLv5[i], lv5);
     }
 
+    for (int i = 0; i < maxObstaclesLv6; i++)
+    {
+        ObstacleMovement(obstacleLv6[i], lv6);
+    }
+
     Collisions();
 }
 
@@ -383,7 +441,7 @@ void Collisions()
     PlayerCollisionLimitLeft(player, wall[0]);
     PlayerCollisionLimitRight(player, wall[1]);
 
-    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lv4, lv5, lvCounter);
+    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lv4, lv5, lv6, lvCounter);
 
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
@@ -430,6 +488,14 @@ void Collisions()
         if (obstacleLv5[i].isActive == true)
         {
             ObstacleCollisionLimit(obstacleLv5[i], GetScreenHeight());
+        }
+    }
+
+    for (int i = 0; i < maxObstaclesLv6; i++)
+    {
+        if (obstacleLv6[i].isActive == true)
+        {
+            ObstacleCollisionLimit(obstacleLv6[i], GetScreenHeight());
         }
     }
     
@@ -484,6 +550,15 @@ void Draw()
         for (int i = 0; i < maxPlatformsLv5; i++)
         {
             DrawPlatform(platformLv5[i]);
+        }
+    }
+
+    //Level 6
+    if (lv6.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv6; i++)
+        {
+            DrawPlatform(platformLv6[i]);
         }
     }
 
@@ -542,6 +617,15 @@ void Draw()
         if (obstacleLv5[i].isActive == true)
         {
             DrawObstacle(obstacleLv5[i], lv5);
+        }
+    }
+
+    //Lv6
+    for (int i = 0; i < maxObstaclesLv6; i++)
+    {
+        if (obstacleLv6[i].isActive == true)
+        {
+            DrawObstacle(obstacleLv6[i], lv6);
         }
     }
 
@@ -726,6 +810,28 @@ void PlayerCollision()
             }
         }
     }
+
+    if (lv6.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv6; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv6[i].pos, platformLv6[i].width, platformLv6[i].height))
+            {
+                player.gravity = 0;
+                player.canJump = true;
+                cont = 0.3f;
+            }
+        }
+
+        for (int i = 0; i < maxObstaclesLv6; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, obstacleLv6[i].pos, obstacleLv6[i].width, obstacleLv6[i].height))
+            {
+                player.isActive = false;
+                RestartGame();
+            }
+        }
+    }
 }
 
 void EnemyCollision(Enemy& enemyLv)
@@ -834,6 +940,7 @@ void RestartGame()
     lv3.isLvActive = false;
     lv4.isLvActive = false;
     lv5.isLvActive = false;
+    lv6.isLvActive = false;
 
     player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
     player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
@@ -871,6 +978,11 @@ void RestartGame()
     for (int i = 0; i < maxObstaclesLv5; i++)
     {
         obstacleLv5[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
+    }
+
+    for (int i = 0; i < maxObstaclesLv6; i++)
+    {
+        obstacleLv6[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
     }
 
     player.isActive = true;
