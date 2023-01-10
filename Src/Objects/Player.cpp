@@ -48,7 +48,7 @@ void PlayerCollisionLimitRight(Player& player, Wall& wall)
 	}
 }
 
-void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, int& lvCounter)
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, Level& lv5, int& lvCounter)
 {
 	if (player.pos.y > static_cast<float>(screenHeight))
 	{
@@ -62,6 +62,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = false;
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
+			lv5.isLvActive = false;
 		}
 
 		if (lvCounter == 2)
@@ -70,6 +71,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = true;
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
+			lv5.isLvActive = false;
 		}
 
 		if (lvCounter == 3)
@@ -78,6 +80,16 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = false;
 			lv3.isLvActive = true;
 			lv4.isLvActive = false;
+			lv5.isLvActive = false;
+		}
+
+		if (lvCounter == 4)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = false;
+			lv3.isLvActive = false;
+			lv4.isLvActive = true;
+			lv5.isLvActive = false;
 		}
 	}
 
@@ -93,6 +105,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = true;
 			lv3.isLvActive = false;
 			lv4.isLvActive = false;
+			lv5.isLvActive = false;
 		}
 		
 		if (lvCounter == 3)
@@ -101,6 +114,7 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = false;
 			lv3.isLvActive = true;
 			lv4.isLvActive = false;
+			lv5.isLvActive = false;
 		}
 
 		if (lvCounter == 4)
@@ -109,6 +123,16 @@ void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1,
 			lv2.isLvActive = false;
 			lv3.isLvActive = false;
 			lv4.isLvActive = true;
+			lv5.isLvActive = false;
+		}
+
+		if (lvCounter == 5)
+		{
+			lv1.isLvActive = false;
+			lv2.isLvActive = false;
+			lv3.isLvActive = false;
+			lv4.isLvActive = false;
+			lv5.isLvActive = true;
 		}
 	}
 }

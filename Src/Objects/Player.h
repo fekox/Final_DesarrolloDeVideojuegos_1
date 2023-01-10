@@ -37,4 +37,4 @@ void DrawPlayer(Player& player);
 void PlayerCollisionLimitLeft(Player& player, Wall& wall);
 void PlayerCollisionLimitRight(Player& player, Wall& wall);
 
-void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, int& lvCounter);
+void PlayerCollisionLimitUpAndDown(Player& player, int screenHeight, Level& lv1, Level& lv2, Level& lv3, Level& lv4, Level& lv5, int& lvCounter);
