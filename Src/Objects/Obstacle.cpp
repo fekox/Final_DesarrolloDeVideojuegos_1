@@ -10,7 +10,7 @@ Obstacle CreateObstacle()
 	obstacle.width = 60;
 	obstacle.height = 90;
 
-	obstacle.speed = 200;
+	obstacle.speed = 400;
 
 	obstacle.isActive = true;
 

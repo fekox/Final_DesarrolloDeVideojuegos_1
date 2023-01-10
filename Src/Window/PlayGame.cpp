@@ -18,13 +18,13 @@ using namespace std;
 //Collisions
 bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2w, float r2h);
 void PlayerCollision();
-void EnemyCollision();
+void EnemyCollision(Enemy& enemyLv);
 
 //Movement
 void PlayerMovement(Player& player);
 void PlayerJump(Player& player);
 void EnemyMovement(Enemy& enemy, Level& lv);
-void ObstacleMovement(Obstacle& obstacle, Level& lv);
+void ObstacleMovement(Obstacle& obstacles, Level& lv);
 
 void RestartGame();
 
@@ -39,9 +39,15 @@ float cont = 0.3f;
 int const maxEnemiesLv2 = 2;
 Enemy enemyLv2[maxEnemiesLv2];
 
+int const maxEnemiesLv4 = 1;
+Enemy enemyLv4[maxEnemiesLv4];
+
 //Obstacle
 int const maxObstaclesLv3 = 2;
 Obstacle obstacleLv3[maxObstaclesLv3];
+
+int const maxObstaclesLv4 = 3;
+Obstacle obstacleLv4[maxObstaclesLv4];
 
 //Level
 int lvCounter = 1;
@@ -60,6 +66,11 @@ Platform platformLv2[maxPlatformsLv2];
 Level lv3;
 int const maxPlatformsLv3 = 4;
 Platform platformLv3[maxPlatformsLv3];
+
+//Level 4
+Level lv4;
+int const maxPlatformsLv4 = 5;
+Platform platformLv4[maxPlatformsLv4];
 
 //Walls
 int const maxWalls = 2;
@@ -88,6 +99,7 @@ void InitGame(int screenWidth, int screenHeight)
     player = CreatePlayer(screenWidth, screenHeight);
 
     //Enemy
+    //Lv2
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
         enemyLv2[i] = CreateEnemy();
@@ -104,17 +116,45 @@ void InitGame(int screenWidth, int screenHeight)
     enemyLv2[1].hitPos.y = enemyLv2[1].pos.y - enemyLv2[1].heightHit;
     enemyLv2[1].dir = MoveDir::Left;
 
+    //Lv4
+    for (int i = 0; i < maxEnemiesLv4; i++)
+    {
+        enemyLv4[i] = CreateEnemy();
+    }
+
+    enemyLv4[0].pos.x = static_cast<float>(screenWidth / 2.1f);
+    enemyLv4[0].pos.y = static_cast<float>(screenHeight / 4.8f);
+    enemyLv4[0].hitPos.x = enemyLv4[0].pos.x + enemyLv4[0].heightHit;
+    enemyLv4[0].hitPos.y = enemyLv4[0].pos.y - enemyLv4[0].heightHit;
+    enemyLv4[0].dir = MoveDir::Left;
+
     //Obstacle
+    //Lv3
     for (int i = 0; i < maxObstaclesLv3; i++)
     {
         obstacleLv3[i] = CreateObstacle();
     }
 
-    obstacleLv3[0].pos.x = static_cast<float>(screenWidth / 1.7);
+    obstacleLv3[0].pos.x = static_cast<float>(screenWidth / 1.7f);
     obstacleLv3[0].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacleLv3[1].pos.x = static_cast<float>(screenWidth / 3);
     obstacleLv3[1].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    //Lv4
+    for (int i = 0; i < maxObstaclesLv4; i++)
+    {
+        obstacleLv4[i] = CreateObstacle();
+    }
+
+    obstacleLv4[0].pos.x = static_cast<float>(screenWidth / 1.4f);
+    obstacleLv4[0].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv4[1].pos.x = static_cast<float>(screenWidth / 2.1f);
+    obstacleLv4[1].pos.y = static_cast<float>(screenWidth / screenWidth);
+
+    obstacleLv4[2].pos.x = static_cast<float>(screenWidth / 4.5f);
+    obstacleLv4[2].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Platforms level 1
     lv1 = CreateLevel();
@@ -179,10 +219,35 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv3[1].pos.y = static_cast<float>(screenHeight / 2);
 
     platformLv3[2].pos.x = static_cast<float>(screenWidth / 2.5f);
-    platformLv3[2].pos.y = static_cast<float>(screenHeight / 3.3);
+    platformLv3[2].pos.y = static_cast<float>(screenHeight / 3.3f);
 
-    platformLv3[3].pos.x = static_cast<float>(screenWidth / 5.5);
+    platformLv3[3].pos.x = static_cast<float>(screenWidth / 5.5f);
     platformLv3[3].pos.y = static_cast<float>(screenHeight / 7);
+
+    //Platforms level 4
+    lv4 = CreateLevel();
+    lv4.isLvActive = false;
+
+    for (int i = 0; i < maxPlatformsLv4; i++)
+    {
+        platformLv4[i] = CreatePlatform();
+    }
+
+    platformLv4[0].pos.x = static_cast<float>(screenWidth / 5.5f);
+    platformLv4[0].pos.y = static_cast<float>(screenHeight / 1.1f);
+
+    platformLv4[1].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platformLv4[1].pos.y = static_cast<float>(screenHeight / 1.3f);
+
+    platformLv4[2].pos.x = static_cast<float>(screenWidth / 1.5f);
+    platformLv4[2].pos.y = static_cast<float>(screenHeight / 1.5f);
+
+    platformLv4[3].pos.x = static_cast<float>(screenWidth / 6);
+    platformLv4[3].pos.y = static_cast<float>(screenHeight / 3.2f);
+    platformLv4[3].width = 650;
+
+    platformLv4[4].pos.x = static_cast<float>(screenWidth / 6);
+    platformLv4[4].pos.y = static_cast<float>(screenHeight / 7);
 
     //Walls 
     for (int i = 0; i < maxWalls; i++)
@@ -226,9 +291,19 @@ void Update()
         EnemyMovement(enemyLv2[i], lv2);
     }
 
+    for (int i = 0; i < maxEnemiesLv4; i++)
+    {
+        EnemyMovement(enemyLv4[i], lv4);
+    }
+
     for (int i = 0; i < maxObstaclesLv3; i++)
     {
         ObstacleMovement(obstacleLv3[i], lv3);
+    }
+
+    for (int i = 0; i < maxObstaclesLv4; i++)
+    {
+        ObstacleMovement(obstacleLv4[i], lv4);
     }
 
     Collisions();
@@ -239,13 +314,21 @@ void Collisions()
     PlayerCollisionLimitLeft(player, wall[0]);
     PlayerCollisionLimitRight(player, wall[1]);
 
-    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lvCounter);
+    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lv4, lvCounter);
 
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
         if (enemyLv2[i].isActive == true)
         {
-            EnemyCollision();
+            EnemyCollision(enemyLv2[i]);
+        }
+    }
+
+    for (int i = 0; i < maxEnemiesLv4; i++)
+    {
+        if (enemyLv4[i].isActive == true)
+        {
+            EnemyCollision(enemyLv4[i]);
         }
     }
 
@@ -254,6 +337,14 @@ void Collisions()
         if (obstacleLv3[i].isActive == true)
         {
             ObstacleCollisionLimit(obstacleLv3[i], GetScreenHeight());
+        }
+    }
+
+    for (int i = 0; i < maxObstaclesLv4; i++)
+    {
+        if (obstacleLv4[i].isActive == true)
+        {
+            ObstacleCollisionLimit(obstacleLv4[i], GetScreenHeight());
         }
     }
     
@@ -293,9 +384,19 @@ void Draw()
         }
     }
 
+    //Level 4 
+    if (lv4.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv4; i++)
+        {
+            DrawPlatform(platformLv4[i]);
+        }
+    }
+
     DrawPlayer(player);
 
     //Enemy
+    //Lv2
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
         if (enemyLv2[i].isActive == true)
@@ -304,12 +405,31 @@ void Draw()
         }
     }
 
+    //Lv4
+    for (int i = 0; i < maxEnemiesLv4; i++)
+    {
+        if (enemyLv4[i].isActive == true)
+        {
+            DrawEnemy(enemyLv4[i], lv4);
+        }
+    }
+
     //Obstacle
+    //Lv3
     for (int i = 0; i < maxObstaclesLv3; i++)
     {
         if (obstacleLv3[i].isActive == true)
         {
             DrawObstacle(obstacleLv3[i], lv3);
+        }
+    }
+
+    //Lv4
+    for (int i = 0; i < maxObstaclesLv4; i++)
+    {
+        if (obstacleLv4[i].isActive == true)
+        {
+            DrawObstacle(obstacleLv4[i], lv4);
         }
     }
 
@@ -416,20 +536,59 @@ void PlayerCollision()
             }
         }
     }
+
+    if (lv4.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv4; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv4[i].pos, platformLv4[i].width, platformLv4[i].height))
+            {
+                player.gravity = 0;
+                player.canJump = true;
+                cont = 0.3f;
+            }
+        }
+
+        for (int i = 0; i < maxEnemiesLv4; i++)
+        {
+            if (enemyLv4[i].isActive == true)
+            {
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemyLv4[i].hitPos, enemyLv4[i].widthHit, enemyLv4[i].heightHit))
+                {
+                    enemyLv4[i].isActive = false;
+                }
+
+                if (CheckCollisionRecRec(player.pos, player.width, player.height, enemyLv4[i].pos, enemyLv4[i].width, enemyLv4[i].height))
+                {
+                    player.isActive = false;
+                    RestartGame();
+                }
+            }
+        }
+
+        for (int i = 0; i < maxObstaclesLv4; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, obstacleLv4[i].pos, obstacleLv4[i].width, obstacleLv4[i].height))
+            {
+                player.isActive = false;
+                RestartGame();
+            }
+        }
+    }
 }
 
-void EnemyCollision()
+void EnemyCollision(Enemy& enemyLv)
 {
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
-        if (CheckCollisionRecRec(enemyLv2[i].pos, enemyLv2[i].width, enemyLv2[i].height, wall[0].pos, wall[0].width, wall[0].height))
+        if (CheckCollisionRecRec(enemyLv.pos, enemyLv.width, enemyLv.height, wall[0].pos, wall[0].width, wall[0].height))
         {
-            enemyLv2[i].dir = MoveDir::Left;
+            enemyLv.dir = MoveDir::Left;
         }
 
-        if (CheckCollisionRecRec(enemyLv2[i].pos, enemyLv2[i].width, enemyLv2[i].height, wall[1].pos, wall[1].width, wall[1].height))
+        if (CheckCollisionRecRec(enemyLv.pos, enemyLv.width, enemyLv.height, wall[1].pos, wall[1].width, wall[1].height))
         {
-            enemyLv2[i].dir = MoveDir::Right;
+            enemyLv.dir = MoveDir::Right;
         }
     }
 }
@@ -513,10 +672,7 @@ void ObstacleMovement(Obstacle& obstacles, Level& lv)
 {
     if (lv.isLvActive == true)
     {
-        for (int i = 0; i < maxObstaclesLv3; i++)
-        {
-            obstacles.pos.y += obstacles.speed * GetFrameTime();
-        }
+        obstacles.pos.y += obstacles.speed * GetFrameTime();
     }
 }
 
@@ -528,6 +684,7 @@ void RestartGame()
     lv1.isLvActive = true;
     lv2.isLvActive = false;
     lv3.isLvActive = false;
+    lv4.isLvActive = false;
 
     player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
     player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
@@ -536,10 +693,21 @@ void RestartGame()
     {
         enemyLv2[i].isActive = true;
     }
+    enemyLv2[1].dir = MoveDir::Left;
+
+    for (int i = 0; i < maxEnemiesLv4; i++)
+    {
+        enemyLv4[i].isActive = true;
+    }
 
     for (int i = 0; i < maxObstaclesLv3; i++)
     {
         obstacleLv3[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
+    }
+
+    for (int i = 0; i < maxObstaclesLv4; i++)
+    {
+        obstacleLv4[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
     }
 
     player.isActive = true;
