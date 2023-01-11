@@ -71,38 +71,41 @@ Platform platformLv1[maxPlatformsLv1];
 
 //Level 2
 Level lv2;
-int const maxPlatformsLv2 = 3;
+int const maxPlatformsLv2 = 8;
 Platform platformLv2[maxPlatformsLv2];
 
 //Level 3
 Level lv3;
-int const maxPlatformsLv3 = 4;
+int const maxPlatformsLv3 = 12;
 Platform platformLv3[maxPlatformsLv3];
 
 //Level 4
 Level lv4;
-int const maxPlatformsLv4 = 5;
+int const maxPlatformsLv4 = 17;
 Platform platformLv4[maxPlatformsLv4];
 
 //Level 5
 Level lv5;
-int const maxPlatformsLv5 = 5;
+int const maxPlatformsLv5 = 22;
 Platform platformLv5[maxPlatformsLv5];
 
 //Level 6
 Level lv6;
-int const maxPlatformsLv6 = 6;
+int const maxPlatformsLv6 = 28;
 Platform platformLv6[maxPlatformsLv6];
 
 //Level 7
 Level lv7;
-int const maxPlatformsLv7 = 4;
+int const maxPlatformsLv7 = 31;
 Platform platformLv7[maxPlatformsLv7];
 
 //Level 8
 Level lv8;
-int const maxPlatformsLv8 = 3;
+int const maxPlatformsLv8 = 34;
 Platform platformLv8[maxPlatformsLv8];
+
+int const maxPlatforms = 34;
+Platform platforms[maxPlatforms];
 
 //Walls
 int const maxWalls = 2;
@@ -129,6 +132,9 @@ void InitGame(int screenWidth, int screenHeight)
 
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
+
+    //Level
+    lv1.isLvActive = true;
 
     //Enemy
     //Lv2
@@ -260,190 +266,132 @@ void InitGame(int screenWidth, int screenHeight)
     obstacleLv6[3].pos.x = static_cast<float>(screenWidth / 1.4f);
     obstacleLv6[3].pos.y = static_cast<float>(screenWidth / screenWidth);
 
-    //Platforms level 1
-    lv1 = CreateLevel();
-    lv1.isLvActive = true;
-
-    for (int i = 0; i < maxPlatformsLv1; i++)
+    //Platforms
+    for (int i = 0; i < maxPlatforms; i++)
     {
-        platformLv1[i] = CreatePlatform();
+        platforms[i] = CreatePlatform();
     }
 
-    platformLv1[0].pos.x = static_cast<float>(screenWidth / screenWidth);
-    platformLv1[0].pos.y = static_cast<float>(screenHeight / 1.1f);
-    platformLv1[0].width = static_cast<float>(screenWidth);
-    platformLv1[0].height = 70;
+    //Platforms Lv1
+    platforms[0].pos.x = static_cast<float>(screenWidth / screenWidth);
+    platforms[0].pos.y = static_cast<float>(screenHeight / 1.1f);
+    platforms[0].width = static_cast<float>(screenWidth);
+    platforms[0].height = 70;
 
-    platformLv1[1].pos.x = static_cast<float>(screenWidth / 5);
-    platformLv1[1].pos.y = static_cast<float>(screenHeight / 1.5f);
+    platforms[1].pos.x = static_cast<float>(screenWidth / 5);
+    platforms[1].pos.y = static_cast<float>(screenHeight / 1.5f);
 
-    platformLv1[2].pos.x = static_cast<float>(screenWidth / 2.1);
-    platformLv1[2].pos.y = static_cast<float>(screenHeight / 2);
+    platforms[2].pos.x = static_cast<float>(screenWidth / 2.1);
+    platforms[2].pos.y = static_cast<float>(screenHeight / 2);
 
-    platformLv1[3].pos.x = static_cast<float>(screenWidth / 3.8f);
-    platformLv1[3].pos.y = static_cast<float>(screenHeight / 4);
+    platforms[3].pos.x = static_cast<float>(screenWidth / 3.8f);
+    platforms[3].pos.y = static_cast<float>(screenHeight / 4);
 
-    platformLv1[4].pos.x = static_cast<float>(screenWidth / 1.9f);
-    platformLv1[4].pos.y = static_cast<float>(screenHeight / 10);
+    platforms[4].pos.x = static_cast<float>(screenWidth / 1.9f);
+    platforms[4].pos.y = static_cast<float>(screenHeight / 10);
 
-    //Platforms level 2
-    lv2 = CreateLevel();
-    lv2.isLvActive = false;
+    //Platforms Lv2
+    platforms[5].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[5].pos.y = static_cast<float>(screenHeight / 1.2f);
+    platforms[5].width = 650;
 
-    for (int i = 0; i < maxPlatformsLv2; i++)
-    {
-        platformLv2[i] = CreatePlatform();
-    }
+    platforms[6].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[6].pos.y = static_cast<float>(screenHeight / 2.1);
+    platforms[6].width = 650;
 
-    platformLv2[0].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv2[0].pos.y = static_cast<float>(screenHeight / 1.2f);
-    platformLv2[0].width = 650;
+    platforms[7].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[7].pos.y = static_cast<float>(screenHeight / 6);
 
-    platformLv2[1].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv2[1].pos.y = static_cast<float>(screenHeight / 2.1);
-    platformLv2[1].width = 650;
+    //Platforms Lv3
+    platforms[8].pos.x = static_cast<float>(screenWidth / 2.6f);
+    platforms[8].pos.y = static_cast<float>(screenHeight / 1.2f);
+    platforms[8].width = 450;
 
-    platformLv2[2].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv2[2].pos.y = static_cast<float>(screenHeight / 6);
+    platforms[9].pos.x = static_cast<float>(screenWidth / 1.5f);
+    platforms[9].pos.y = static_cast<float>(screenHeight / 2);
 
-    //Platforms level 3
-    lv3 = CreateLevel();
-    lv3.isLvActive = false;
+    platforms[10].pos.x = static_cast<float>(screenWidth / 2.5f);
+    platforms[10].pos.y = static_cast<float>(screenHeight / 3.3f);
 
-    for (int i = 0; i < maxPlatformsLv3; i++)
-    {
-        platformLv3[i] = CreatePlatform();
-    }
+    platforms[11].pos.x = static_cast<float>(screenWidth / 5.5f);
+    platforms[11].pos.y = static_cast<float>(screenHeight / 7);
 
-    platformLv3[0].pos.x = static_cast<float>(screenWidth / 2.6f);
-    platformLv3[0].pos.y = static_cast<float>(screenHeight / 1.2f);
-    platformLv3[0].width = 450;
+    //Platforms Lv4
+    platforms[12].pos.x = static_cast<float>(screenWidth / 5.5f);
+    platforms[12].pos.y = static_cast<float>(screenHeight / 1.1f);
 
-    platformLv3[1].pos.x = static_cast<float>(screenWidth / 1.5f);
-    platformLv3[1].pos.y = static_cast<float>(screenHeight / 2);
+    platforms[13].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platforms[13].pos.y = static_cast<float>(screenHeight / 1.3f);
 
-    platformLv3[2].pos.x = static_cast<float>(screenWidth / 2.5f);
-    platformLv3[2].pos.y = static_cast<float>(screenHeight / 3.3f);
+    platforms[14].pos.x = static_cast<float>(screenWidth / 1.5f);
+    platforms[14].pos.y = static_cast<float>(screenHeight / 1.5f);
 
-    platformLv3[3].pos.x = static_cast<float>(screenWidth / 5.5f);
-    platformLv3[3].pos.y = static_cast<float>(screenHeight / 7);
+    platforms[15].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[15].pos.y = static_cast<float>(screenHeight / 3.2f);
+    platforms[15].width = 650;
 
-    //Platforms level 4
-    lv4 = CreateLevel();
-    lv4.isLvActive = false;
+    platforms[16].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[16].pos.y = static_cast<float>(screenHeight / 7);
 
-    for (int i = 0; i < maxPlatformsLv4; i++)
-    {
-        platformLv4[i] = CreatePlatform();
-    }
+    //Platforms Lv5
+    platforms[17].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[17].pos.y = static_cast<float>(screenHeight / 1.2f);
+    platforms[17].width = 650;
 
-    platformLv4[0].pos.x = static_cast<float>(screenWidth / 5.5f);
-    platformLv4[0].pos.y = static_cast<float>(screenHeight / 1.1f);
+    platforms[18].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platforms[18].pos.y = static_cast<float>(screenHeight / 1.8f);
 
-    platformLv4[1].pos.x = static_cast<float>(screenWidth / 2.3f);
-    platformLv4[1].pos.y = static_cast<float>(screenHeight / 1.3f);
+    platforms[19].pos.x = static_cast<float>(screenWidth / 5.8f);
+    platforms[19].pos.y = static_cast<float>(screenHeight / 3);
 
-    platformLv4[2].pos.x = static_cast<float>(screenWidth / 1.5f);
-    platformLv4[2].pos.y = static_cast<float>(screenHeight / 1.5f);
+    platforms[20].pos.x = static_cast<float>(screenWidth / 1.45f);
+    platforms[20].pos.y = static_cast<float>(screenHeight / 3);
 
-    platformLv4[3].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv4[3].pos.y = static_cast<float>(screenHeight / 3.2f);
-    platformLv4[3].width = 650;
+    platforms[21].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platforms[21].pos.y = static_cast<float>(screenHeight / 6);
 
-    platformLv4[4].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv4[4].pos.y = static_cast<float>(screenHeight / 7);
+    //Platforms Lv6
+    platforms[22].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platforms[22].pos.y = static_cast<float>(screenHeight / 1.2f);
 
-    //Platforms level 5
-    lv5 = CreateLevel();
-    lv5.isLvActive = false;
+    platforms[23].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[23].pos.y = static_cast<float>(screenHeight / 1.6f);
 
-    for (int i = 0; i < maxPlatformsLv5; i++)
-    {
-        platformLv5[i] = CreatePlatform();
-    }
+    platforms[24].pos.x = static_cast<float>(screenWidth / 1.45f);
+    platforms[24].pos.y = static_cast<float>(screenHeight / 1.6f);
 
-    platformLv5[0].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv5[0].pos.y = static_cast<float>(screenHeight / 1.2f);
-    platformLv5[0].width = 650;
+    platforms[25].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[25].pos.y = static_cast<float>(screenHeight / 3.5f);
 
-    platformLv5[1].pos.x = static_cast<float>(screenWidth / 2.3f);
-    platformLv5[1].pos.y = static_cast<float>(screenHeight / 1.8f);
+    platforms[26].pos.x = static_cast<float>(screenWidth / 1.45f);
+    platforms[26].pos.y = static_cast<float>(screenHeight / 3.5f);
 
-    platformLv5[2].pos.x = static_cast<float>(screenWidth / 5.8f);
-    platformLv5[2].pos.y = static_cast<float>(screenHeight / 3);
+    platforms[27].pos.x = static_cast<float>(screenWidth / 2.3f);
+    platforms[27].pos.y = static_cast<float>(screenHeight / 5);
 
-    platformLv5[3].pos.x = static_cast<float>(screenWidth / 1.45f);
-    platformLv5[3].pos.y = static_cast<float>(screenHeight / 3);
+    //Platforms Lv7
+    platforms[28].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[28].pos.y = static_cast<float>(screenHeight / 1.2f);
+    platforms[28].width = 650;
 
-    platformLv5[4].pos.x = static_cast<float>(screenWidth / 2.3f);
-    platformLv5[4].pos.y = static_cast<float>(screenHeight / 6);
+    platforms[29].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[29].pos.y = static_cast<float>(screenHeight / 2);
+    platforms[29].width = 650;
 
-    //Platforms level 6
-    lv6 = CreateLevel();
-    lv6.isLvActive = false;
+    platforms[30].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[30].pos.y = static_cast<float>(screenHeight / 6);
+    platforms[30].width = 650;
 
-    for (int i = 0; i < maxPlatformsLv6; i++)
-    {
-        platformLv6[i] = CreatePlatform();
-    }
+    //Platforms Lv8
+    platforms[31].pos.x = static_cast<float>(screenWidth / 1.5f);
+    platforms[31].pos.y = static_cast<float>(screenHeight / 1.2f);
 
-    platformLv6[0].pos.x = static_cast<float>(screenWidth / 2.3f);
-    platformLv6[0].pos.y = static_cast<float>(screenHeight / 1.2f);
+    platforms[32].pos.x = static_cast<float>(screenWidth / 6);
+    platforms[32].pos.y = static_cast<float>(screenHeight / 2);
+    platforms[32].width = 650;
 
-    platformLv6[1].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv6[1].pos.y = static_cast<float>(screenHeight / 1.6f);
-
-    platformLv6[2].pos.x = static_cast<float>(screenWidth / 1.45f);
-    platformLv6[2].pos.y = static_cast<float>(screenHeight / 1.6f);
-
-    platformLv6[3].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv6[3].pos.y = static_cast<float>(screenHeight / 3.5f);
-
-    platformLv6[4].pos.x = static_cast<float>(screenWidth / 1.45f);
-    platformLv6[4].pos.y = static_cast<float>(screenHeight / 3.5f);
-
-    platformLv6[5].pos.x = static_cast<float>(screenWidth / 2.3f);
-    platformLv6[5].pos.y = static_cast<float>(screenHeight / 5);
-
-    //Platforms level 7
-    lv7 = CreateLevel();
-    lv7.isLvActive = false;
-
-    for (int i = 0; i < maxPlatformsLv7; i++)
-    {
-        platformLv7[i] = CreatePlatform();
-    }
-
-    platformLv7[0].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv7[0].pos.y = static_cast<float>(screenHeight / 1.2f);
-    platformLv7[0].width = 650;
-
-    platformLv7[1].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv7[1].pos.y = static_cast<float>(screenHeight / 2);
-    platformLv7[1].width = 650;
-
-    platformLv7[2].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv7[2].pos.y = static_cast<float>(screenHeight / 6);
-    platformLv7[2].width = 650;
-
-    //Platforms level 8
-    lv8 = CreateLevel();
-    lv8.isLvActive = false;
-
-    for (int i = 0; i < maxPlatformsLv8; i++)
-    {
-        platformLv8[i] = CreatePlatform();
-    }
-
-    platformLv8[0].pos.x = static_cast<float>(screenWidth / 1.5f);
-    platformLv8[0].pos.y = static_cast<float>(screenHeight / 1.2f);
-
-    platformLv8[1].pos.x = static_cast<float>(screenWidth / 6);
-    platformLv8[1].pos.y = static_cast<float>(screenHeight / 2);
-    platformLv8[1].width = 650;
-
-    platformLv8[2].pos.x = static_cast<float>(screenWidth / 2.5f);
-    platformLv8[2].pos.y = static_cast<float>(screenHeight / 5);
+    platforms[33].pos.x = static_cast<float>(screenWidth / 2.5f);
+    platforms[33].pos.y = static_cast<float>(screenHeight / 5);
 
     //Walls 
     for (int i = 0; i < maxWalls; i++)
@@ -610,70 +558,70 @@ void Draw()
     {
         for (int i = 0; i < maxPlatformsLv1; i++)
         {
-            DrawPlatform(platformLv1[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 2
     if (lv2.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv2; i++)
+        for (int i = maxPlatformsLv1; i < maxPlatformsLv2; i++)
         {
-            DrawPlatform(platformLv2[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 3 
     if (lv3.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv3; i++)
+        for (int i = maxPlatformsLv2; i < maxPlatformsLv3; i++)
         {
-            DrawPlatform(platformLv3[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 4 
     if (lv4.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv4; i++)
+        for (int i = maxPlatformsLv3; i < maxPlatformsLv4; i++)
         {
-            DrawPlatform(platformLv4[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 5 
     if (lv5.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv5; i++)
+        for (int i = maxPlatformsLv4; i < maxPlatformsLv5; i++)
         {
-            DrawPlatform(platformLv5[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 6
     if (lv6.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv6; i++)
+        for (int i = maxPlatformsLv5; i < maxPlatformsLv6; i++)
         {
-            DrawPlatform(platformLv6[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 7
     if (lv7.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv7; i++)
+        for (int i = maxPlatformsLv6; i < maxPlatformsLv7; i++)
         {
-            DrawPlatform(platformLv7[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
     //Level 8
     if (lv8.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv8; i++)
+        for (int i = maxPlatformsLv7; i < maxPlatformsLv8; i++)
         {
-            DrawPlatform(platformLv8[i]);
+            DrawPlatform(platforms[i]);
         }
     }
 
@@ -786,7 +734,7 @@ void PlayerCollision()
     {
         for (int i = 0; i < maxPlatformsLv1; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv1[i].pos, platformLv1[i].width, platformLv1[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -794,7 +742,7 @@ void PlayerCollision()
             }
         }
 
-        if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv1[0].pos, platformLv1[0].width, platformLv1[0].height))
+        if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[0].pos, platforms[0].width, platforms[0].height))
         {
             player.canGoDown = false;
         }
@@ -807,9 +755,9 @@ void PlayerCollision()
 
     if (lv2.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv2; i++)
+        for (int i = maxPlatformsLv1; i < maxPlatformsLv2; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv2[i].pos, platformLv2[i].width, platformLv2[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -837,9 +785,9 @@ void PlayerCollision()
 
     if (lv3.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv3; i++)
+        for (int i = maxPlatformsLv2; i < maxPlatformsLv3; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv3[i].pos, platformLv3[i].width, platformLv3[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -859,9 +807,9 @@ void PlayerCollision()
 
     if (lv4.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv4; i++)
+        for (int i = maxPlatformsLv3; i < maxPlatformsLv4; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv4[i].pos, platformLv4[i].width, platformLv4[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -898,9 +846,9 @@ void PlayerCollision()
 
     if (lv5.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv5; i++)
+        for (int i = maxPlatformsLv4; i < maxPlatformsLv5; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv5[i].pos, platformLv5[i].width, platformLv5[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -937,9 +885,9 @@ void PlayerCollision()
 
     if (lv6.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv6; i++)
+        for (int i = maxPlatformsLv5; i < maxPlatformsLv6; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv6[i].pos, platformLv6[i].width, platformLv6[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -959,9 +907,9 @@ void PlayerCollision()
 
     if (lv7.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv7; i++)
+        for (int i = maxPlatformsLv6; i < maxPlatformsLv7; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv7[i].pos, platformLv7[i].width, platformLv7[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;
@@ -989,9 +937,9 @@ void PlayerCollision()
 
     if (lv8.isLvActive == true)
     {
-        for (int i = 0; i < maxPlatformsLv8; i++)
+        for (int i = maxPlatformsLv7; i < maxPlatformsLv8; i++)
         {
-            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv8[i].pos, platformLv8[i].width, platformLv8[i].height))
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platforms[i].pos, platforms[i].width, platforms[i].height))
             {
                 player.gravity = 0;
                 player.canJump = true;

@@ -4,7 +4,7 @@ Level CreateLevel()
 {
 	Level level;
 
-	level.isLvActive = true;
+	level.isLvActive = false;
 
 	return level;
 }
