@@ -45,7 +45,7 @@ Enemy enemyLv4[maxEnemiesLv4];
 int const maxEnemiesLv5 = 1;
 Enemy enemyLv5[maxEnemiesLv5];
 
-int const maxEnemiesLv7 = 6;
+int const maxEnemiesLv7 = 5;
 Enemy enemyLv7[maxEnemiesLv7];
 
 //Obstacle
@@ -98,6 +98,11 @@ Platform platformLv6[maxPlatformsLv6];
 Level lv7;
 int const maxPlatformsLv7 = 4;
 Platform platformLv7[maxPlatformsLv7];
+
+//Level 8
+Level lv8;
+int const maxPlatformsLv8 = 3;
+Platform platformLv8[maxPlatformsLv8];
 
 //Walls
 int const maxWalls = 2;
@@ -192,15 +197,10 @@ void InitGame(int screenWidth, int screenHeight)
     enemyLv7[3].hitPos.x = enemyLv7[3].pos.x + enemyLv7[3].heightHit;
     enemyLv7[3].hitPos.y = enemyLv7[3].pos.y - enemyLv7[3].heightHit;
 
-    enemyLv7[4].pos.x = static_cast<float>(GetScreenWidth() / 1.4f);
+    enemyLv7[4].pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
     enemyLv7[4].pos.y = static_cast<float>(GetScreenHeight() / 14);
     enemyLv7[4].hitPos.x = enemyLv7[4].pos.x + enemyLv7[4].heightHit;
     enemyLv7[4].hitPos.y = enemyLv7[4].pos.y - enemyLv7[4].heightHit;
-
-    enemyLv7[5].pos.x = static_cast<float>(GetScreenWidth() / 6);
-    enemyLv7[5].pos.y = static_cast<float>(GetScreenHeight() / 14);
-    enemyLv7[5].hitPos.x = enemyLv7[5].pos.x + enemyLv7[5].heightHit;
-    enemyLv7[5].hitPos.y = enemyLv7[5].pos.y - enemyLv7[5].heightHit;
 
     //Obstacle
     //Lv3
@@ -426,6 +426,25 @@ void InitGame(int screenWidth, int screenHeight)
     platformLv7[2].pos.y = static_cast<float>(screenHeight / 6);
     platformLv7[2].width = 650;
 
+    //Platforms level 8
+    lv8 = CreateLevel();
+    lv8.isLvActive = false;
+
+    for (int i = 0; i < maxPlatformsLv8; i++)
+    {
+        platformLv8[i] = CreatePlatform();
+    }
+
+    platformLv8[0].pos.x = static_cast<float>(screenWidth / 1.5f);
+    platformLv8[0].pos.y = static_cast<float>(screenHeight / 1.2f);
+
+    platformLv8[1].pos.x = static_cast<float>(screenWidth / 6);
+    platformLv8[1].pos.y = static_cast<float>(screenHeight / 2);
+    platformLv8[1].width = 650;
+
+    platformLv8[2].pos.x = static_cast<float>(screenWidth / 2.5f);
+    platformLv8[2].pos.y = static_cast<float>(screenHeight / 5);
+
     //Walls 
     for (int i = 0; i < maxWalls; i++)
     {
@@ -511,7 +530,7 @@ void Collisions()
     PlayerCollisionLimitLeft(player, wall[0]);
     PlayerCollisionLimitRight(player, wall[1]);
 
-    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lv4, lv5, lv6, lv7, lvCounter);
+    PlayerCollisionLimitUpAndDown(player, GetScreenHeight(), lv1, lv2, lv3, lv4, lv5, lv6, lv7, lv8, lvCounter);
 
     for (int i = 0; i < maxEnemiesLv2; i++)
     {
@@ -646,6 +665,15 @@ void Draw()
         for (int i = 0; i < maxPlatformsLv7; i++)
         {
             DrawPlatform(platformLv7[i]);
+        }
+    }
+
+    //Level 8
+    if (lv8.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv8; i++)
+        {
+            DrawPlatform(platformLv8[i]);
         }
     }
 
@@ -958,6 +986,19 @@ void PlayerCollision()
             }
         }
     }
+
+    if (lv8.isLvActive == true)
+    {
+        for (int i = 0; i < maxPlatformsLv8; i++)
+        {
+            if (CheckCollisionRecRec(player.pos, player.width, player.height, platformLv8[i].pos, platformLv8[i].width, platformLv8[i].height))
+            {
+                player.gravity = 0;
+                player.canJump = true;
+                cont = 0.3f;
+            }
+        }
+    }
 }
 
 void EnemyCollision(Enemy& enemyLv)
@@ -1068,6 +1109,7 @@ void RestartGame()
     lv5.isLvActive = false;
     lv6.isLvActive = false;
     lv7.isLvActive = false;
+    lv8.isLvActive = false;
 
     player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
     player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
@@ -1115,6 +1157,11 @@ void RestartGame()
     enemyLv7[3].pos.y = static_cast<float>(GetScreenHeight() / 2.5f);
     enemyLv7[3].hitPos.x = enemyLv7[3].pos.x + enemyLv7[3].heightHit;
     enemyLv7[3].hitPos.y = enemyLv7[3].pos.y - enemyLv7[3].heightHit;
+
+    enemyLv7[4].pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
+    enemyLv7[4].pos.y = static_cast<float>(GetScreenHeight() / 14);
+    enemyLv7[4].hitPos.x = enemyLv7[4].pos.x + enemyLv7[4].heightHit;
+    enemyLv7[4].hitPos.y = enemyLv7[4].pos.y - enemyLv7[4].heightHit;
 
     for (int i = 0; i < maxObstaclesLv3; i++)
     {
