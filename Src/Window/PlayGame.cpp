@@ -6,6 +6,7 @@
 #include "Window/LevelManager.h"
 #include "Window/Ui.h"
 #include "Window/Menu.h"
+#include "Window/PauseMenu.h"
 
 #include "Objects/Player.h"
 #include "Objects/Platform.h"
@@ -15,13 +16,6 @@
 #include "Objects/Mouse.h"
 
 using namespace std;
-
-//Menu
-int optionSelect = 0;
-bool playGame = false;
-Texture menuBackground;
-
-Texture subMenusBackground;
 
 //Init
 void InitEnemies(int screenWidht, int screenHeight);
@@ -51,6 +45,26 @@ void MouseMovement();
 void NextLevel(int screenHeight);
 void PreviusLevel(int screenHeight);
 
+
+//Menu
+int optionSelect = 0;
+bool playGame = false;
+Texture menuBackground;
+
+Texture subMenusBackground;
+
+//Pause
+bool pause = false;
+SubMenu pauseMenu;
+Button pauseButtonOff;
+Button pauseButtonOn;
+Button resumeButton;
+Button returnMenuButton;
+Button quitGameButton;
+
+//RestartMenu
+SubMenu restartMenu;
+Button restartButton;
 
 //UI
 Ui ui;
@@ -121,6 +135,9 @@ Wall wall[maxWalls];
 //Mouse
 Mouse mouse;
 
+//Music
+Music music;
+
 //Font
 Font gameFont;
 
@@ -143,6 +160,9 @@ void InitGame(int screenWidth, int screenHeight)
 
     subMenusBackground = LoadTexture("resources/Sprites/SubMenusBackground.png");
     InitMenu();
+
+    //Pause Menu
+    InitPauseMenu(pauseMenu, pauseButtonOff, pauseButtonOn, resumeButton, returnMenuButton, quitGameButton, screenWidth, screenHeight);
 
     //Ui
     ui = CreateUi();
@@ -429,7 +449,17 @@ void GameLoop()
             MenuCollisions(mouse, optionSelect);
             MenuInputs(mouse, optionSelect, playGame);
 
-            Update();
+            if (playGame == true)
+            {
+                PauseMenusInputs(gameOn, playGame, optionSelect, pause, restartMenu, pauseMenu, pauseButtonOff, pauseButtonOn, music, mouse, GetScreenWidth(), GetScreenHeight());
+
+                if (!pause)
+                {
+                    Update();
+                }
+
+                PauseMenuCollisions(pauseMenu, mouse, resumeButton, returnMenuButton, quitGameButton, GetScreenWidth(), GetScreenHeight());
+            }
 
             switch (optionSelect)
             {
@@ -677,6 +707,20 @@ void Draw()
     }
 
     DrawUi(ui, lvCounter);
+
+    if (!pauseMenu.isActive)
+    {
+        DrawRectangle(static_cast<int>(pauseButtonOff.pos.x), static_cast<int>(pauseButtonOff.pos.y), static_cast<int>(pauseButtonOff.width), static_cast<int>(pauseButtonOff.height), BLANK);
+        DrawTexture(pauseButtonOff.texture, static_cast<int>(pauseButtonOff.pos.x), static_cast<int>(pauseButtonOff.pos.y), pauseButtonOff.color);
+    }
+
+    if (pauseMenu.isActive)
+    {
+        DrawRectangle(static_cast<int>(pauseButtonOff.pos.x), static_cast<int>(pauseButtonOff.pos.y), static_cast<int>(pauseButtonOff.width), static_cast<int>(pauseButtonOff.height), BLANK);
+        DrawTexture(pauseButtonOn.texture, static_cast<int>(pauseButtonOn.pos.x), static_cast<int>(pauseButtonOn.pos.y), pauseButtonOn.color);
+
+        DrawPauseMenu(pauseMenu, resumeButton, returnMenuButton, quitGameButton, gameFont, GetScreenWidth(), GetScreenHeight());
+    }
 
     DrawMouse(mouse, mouse.mouseRec);
 
@@ -1283,6 +1327,10 @@ void RestartGame()
     }
 
     player.isActive = true;
+
+    //RestartMenu
+    restartMenu.isActive = false;
+    pause = false;
 }
 
 void UnloadData()
@@ -1291,6 +1339,13 @@ void UnloadData()
 
     UnloadTexture(mouse.texture);
 
+    UnloadTexture(restartMenu.texture);
+    UnloadTexture(pauseMenu.texture);
+    UnloadTexture(pauseButtonOff.texture);
+    UnloadTexture(pauseButtonOn.texture);
+
     UnloadTexture(menuBackground);
     UnloadTexture(subMenusBackground);
+
+    UnloadMusicStream(music);
 }

@@ -49,7 +49,7 @@ void InitPauseMenu(SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButt
     quitGameButton.color = BLACK;
 }
 
-void PauseMenusInputs(bool& gameOn, bool& runGame, bool& playGame, int& optionSelect, bool& pause, SubMenu& restartMenu, SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButtonOn, Music& music, Mouse& mouse, int screenWidth, int screenHeight)
+void PauseMenusInputs(bool& gameOn, bool& playGame, int& optionSelect, bool& pause, SubMenu& restartMenu, SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButtonOn, Music& music, Mouse& mouse, int screenWidth, int screenHeight)
 {
     if (!restartMenu.isActive && pauseMenu.isActive)
     {
@@ -72,7 +72,6 @@ void PauseMenusInputs(bool& gameOn, bool& runGame, bool& playGame, int& optionSe
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
                 RestartGame();
-                runGame = false;
 
                 pause = false;
                 playGame = false;

@@ -23,6 +23,8 @@ struct Player
 	int points;
 
 	bool canJump;
+	bool isAlive;
+	bool win;
 	bool isActive;
 	bool canGoDown;
 
@@ -33,3 +35,9 @@ struct Player
 Player CreatePlayer(int screenWidth, int screenHeight);
 
 void DrawPlayer(Player& player);
+
+void LoseLife(Player& player);
+
+bool IsAlive(Player& player);
+
+bool PlayerWin(Player& player);

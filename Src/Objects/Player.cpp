@@ -18,7 +18,11 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 
 	player.jumpForce = -650;
 
+	player.lifes = 1;
+
 	player.canJump = true;
+	player.isAlive = true;
+	player.win = false;
 	player.isActive = true;
 	player.canGoDown = false;
 
@@ -30,4 +34,35 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 void DrawPlayer(Player& player)
 {
 	DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), RED);
+}
+
+void LoseLife(Player& player)
+{
+	player.lifes -= 1;
+}
+
+bool IsAlive(Player& player)
+{
+	if (player.lifes <= 0)
+	{
+		return player.isAlive == false;
+	}
+
+	else
+	{
+		return player.isAlive == true;
+	}
+}
+
+bool PlayerWin(Player& player)
+{
+	if (player.points < 150000)
+	{
+		return player.win == true;
+	}
+
+	else
+	{
+		return player.win == false;
+	}
 }
