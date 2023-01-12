@@ -11,6 +11,7 @@
 #include "Objects/Wall.h"
 #include "Objects/Enemy.h"
 #include "Objects/Obstacle.h"
+#include "Objects/Mouse.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ void AllEnemiesMovement();
 void EnemyMovement(Enemy& enemy, Level& lv);
 void AllObstaclesMovement();
 void ObstacleMovement(Obstacle& obstacles, Level& lv);
+void MouseMovement();
 
 void NextLevel(int screenHeight);
 void PreviusLevel(int screenHeight);
@@ -109,6 +111,9 @@ int const maxPlatformsLv8 = 34;
 int const maxWalls = 2;
 Wall wall[maxWalls];
 
+//Mouse
+Mouse mouse;
+
 void StartGame()
 {
     int screenWidth = 1024;
@@ -174,6 +179,10 @@ void InitGame(int screenWidth, int screenHeight)
 
     wall[1].width = 40;
     wall[1].height = 770;
+
+    //Mouse
+    mouse = CreateMouse();
+    HideCursor();
 }
 
 void InitEnemies(int screenWidth, int screenHeight)
@@ -395,6 +404,8 @@ void GameLoop()
 
     while (!WindowShouldClose())
     {
+        MouseMovement();
+        
         Update();
 
         Draw();
@@ -595,6 +606,8 @@ void Draw()
     }
 
     DrawUi(ui, lvCounter);
+
+    DrawMouse(mouse, mouse.mouseRec);
 
     EndDrawing();
 }
@@ -939,6 +952,11 @@ void ObstacleMovement(Obstacle& obstacle, Level& lv)
     {
         obstacle.pos.y += obstacle.speed * GetFrameTime();
     }
+}
+
+void MouseMovement()
+{
+    mouse.position = GetMousePosition();
 }
 
 void NextLevel(int screenHeight)

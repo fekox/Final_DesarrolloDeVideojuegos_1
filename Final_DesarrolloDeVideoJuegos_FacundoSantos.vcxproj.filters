@@ -51,6 +51,9 @@
     <ClCompile Include="Src\Window\Ui.cpp">
       <Filter>Src\Window</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Objects\Mouse.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Window\PlayGame.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Src\Window\Ui.h">
       <Filter>Src\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Objects\Mouse.h">
+      <Filter>Src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
