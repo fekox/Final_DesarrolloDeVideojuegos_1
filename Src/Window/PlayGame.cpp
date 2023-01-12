@@ -5,6 +5,7 @@
 #include "Window/PlayGame.h"
 #include "Window/LevelManager.h"
 #include "Window/Ui.h"
+#include "Window/Menu.h"
 
 #include "Objects/Player.h"
 #include "Objects/Platform.h"
@@ -14,6 +15,13 @@
 #include "Objects/Mouse.h"
 
 using namespace std;
+
+//Menu
+int optionSelect = 0;
+bool playGame = false;
+Texture menuBackground;
+
+Texture subMenusBackground;
 
 //Init
 void InitEnemies(int screenWidht, int screenHeight);
@@ -43,7 +51,6 @@ void MouseMovement();
 void NextLevel(int screenHeight);
 void PreviusLevel(int screenHeight);
 
-void RestartGame();
 
 //UI
 Ui ui;
@@ -114,6 +121,9 @@ Wall wall[maxWalls];
 //Mouse
 Mouse mouse;
 
+//Font
+Font gameFont;
+
 void StartGame()
 {
     int screenWidth = 1024;
@@ -122,13 +132,17 @@ void StartGame()
     InitGame(screenWidth, screenHeight);
 
     GameLoop();
-
-    QuitGame();
 }
 
 void InitGame(int screenWidth, int screenHeight)
 {
     InitWindow(screenWidth, screenHeight, "Pingu Climber V0.2");
+
+    //Menu
+    menuBackground = LoadTexture("resources/Sprites/MenuBackground.png");
+
+    subMenusBackground = LoadTexture("resources/Sprites/SubMenusBackground.png");
+    InitMenu();
 
     //Ui
     ui = CreateUi();
@@ -183,6 +197,9 @@ void InitGame(int screenWidth, int screenHeight)
     //Mouse
     mouse = CreateMouse();
     HideCursor();
+
+    //Font
+    gameFont = LoadFont("resources/Font/baby blocks.ttf");
 }
 
 void InitEnemies(int screenWidth, int screenHeight)
@@ -402,13 +419,67 @@ void GameLoop()
 {
     SetExitKey(NULL);
 
-    while (!WindowShouldClose())
-    {
-        MouseMovement();
-        
-        Update();
+    bool gameOn = true;
 
-        Draw();
+    if (gameOn == true)
+    {
+        while (!WindowShouldClose() && gameOn)
+        {
+            MouseMovement();
+            MenuCollisions(mouse, optionSelect);
+            MenuInputs(mouse, optionSelect, playGame);
+
+            Update();
+
+            switch (optionSelect)
+            {
+            case static_cast<int>(Menu::MainMenu):
+                BeginDrawing();
+                ClearBackground(BLACK);
+                DrawMenu(gameFont, menuBackground);
+                DrawMouse(mouse, mouse.mouseRec);
+                EndDrawing();
+                break;
+
+            case static_cast<int>(Menu::Play):
+                Draw();
+                break;
+
+            case static_cast<int>(Menu::Controlls):
+                BeginDrawing();
+                ClearBackground(BLACK);
+                DrawControlls(gameFont, subMenusBackground);
+                DrawMouse(mouse, mouse.mouseRec);
+                EndDrawing();
+                break;
+
+            case static_cast<int>(Menu::Rules):
+                BeginDrawing();
+                ClearBackground(BLACK);
+                DrawRules(gameFont, subMenusBackground);
+                DrawMouse(mouse, mouse.mouseRec);
+                EndDrawing();
+                break;
+
+            case static_cast<int>(Menu::Credits):
+                BeginDrawing();
+                ClearBackground(BLACK);
+                DrawCredits(gameFont, subMenusBackground);
+                DrawMouse(mouse, mouse.mouseRec);
+                EndDrawing();
+                break;
+
+            case static_cast<int>(Menu::Quit):
+                gameOn = false;
+                break;
+            }
+        }
+    }
+
+    if (!gameOn)
+    {
+        UnloadData();
+        CloseWindow();
     }
 }
 
@@ -610,11 +681,6 @@ void Draw()
     DrawMouse(mouse, mouse.mouseRec);
 
     EndDrawing();
-}
-
-void QuitGame()
-{
-    CloseWindow();
 }
 
 bool CheckCollisionRecRec(Vector2 r1, float r1w, float r1h, Vector2 r2, float r2w, float r2h)
@@ -1217,4 +1283,14 @@ void RestartGame()
     }
 
     player.isActive = true;
+}
+
+void UnloadData()
+{
+    UnloadFont(gameFont);
+
+    UnloadTexture(mouse.texture);
+
+    UnloadTexture(menuBackground);
+    UnloadTexture(subMenusBackground);
 }
