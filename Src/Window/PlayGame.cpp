@@ -219,7 +219,7 @@ void InitGame(int screenWidth, int screenHeight)
     HideCursor();
 
     //Font
-    gameFont = LoadFont("resources/Font/baby blocks.ttf");
+    gameFont = LoadFont("resources/Font/Rocket Vintage.otf");
 }
 
 void InitEnemies(int screenWidth, int screenHeight)

@@ -31,19 +31,19 @@ void InitPauseMenu(SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButt
     pauseButtonOn.texture = LoadTexture("resources/Sprites/PauseButtonOn.png");
 
     //Resume Button
-    resumeButton.width = static_cast<float>(screenWidth / 2.5);
+    resumeButton.width = static_cast<float>(screenWidth / 2.1);
     resumeButton.height = static_cast<float>(screenHeight / 2.1);
     resumeButton.size = 40;
     resumeButton.color = BLACK;
 
     //Menu Button
-    returnMenuButton.width = static_cast<float>(screenWidth / 2.3);
+    returnMenuButton.width = static_cast<float>(screenWidth / 2);
     returnMenuButton.height = static_cast<float>(screenHeight / 1.65);
     returnMenuButton.size = 40;
     returnMenuButton.color = BLACK;
 
     //Quit Button
-    quitGameButton.width = static_cast<float>(screenWidth / 2.3);
+    quitGameButton.width = static_cast<float>(screenWidth / 2);
     quitGameButton.height = static_cast<float>(screenHeight / 1.37);
     quitGameButton.size = 40;
     quitGameButton.color = BLACK;
@@ -182,7 +182,7 @@ void DrawPauseMenu(SubMenu& pauseMenu, Button& resumeButton, Button& returnMenuB
     DrawRectangle(static_cast<int>(pauseMenu.pos.x), static_cast<int>(pauseMenu.pos.y), static_cast<int>(pauseMenu.width), static_cast<int>(pauseMenu.height), BLANK);
     DrawTexture(pauseMenu.texture, static_cast<int>(pauseMenu.pos.x), static_cast<int>(pauseMenu.pos.y), WHITE);
 
-    DrawTextEx(gameFont, "PAUSE", { static_cast<float>(screenWidth / 3), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
+    DrawTextEx(gameFont, "PAUSE", { static_cast<float>(screenWidth / 2.2), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
 
     //Restart Button
     DrawRectangle(static_cast<int>(screenWidth / 2.5), static_cast<int>(screenHeight / 2.2), static_cast<int>(screenWidth / 3.8), static_cast<int>(screenHeight / 10), BLANK);
