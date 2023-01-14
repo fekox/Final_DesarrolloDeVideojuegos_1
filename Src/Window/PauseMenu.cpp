@@ -31,9 +31,9 @@ void InitPauseMenu(SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButt
     pauseButtonOn.texture = LoadTexture("resources/Sprites/PauseButtonOn.png");
 
     //Resume Button
-    resumeButton.width = static_cast<float>(screenWidth / 2.1);
+    resumeButton.width = static_cast<float>(screenWidth / 2.2);
     resumeButton.height = static_cast<float>(screenHeight / 2.1);
-    resumeButton.size = 40;
+    resumeButton.size = 50;
     resumeButton.color = BLACK;
 
     //Menu Button
