@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+#include "Objects/Player.h"
+
 struct Ui
 {
 	bool isActive;
@@ -9,4 +11,4 @@ struct Ui
 
 Ui CreateUi();
 
-void DrawUi(Ui& ui, int lvCounter, Font gameFont);
+void DrawUi(Ui& ui, int lvCounter, Font gameFont, Player& player);

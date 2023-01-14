@@ -7,6 +7,7 @@
 #include "Window/Ui.h"
 #include "Window/Menu.h"
 #include "Window/PauseMenu.h"
+#include "Window/RestartMenu.h"
 
 #include "Objects/Player.h"
 #include "Objects/Platform.h"
@@ -163,6 +164,9 @@ void InitGame(int screenWidth, int screenHeight)
 
     //Pause Menu
     InitPauseMenu(pauseMenu, pauseButtonOff, pauseButtonOn, resumeButton, returnMenuButton, quitGameButton, screenWidth, screenHeight);
+
+    //Restart Menu
+    InitRestartMenu(restartMenu, restartButton, returnMenuButton, quitGameButton, screenWidth, screenHeight);
 
     //Ui
     ui = CreateUi();
@@ -452,6 +456,7 @@ void GameLoop()
             if (playGame == true)
             {
                 PauseMenusInputs(gameOn, playGame, optionSelect, pause, restartMenu, pauseMenu, pauseButtonOff, pauseButtonOn, music, mouse, GetScreenWidth(), GetScreenHeight());
+                RestartMenuInputs(restartMenu, pause, playGame, gameOn, optionSelect, mouse, GetScreenWidth(), GetScreenHeight(), player);
 
                 if (!pause)
                 {
@@ -459,6 +464,7 @@ void GameLoop()
                 }
 
                 PauseMenuCollisions(pauseMenu, mouse, resumeButton, returnMenuButton, quitGameButton, GetScreenWidth(), GetScreenHeight());
+                RestarGameMenuCollisions(restartMenu, restartButton, returnMenuButton, quitGameButton, mouse, GetScreenWidth(), GetScreenHeight());
             }
 
             switch (optionSelect)
@@ -468,6 +474,7 @@ void GameLoop()
                 ClearBackground(BLACK);
                 DrawMenu(gameFont, menuBackground);
                 DrawMouse(mouse, mouse.mouseRec);
+                player.deadCount = 0;
                 EndDrawing();
                 break;
 
@@ -706,7 +713,7 @@ void Draw()
         DrawWall(wall[i]);
     }
 
-    DrawUi(ui, lvCounter, gameFont);
+    DrawUi(ui, lvCounter, gameFont, player);
 
     if (!pauseMenu.isActive)
     {
@@ -720,6 +727,12 @@ void Draw()
         DrawTexture(pauseButtonOn.texture, static_cast<int>(pauseButtonOn.pos.x), static_cast<int>(pauseButtonOn.pos.y), pauseButtonOn.color);
 
         DrawPauseMenu(pauseMenu, resumeButton, returnMenuButton, quitGameButton, gameFont, GetScreenWidth(), GetScreenHeight());
+    }
+
+    if (PlayerWin(player, lvCounter))
+    {
+        player.isActive = false;
+        DrawRestarGameMenu(restartMenu, restartButton, returnMenuButton, quitGameButton, player, gameFont, GetScreenWidth(), GetScreenHeight(), lvCounter);
     }
 
     DrawMouse(mouse, mouse.mouseRec);
@@ -904,6 +917,7 @@ void PlayerEnemyCollision(Player& players, Level& lvs, Enemy& enemy)
             if (CheckCollisionRecRec(players.pos, players.width, players.height, enemy.pos, enemy.width, enemy.height))
             {
                 players.isActive = false;
+                AddDead(players);
                 RestartGame();
             }
         }
@@ -917,6 +931,7 @@ void PlayerObstacleCollision(Player& players, Level& lvs, Obstacle& obstacle)
         if (CheckCollisionRecRec(players.pos, players.width, players.height, obstacle.pos, obstacle.width, obstacle.height))
         {
             players.isActive = false;
+            AddDead(players);
             RestartGame();
         }
     }

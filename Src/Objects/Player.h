@@ -18,9 +18,7 @@ struct Player
 	float gravity;
 	float jumpForce;
 
-	int lifes;
-
-	int points;
+	int deadCount;
 
 	bool canJump;
 	bool isAlive;
@@ -36,8 +34,6 @@ Player CreatePlayer(int screenWidth, int screenHeight);
 
 void DrawPlayer(Player& player);
 
-void LoseLife(Player& player);
+void AddDead(Player& player);
 
-bool IsAlive(Player& player);
-
-bool PlayerWin(Player& player);
+bool PlayerWin(Player& player, int& lvCounter);

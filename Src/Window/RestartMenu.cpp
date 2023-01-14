@@ -14,25 +14,25 @@ void InitRestartMenu(SubMenu& restartMenu, Button& restartButton, Button& return
     restartMenu.texture = LoadTexture("resources/Sprites/RestartGameMenu.png");
 
     //Restart Button
-    restartButton.width = static_cast<float>(screenWidth / 2.7);
+    restartButton.width = static_cast<float>(screenWidth / 2.2);
     restartButton.height = static_cast<float>(screenHeight / 2.1);
-    restartButton.size = 40;
-    restartButton.color = BLACK;
+    restartButton.size = 50;
+    restartButton.color = WHITE;
 
     //Menu Button
-    returnMenuButton.width = static_cast<float>(screenWidth / 2.3);
+    returnMenuButton.width = static_cast<float>(screenWidth / 2.1);
     returnMenuButton.height = static_cast<float>(screenHeight / 1.65);
-    returnMenuButton.size = 40;
-    returnMenuButton.color = BLACK;
+    returnMenuButton.size = 50;
+    returnMenuButton.color = WHITE;
 
     //Quit Button
-    quitGameButton.width = static_cast<float>(screenWidth / 2.3);
+    quitGameButton.width = static_cast<float>(screenWidth / 2.1);
     quitGameButton.height = static_cast<float>(screenHeight / 1.37);
-    quitGameButton.size = 40;
-    quitGameButton.color = BLACK;
+    quitGameButton.size = 50;
+    quitGameButton.color = WHITE;
 }
 
-void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& runGame, bool& playGame, bool& gameOn, int& optionSelect, Mouse& mouse, int screenWidth, int screenHeight)
+void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& playGame, bool& gameOn, int& optionSelect, Mouse& mouse, int screenWidth, int screenHeight, Player& player)
 {
     if (restartMenu.isActive)
     {
@@ -44,6 +44,7 @@ void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& runGame, bool& p
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
                 RestartGame();
+                player.deadCount = 0;
             }
         }
 
@@ -53,7 +54,7 @@ void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& runGame, bool& p
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
                 RestartGame();
-                runGame = false;
+                player.deadCount = 0;
 
                 restartMenu.isActive = false;
                 playGame = false;
@@ -79,7 +80,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
         //Restart Button
         if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.7), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 3.2), static_cast<float>(screenHeight / 10) }))
         {
-            restartButton.color = GOLD;
+            restartButton.color = RED;
         }
 
         else
@@ -90,7 +91,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
         //Return Menu Button
         if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.7), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
-            returnMenuButton.color = GOLD;
+            returnMenuButton.color = RED;
         }
 
         else
@@ -101,7 +102,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
         //Quit Game Button
         if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.4), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
-            quitGameButton.color = GOLD;
+            quitGameButton.color = RED;
         }
 
         else
@@ -111,21 +112,16 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
     }
 }
 
-void DrawRestarGameMenu(SubMenu& restartMenu, Button& restartButton, Button& returnMenuButton, Button& quitGameButton, Player& player, Font gameFont, int screenWidth, int screenHeight)
+void DrawRestarGameMenu(SubMenu& restartMenu, Button& restartButton, Button& returnMenuButton, Button& quitGameButton, Player& player, Font gameFont, int screenWidth, int screenHeight, int& lvCounter)
 {
     DrawRectangle(static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), static_cast<int>(restartMenu.width), static_cast<int>(restartMenu.height), BLANK);
     restartMenu.isActive = true;
 
     DrawTexture(restartMenu.texture, static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), WHITE);
 
-    if (!IsAlive(player))
+    if (PlayerWin(player, lvCounter))
     {
-        DrawTextEx(gameFont, "YOU LOSE", { static_cast<float>(screenWidth / 4.2), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
-    }
-
-    if (PlayerWin(player))
-    {
-        DrawTextEx(gameFont, "YOU WIN", { static_cast<float>(screenWidth / 3.5), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
+        DrawTextEx(gameFont, "YOU WIN", { static_cast<float>(screenWidth / 2.4), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
     }
 
 
