@@ -1,4 +1,4 @@
-# Pingu Climber V0.2
+# Pingu Climber V0.3
 College final project made whit raylib in c++.
 
 # Web page of the developer who work on the project:

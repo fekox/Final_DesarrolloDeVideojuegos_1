@@ -154,7 +154,7 @@ void StartGame()
 
 void InitGame(int screenWidth, int screenHeight)
 {
-    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.2");
+    InitWindow(screenWidth, screenHeight, "Pingu Climber V0.3");
 
     //Menu
     menuBackground = LoadTexture("resources/Sprites/MenuBackground.png");
