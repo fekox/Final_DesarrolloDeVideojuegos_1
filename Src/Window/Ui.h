@@ -9,4 +9,4 @@ struct Ui
 
 Ui CreateUi();
 
-void DrawUi(Ui& ui, int lvCounter);
+void DrawUi(Ui& ui, int lvCounter, Font gameFont);

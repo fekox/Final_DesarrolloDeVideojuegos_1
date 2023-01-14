@@ -706,7 +706,7 @@ void Draw()
         DrawWall(wall[i]);
     }
 
-    DrawUi(ui, lvCounter);
+    DrawUi(ui, lvCounter, gameFont);
 
     if (!pauseMenu.isActive)
     {

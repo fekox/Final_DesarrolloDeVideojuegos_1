@@ -9,10 +9,10 @@ Ui CreateUi()
 	return ui;
 }
 
-void DrawUi(Ui& ui, int lvCounter)
+void DrawUi(Ui& ui, int lvCounter, Font gameFont)
 {
 	if (ui.isActive == true)
 	{
-		DrawText(TextFormat("Level: %i", lvCounter), 0, 0, 40, WHITE);
+		DrawTextEx(gameFont, TextFormat("Level: %i", lvCounter), { static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 7) }, 60, 0, WHITE);
 	}
 }
