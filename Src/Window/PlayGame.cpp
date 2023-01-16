@@ -1414,5 +1414,10 @@ void UnloadData()
         UnloadTexture(enemies[i].texWalkLeft);
     }
 
+    for (int i = 0; i < maxObstacles; i++)
+    {
+        UnloadTexture(obstacles[i].tex);
+    }
+
     UnloadMusicStream(music);
 }
