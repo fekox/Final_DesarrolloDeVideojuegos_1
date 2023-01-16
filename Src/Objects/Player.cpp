@@ -26,6 +26,9 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 	player.isActive = true;
 	player.canGoDown = false;
 
+	player.goRight = true;
+	player.goLeft = false;
+
 	player.actualAnim = 0;
 	player.frameSpeed = 1;
 
@@ -47,7 +50,6 @@ void InitAnimations(Player& player)
 
 	switch (player.actualAnim)
 	{
-
 		case static_cast<int>(PlayerAnimations::WalkRight):
 		
 		texLimitWidth = 1070;
@@ -70,26 +72,12 @@ void InitAnimations(Player& player)
 
 			break;
 
-		case static_cast<int>(PlayerAnimations::JumpRight):
-
-
-		break;
-
-		case static_cast<int>(PlayerAnimations::JumpLeft):
-
-
-			break;
-
-		case static_cast<int>(PlayerAnimations::Grab):
-
-		break;
-
 		default:
 		break;
 	}
 }
 
-void DrawPlayer(Player& player, bool& goRight, bool& goLeft)
+void DrawPlayer(Player& player)
 {
 	int texLimitWidth = 1070;
 	int texLimitHeight = 17;
@@ -101,8 +89,8 @@ void DrawPlayer(Player& player, bool& goRight, bool& goLeft)
 	{
 		repoTexX = 50;
 		repoTexY = 40;
-		goRight = false;
-		goLeft = true;
+		player.goRight = false;
+		player.goLeft = true;
 
 		DrawTextureRec(player.texWalkLeft, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY}, WHITE);
 	}
@@ -111,20 +99,15 @@ void DrawPlayer(Player& player, bool& goRight, bool& goLeft)
 	{
 		repoTexX = 60;
 		repoTexY = 40;
-		goRight = true;
-		goLeft = false;
+		player.goRight = true;
+		player.goLeft = false;
 
 		DrawTextureRec(player.texWalkRight, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
 	}
 
 	if (IsKeyDown(KEY_W))
 	{
-
-	}
-
-	if (!IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_S))
-	{
-		if (goRight == true)
+		if (player.goRight == true)
 		{
 			repoTexX = 60;
 			repoTexY = 40;
@@ -133,7 +116,49 @@ void DrawPlayer(Player& player, bool& goRight, bool& goLeft)
 				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
 		}
 
-		if (goLeft == true)
+		if (player.goLeft == true)
+		{
+			repoTexX = 55;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
+				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+	}
+
+	if (IsKeyDown(KEY_S))
+	{
+		if (player.goRight == true)
+		{
+			repoTexX = 60;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+
+		if (player.goLeft == true)
+		{
+			repoTexX = 55;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
+				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+	}
+
+	if (!IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_S))
+	{
+		if (player.goRight == true)
+		{
+			repoTexX = 60;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+
+		if (player.goLeft == true)
 		{
 			repoTexX = 55;
 			repoTexY = 40;

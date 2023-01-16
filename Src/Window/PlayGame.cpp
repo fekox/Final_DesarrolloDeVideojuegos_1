@@ -74,8 +74,6 @@ Ui ui;
 Player player;
 float cont = 0.3f;
 int currentFrame = 0;
-bool goRight = true;
-bool goLeft = false;
 
 //Enemy
 int const maxEnemies = 8;
@@ -636,7 +634,7 @@ void Draw()
         }
     }
 
-    DrawPlayer(player, goRight, goLeft);
+    DrawPlayer(player);
 
     //Enemy
     //Lv2
@@ -1008,17 +1006,6 @@ void PlayerMovement(Player& players)
             if (players.canJump == false && cont > 0)
             {
                 PlayerJump(player);
-
-                if (players.frameCounter >= (60 / players.frameSpeed))
-                {
-                    players.frameCounter = 0;
-
-                    currentFrame++;
-
-                    currentFrame = 8;
-                    
-                    players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.texWalkRight.width - texWidthLimitRight);
-                }
             }
         }
 
