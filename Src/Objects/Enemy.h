@@ -28,9 +28,13 @@ struct Enemy
 
 	bool isActive;
 
+	bool goLeft;
+	bool goRight;
+
 	MoveDir dir;
 
-	Texture tex;
+	Texture texWalkLeft;
+	Texture texWalkRight;
 	Color color;
 	Color hitColor;
 };

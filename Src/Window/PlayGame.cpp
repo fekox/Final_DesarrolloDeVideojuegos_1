@@ -1076,12 +1076,16 @@ void EnemyMovement(Enemy& enemys, Level& lv)
     {
         if (enemys.dir == MoveDir::Left)
         {
+            enemys.goRight = false;
+            enemys.goLeft = true;
             enemys.pos.x -= enemys.speed * GetFrameTime();
             enemys.hitPos.x -= enemys.speed * GetFrameTime();
         }
 
         if (enemys.dir == MoveDir::Right)
         {
+            enemys.goRight = true;
+            enemys.goLeft = false;
             enemys.pos.x += enemys.speed * GetFrameTime();
             enemys.hitPos.x += enemys.speed * GetFrameTime();
         }
@@ -1404,6 +1408,11 @@ void UnloadData()
 
     UnloadTexture(menuBackground);
     UnloadTexture(subMenusBackground);
+
+    for (int i = 0; i < maxEnemies; i++)
+    {
+        UnloadTexture(enemies[i].texWalkLeft);
+    }
 
     UnloadMusicStream(music);
 }
