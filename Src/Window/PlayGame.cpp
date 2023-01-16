@@ -73,6 +73,7 @@ Ui ui;
 //Player
 Player player;
 float cont = 0.3f;
+int currentFrame = 0;
 
 //Enemy
 int const maxEnemies = 8;
@@ -173,7 +174,8 @@ void InitGame(int screenWidth, int screenHeight)
 
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
-
+    InitAnimations(player);
+    
     //Level
     lv1.isLvActive = true;
 
@@ -952,16 +954,50 @@ void EnemyWallCollision(Enemy& enemyLv)
 
 void PlayerMovement(Player& players)
 {
+    int texWidthLimit = 1032;
+
+    players.frameCounter++;
+
     if (players.isActive == true)
     {
         if (IsKeyDown(KEY_A))
         {
+            player.actualAnim = 1;
             players.pos.x -= players.speed * GetFrameTime();
+
+            if (players.frameCounter >= (60 / players.frameSpeed))
+            {
+                players.frameCounter = 0;
+
+                currentFrame--;
+
+                if (currentFrame > 8)
+                {
+                    currentFrame = 0;
+                }
+
+                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.tex.width - texWidthLimit);
+            }
         }
 
         if (IsKeyDown(KEY_D))
         {
+            player.actualAnim = 2;
             players.pos.x += players.speed * GetFrameTime();
+
+            if (players.frameCounter >= (60 / players.frameSpeed))
+            {
+                players.frameCounter = 0;
+
+                currentFrame++;
+
+                if (currentFrame > 8)
+                {
+                    currentFrame = 0;
+                }
+
+                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.tex.width - texWidthLimit);
+            }
         }
 
         if (IsKeyDown(KEY_W))
@@ -997,6 +1033,11 @@ void PlayerMovement(Player& players)
                 players.gravity += players.gravity * GetFrameTime();
                 players.pos.y = players.pos.y + players.gravity * GetFrameTime();
             }
+        }
+
+        if (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D) && IsKeyDown(KEY_S) && IsKeyDown(KEY_W))
+        {
+            players.actualAnim = 0;
         }
     }
 }
@@ -1353,6 +1394,8 @@ void UnloadData()
     UnloadFont(gameFont);
 
     UnloadTexture(mouse.texture);
+
+    UnloadTexture(player.tex);
 
     UnloadTexture(restartMenu.texture);
     UnloadTexture(pauseMenu.texture);

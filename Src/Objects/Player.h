@@ -6,6 +6,13 @@
 
 #include "Window/LevelManager.h"
 
+enum class PlayerAnimations
+{
+	WalkRight,
+	Jump,
+	Grab
+};
+
 struct Player
 {
 	Vector2 pos;
@@ -26,13 +33,22 @@ struct Player
 	bool isActive;
 	bool canGoDown;
 
+	int actualAnim;
+
 	Texture tex;
+
+	Rectangle frameRec;
+	int frameCounter;
+	int frameSpeed;
+
 	Color color;
 };
 
 Player CreatePlayer(int screenWidth, int screenHeight);
 
 void DrawPlayer(Player& player);
+
+void InitAnimations(Player& player);
 
 void AddDead(Player& player);
 
