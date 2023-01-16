@@ -9,7 +9,9 @@
 enum class PlayerAnimations
 {
 	WalkRight,
-	Jump,
+	WalkLeft,
+	JumpRight,
+	JumpLeft,
 	Grab
 };
 
@@ -35,7 +37,8 @@ struct Player
 
 	int actualAnim;
 
-	Texture tex;
+	Texture texWalkRight;
+	Texture texWalkLeft;
 
 	Rectangle frameRec;
 	int frameCounter;
@@ -46,7 +49,7 @@ struct Player
 
 Player CreatePlayer(int screenWidth, int screenHeight);
 
-void DrawPlayer(Player& player);
+void DrawPlayer(Player& player, bool& goRight, bool& goLeft);
 
 void InitAnimations(Player& player);
 

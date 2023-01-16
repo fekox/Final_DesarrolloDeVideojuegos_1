@@ -74,6 +74,8 @@ Ui ui;
 Player player;
 float cont = 0.3f;
 int currentFrame = 0;
+bool goRight = true;
+bool goLeft = false;
 
 //Enemy
 int const maxEnemies = 8;
@@ -634,7 +636,7 @@ void Draw()
         }
     }
 
-    DrawPlayer(player);
+    DrawPlayer(player, goRight, goLeft);
 
     //Enemy
     //Lv2
@@ -954,7 +956,8 @@ void EnemyWallCollision(Enemy& enemyLv)
 
 void PlayerMovement(Player& players)
 {
-    int texWidthLimit = 1032;
+    int texWidthLimitRight = 1070;
+    int texWidthLimitLeft = 1070;
 
     players.frameCounter++;
 
@@ -968,14 +971,14 @@ void PlayerMovement(Player& players)
             {
                 players.frameCounter = 0;
 
-                currentFrame--;
+                currentFrame++;
 
                 if (currentFrame > 8)
                 {
                     currentFrame = 0;
                 }
 
-                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.tex.width - texWidthLimit);
+                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.texWalkLeft.width - texWidthLimitLeft);
             }
         }
 
@@ -994,7 +997,7 @@ void PlayerMovement(Player& players)
                     currentFrame = 0;
                 }
 
-                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.tex.width - texWidthLimit);
+                players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.texWalkRight.width - texWidthLimitRight);
             }
         }
 
@@ -1005,6 +1008,17 @@ void PlayerMovement(Player& players)
             if (players.canJump == false && cont > 0)
             {
                 PlayerJump(player);
+
+                if (players.frameCounter >= (60 / players.frameSpeed))
+                {
+                    players.frameCounter = 0;
+
+                    currentFrame++;
+
+                    currentFrame = 8;
+                    
+                    players.frameRec.x = static_cast<float>(currentFrame) * static_cast<float>(player.texWalkRight.width - texWidthLimitRight);
+                }
             }
         }
 
@@ -1393,7 +1407,8 @@ void UnloadData()
 
     UnloadTexture(mouse.texture);
 
-    UnloadTexture(player.tex);
+    UnloadTexture(player.texWalkRight);
+    UnloadTexture(player.texWalkLeft);
 
     UnloadTexture(restartMenu.texture);
     UnloadTexture(pauseMenu.texture);

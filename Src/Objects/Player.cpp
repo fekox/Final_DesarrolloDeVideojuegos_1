@@ -29,7 +29,8 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 	player.actualAnim = 0;
 	player.frameSpeed = 1;
 
-	player.tex = LoadTexture("resources/Sprites/Penguin.png");
+	player.texWalkRight = LoadTexture("resources/Sprites/Penguin_Walk_Right.png");
+	player.texWalkLeft = LoadTexture("resources/Sprites/Penguin_Walk_Left.png");
 
 	player.color = WHITE;
 
@@ -44,30 +45,40 @@ void InitAnimations(Player& player)
 	int texLimitWidth = 0;
 	int texLimitHeight = 0;
 
-	texLimitWidth = 1032;
-	texLimitHeight = 671;
-
-	player.frameRec = Rectangle{ static_cast<float>(texLimitX), static_cast<float>(texLimitY), static_cast<float>(player.tex.width - texLimitWidth), static_cast<float>(player.tex.height - texLimitHeight) };
-	player.frameCounter = 0;
-	player.frameSpeed = 1;
-
 	switch (player.actualAnim)
 	{
 
 		case static_cast<int>(PlayerAnimations::WalkRight):
 		
-		texLimitWidth = 1032;
-		texLimitHeight = 671;
+		texLimitWidth = 1070;
+		texLimitHeight = 17;
 
-		player.frameRec = Rectangle{ static_cast<float>(texLimitX), static_cast<float>(texLimitY), static_cast<float>(player.tex.width - texLimitWidth), static_cast<float>(player.tex.height - texLimitHeight) };
+		player.frameRec = Rectangle{ static_cast<float>(texLimitX), static_cast<float>(texLimitY), static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) };
 		player.frameCounter = 0;
 		player.frameSpeed = 1;
 
 		break;
 
-		case static_cast<int>(PlayerAnimations::Jump):
+		case static_cast<int>(PlayerAnimations::WalkLeft):
+
+			texLimitWidth = 1071;
+			texLimitHeight = 17;
+
+			player.frameRec = Rectangle{ static_cast<float>(texLimitX), static_cast<float>(texLimitY), static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) };
+			player.frameCounter = 0;
+			player.frameSpeed = 1;
+
+			break;
+
+		case static_cast<int>(PlayerAnimations::JumpRight):
+
 
 		break;
+
+		case static_cast<int>(PlayerAnimations::JumpLeft):
+
+
+			break;
 
 		case static_cast<int>(PlayerAnimations::Grab):
 
@@ -78,31 +89,59 @@ void InitAnimations(Player& player)
 	}
 }
 
-void DrawPlayer(Player& player)
+void DrawPlayer(Player& player, bool& goRight, bool& goLeft)
 {
-	int repoTexX = 50;
-	int repoTexY = 50;
+	int texLimitWidth = 1070;
+	int texLimitHeight = 17;
+
+	int repoTexX = 0;
+	int repoTexY = 0;
 
 	if (IsKeyDown(KEY_A))
 	{
 		repoTexX = 50;
-		repoTexY = 50;
+		repoTexY = 40;
+		goRight = false;
+		goLeft = true;
 
-		DrawTextureRec(player.tex, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY}, WHITE);
+		DrawTextureRec(player.texWalkLeft, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY}, WHITE);
 	}
 
 	if (IsKeyDown(KEY_D))
 	{
-		repoTexX = 45;
-		repoTexY = 50;
+		repoTexX = 60;
+		repoTexY = 40;
+		goRight = true;
+		goLeft = false;
 
-		DrawTextureRec(player.tex, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		DrawTextureRec(player.texWalkRight, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+	}
+
+	if (IsKeyDown(KEY_W))
+	{
+
 	}
 
 	if (!IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_S))
 	{
-		DrawTextureRec(player.tex, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.tex.width - 1032), static_cast<float>(player.tex.height - 671)},
+		if (goRight == true)
+		{
+			repoTexX = 60;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+
+		if (goLeft == true)
+		{
+			repoTexX = 55;
+			repoTexY = 40;
+
+			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
 			Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
+		
 	}
 
 	DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), BLANK);
