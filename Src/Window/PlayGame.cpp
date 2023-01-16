@@ -958,11 +958,10 @@ void PlayerMovement(Player& players)
 
     players.frameCounter++;
 
-    if (players.isActive == true)
+    if (players.isActive == true && pause == false)
     {
         if (IsKeyDown(KEY_A))
         {
-            player.actualAnim = 1;
             players.pos.x -= players.speed * GetFrameTime();
 
             if (players.frameCounter >= (60 / players.frameSpeed))
@@ -982,7 +981,6 @@ void PlayerMovement(Player& players)
 
         if (IsKeyDown(KEY_D))
         {
-            player.actualAnim = 2;
             players.pos.x += players.speed * GetFrameTime();
 
             if (players.frameCounter >= (60 / players.frameSpeed))
