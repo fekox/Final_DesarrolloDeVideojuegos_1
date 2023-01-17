@@ -1431,6 +1431,7 @@ void UnloadData()
     for (int i = 0; i < maxEnemies; i++)
     {
         UnloadTexture(enemies[i].texWalkLeft);
+        UnloadTexture(enemies[i].texWalkRight);
     }
 
     for (int i = 0; i < maxObstacles; i++)
