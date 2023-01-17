@@ -1,7 +1,6 @@
 #pragma once
 #include "raylib.h"
 #include "Objects/Mouse.h"
-#include "Window/PlayGame.h"
 
 struct MenuButton
 {
@@ -16,8 +15,6 @@ struct MenuButton
 
 	int repoTexX;
 	int repoTexY;
-
-	Texture texture;
 
 	Color color;
 };
@@ -35,7 +32,7 @@ enum class Menu
 void InitMenu();
 void MenuCollisions(Mouse& mouse, int& optionSelect);
 void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame);
-void DrawMenu(Font gameFont, Texture menuBackground);
+void DrawMenu(Font gameFont, Texture menuBackground, Texture buttonTex);
 void DrawControlls(Font gameFont, Texture subMenusBackground);
 void DrawRules(Font gameFont, Texture subMenusBackground);
 void DrawCredits(Font gameFont, Texture subMenusBackground);

@@ -52,6 +52,7 @@ void PreviusLevel(int screenHeight);
 int optionSelect = 0;
 bool playGame = false;
 Texture menuBackground;
+Texture menuButton;
 
 Texture subMenusBackground;
 
@@ -165,6 +166,7 @@ void InitGame(int screenWidth, int screenHeight)
 
     //Menu
     menuBackground = LoadTexture("resources/Sprites/MenuBackground.png");
+    menuButton = LoadTexture("resources/Sprites/Button.png");
 
     subMenusBackground = LoadTexture("resources/Sprites/SubMenusBackground.png");
     InitMenu();
@@ -486,7 +488,7 @@ void GameLoop()
             case static_cast<int>(Menu::MainMenu):
                 BeginDrawing();
                 ClearBackground(BLACK);
-                DrawMenu(gameFont, menuBackground);
+                DrawMenu(gameFont, menuBackground, menuButton);
                 DrawMouse(mouse, mouse.mouseRec);
                 player.deadCount = 0;
                 EndDrawing();
@@ -1441,6 +1443,9 @@ void UnloadData()
 
     UnloadTexture(leftBackground.leftTex);
     UnloadTexture(rightBackground.rightTex);
+
+    UnloadTexture(menuButton);
+
 
     UnloadMusicStream(music);
 }

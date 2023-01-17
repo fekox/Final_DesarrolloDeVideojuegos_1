@@ -20,7 +20,6 @@ void InitMenu()
 	play.width = static_cast<float>(GetScreenWidth() / 9);
 	play.height = static_cast<float>(GetScreenHeight() / 10);
 	play.size = 50;
-	play.texture = LoadTexture("resources/Sprites/Button.png");
 	play.isActive = false;
 	play.repoTexX = 40;
 	play.repoTexY = 10;
@@ -252,7 +251,7 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 	}
 }
 
-void DrawMenu(Font gameFont, Texture menuBackground)
+void DrawMenu(Font gameFont, Texture menuBackground, Texture buttonTex)
 {
 	ClearBackground(BLACK);
 
@@ -264,30 +263,30 @@ void DrawMenu(Font gameFont, Texture menuBackground)
 
 	//Play Button
 
-	DrawTexture(play.texture, static_cast<int>(GetScreenWidth() / 14) - play.repoTexX, static_cast<int>(GetScreenHeight() / 3.5) + play.repoTexY, WHITE);
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - play.repoTexX, static_cast<int>(GetScreenHeight() / 3.5) + play.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 3.5), static_cast<int>(play.width), static_cast<int>(play.height), BLANK);
 	DrawTextEx(gameFont, "PLAY", play.pos, static_cast<float>(play.size), 0, play.color);
 
 	//Controlls Button
-	DrawTexture(play.texture, static_cast<int>(GetScreenWidth() / 22), static_cast<int>(GetScreenHeight() / 2.5), WHITE);
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 22), static_cast<int>(GetScreenHeight() / 2.5), WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 22), static_cast<int>(GetScreenHeight() / 2.5), static_cast<int>(controlls.width), static_cast<int>(controlls.height), BLANK);
 	DrawTextEx(gameFont, "CONTROLLS", controlls.pos, static_cast<float>(controlls.size), 0, controlls.color);
 
 	//Rules Button
 
-	DrawTexture(play.texture, static_cast<int>(GetScreenWidth() / 14) - rules.repoTexX, static_cast<int>(GetScreenHeight() / 1.94) + rules.repoTexY, WHITE);
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - rules.repoTexX, static_cast<int>(GetScreenHeight() / 1.94) + rules.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 1.94), static_cast<int>(rules.width), static_cast<int>(rules.height), BLANK);
 	DrawTextEx(gameFont, "RULES", rules.pos, static_cast<float>(rules.size), 0, rules.color);
 
 	//Credits Button
 
-	DrawTexture(play.texture, static_cast<int>(GetScreenWidth() / 1.5) - credits.repoTexX, static_cast<int>(GetScreenHeight() / 1.13), WHITE);
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 1.5) - credits.repoTexX, static_cast<int>(GetScreenHeight() / 1.13), WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 1.5), static_cast<int>(GetScreenHeight() / 1.13), static_cast<int>(credits.width), static_cast<int>(credits.height), BLANK);
 	DrawTextEx(gameFont, "CREDITS", credits.pos, static_cast<float>(credits.size), 0, credits.color);
 
 	//Quit Button
 
-	DrawTexture(play.texture, static_cast<int>(GetScreenWidth() / 14) - quit.repoTexX, static_cast<int>(GetScreenHeight() / 1.59) + quit.repoTexY, WHITE);
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - quit.repoTexX, static_cast<int>(GetScreenHeight() / 1.59) + quit.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 1.59), static_cast<int>(quit.width), static_cast<int>(quit.height), BLANK);
 	DrawTextEx(gameFont, "QUIT", quit.pos, static_cast<float>(quit.size), 0, quit.color);
 }
