@@ -26,7 +26,7 @@ Enemy CreateEnemy()
 	enemy.texWalkRight = LoadTexture("resources/Sprites/Seal_Right.png");
 
 	enemy.color = BLANK;
-	enemy.hitColor = ORANGE;
+	enemy.hitColor = BLANK;
 
 	return enemy;
 }

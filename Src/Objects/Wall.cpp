@@ -10,7 +10,7 @@ Wall CreateWall()
 	wall.width = 0;
 	wall.height = 0;
 
-	wall.color = BLUE;
+	wall.color = BLANK;
 
 	return wall;
 }

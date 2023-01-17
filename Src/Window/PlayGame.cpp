@@ -136,7 +136,9 @@ int const maxWalls = 2;
 Wall wall[maxWalls];
 
 //Background
-Background background;
+Background centerBackground;
+Background leftBackground;
+Background rightBackground;
 
 //Mouse
 Mouse mouse;
@@ -176,6 +178,7 @@ void InitGame(int screenWidth, int screenHeight)
     //Ui
     ui = CreateUi();
 
+
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
     InitAnimations(player);
@@ -210,15 +213,6 @@ void InitGame(int screenWidth, int screenHeight)
         wall[i] = CreateWall();
     }
 
-    //Background
-    background = CreateBackground();
-    
-    background.pos.x = 200;
-    background.pos.y = 0;
-    
-    background.width = 630;
-    background.height = 730;
-
     //Right Wall
     wall[0].pos.x = static_cast<float>(screenWidth / 1.25f);
     wall[0].pos.y = -2;
@@ -232,6 +226,22 @@ void InitGame(int screenWidth, int screenHeight)
 
     wall[1].width = 40;
     wall[1].height = 770;
+
+    //Backgrounds
+    centerBackground = CreateBackground();
+
+    centerBackground.pos.x = 140;
+    centerBackground.pos.y = 0;
+
+    leftBackground = CreateBackground();
+
+    leftBackground.pos.x = 0;
+    leftBackground.pos.y = 0;
+
+    rightBackground = CreateBackground();
+
+    rightBackground.pos.x = 760;
+    rightBackground.pos.y = 0;
 
     //Mouse
     mouse = CreateMouse();
@@ -564,7 +574,7 @@ void Draw()
 
     ClearBackground(BLACK);
 
-    DrawBackground(background, lvCounter);
+    DrawCenterBackground(centerBackground, lvCounter);
     
     //Level 1
     if (lv1.isLvActive == true)
@@ -718,6 +728,9 @@ void Draw()
     {
         DrawWall(wall[i]);
     }
+
+    DrawLeftBackground(leftBackground);
+    DrawRightBackgrounds(rightBackground);
 
     DrawUi(ui, lvCounter, gameFont, player);
 
@@ -1423,8 +1436,11 @@ void UnloadData()
         UnloadTexture(obstacles[i].tex);
     }
 
-    UnloadTexture(background.tex);
-    UnloadTexture(background.tex2);
+    UnloadTexture(centerBackground.centerTex);
+    UnloadTexture(centerBackground.centerTex2);
+
+    UnloadTexture(leftBackground.leftTex);
+    UnloadTexture(rightBackground.rightTex);
 
     UnloadMusicStream(music);
 }

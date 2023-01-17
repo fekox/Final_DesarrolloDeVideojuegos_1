@@ -9,10 +9,16 @@ struct Background
 	float width;
 	float height;
 
-	Texture tex;
-	Texture tex2;
+	Texture centerTex;
+	Texture centerTex2;
+	Texture leftTex;
+	Texture rightTex;
 };
 
 Background CreateBackground();
 
-void DrawBackground(Background& background, int lvCounter);
+void DrawCenterBackground(Background& background, int lvCounter);
+
+void DrawLeftBackground(Background& background); 
+
+void DrawRightBackgrounds(Background& background);

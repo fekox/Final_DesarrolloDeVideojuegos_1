@@ -10,21 +10,33 @@ Background CreateBackground()
 	background.width = 0;
 	background.height = 0;
 
-	background.tex = LoadTexture("resources/Sprites/Background.png");
-	background.tex2 = LoadTexture("resources/Sprites/Background2.png");
+	background.centerTex = LoadTexture("resources/Sprites/Background.png");
+	background.centerTex2 = LoadTexture("resources/Sprites/Background2.png");
+	background.leftTex = LoadTexture("resources/Sprites/LeftBackground.png");
+	background.rightTex = LoadTexture("resources/Sprites/RightBackground.png");
 
 	return background;
 }
 
-void DrawBackground(Background& background, int lvCounter)
+void DrawCenterBackground(Background& background, int lvCounter)
 {
 	if (lvCounter % 2 == 0 )
 	{
-		DrawTexture(background.tex2, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
+		DrawTexture(background.centerTex2, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
 	}
 
 	else
 	{
-		DrawTexture(background.tex, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
+		DrawTexture(background.centerTex, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
 	}
+}
+
+void DrawLeftBackground(Background& background)
+{
+	DrawTexture(background.leftTex, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
+}
+
+void DrawRightBackgrounds(Background& background)
+{
+	DrawTexture(background.rightTex, static_cast<int>(background.pos.x), static_cast<int>(background.pos.y), WHITE);
 }
