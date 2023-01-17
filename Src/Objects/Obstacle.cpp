@@ -5,7 +5,7 @@ Obstacle CreateObstacle()
 	Obstacle obstacle;
 
 	obstacle.pos.x = 0;
-	obstacle.pos.y = 0;
+	obstacle.pos.y = -150;
 
 	obstacle.width = 40;
 	obstacle.height = 150;
@@ -24,7 +24,7 @@ void ObstacleCollisionLimit(Obstacle& obstacle, int screenHeight)
 {
 	if (obstacle.pos.y > static_cast<float>(screenHeight))
 	{
-		obstacle.pos.y = static_cast<float>(screenHeight / screenHeight);
+		obstacle.pos.y = -150;
 	}
 }
 

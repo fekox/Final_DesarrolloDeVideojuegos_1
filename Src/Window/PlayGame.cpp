@@ -281,40 +281,29 @@ void InitObstacles(int screenWidth)
 {
     //Lv3
     obstacles[0].pos.x = static_cast<float>(screenWidth / 1.7f);
-    obstacles[0].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[1].pos.x = static_cast<float>(screenWidth / 3);
-    obstacles[1].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Lv4
     obstacles[2].pos.x = static_cast<float>(screenWidth / 1.4f);
-    obstacles[2].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[3].pos.x = static_cast<float>(screenWidth / 2.1f);
-    obstacles[3].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[4].pos.x = static_cast<float>(screenWidth / 4.5f);
-    obstacles[4].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Lv5
     obstacles[5].pos.x = static_cast<float>(screenWidth / 1.8f);
-    obstacles[5].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[6].pos.x = static_cast<float>(screenWidth / 2.5f);
-    obstacles[6].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     //Lv6
     obstacles[7].pos.x = static_cast<float>(screenWidth / 1.8f);
-    obstacles[7].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[8].pos.x = static_cast<float>(screenWidth / 2.5f);
-    obstacles[8].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[9].pos.x = static_cast<float>(screenWidth / 4.5f);
-    obstacles[9].pos.y = static_cast<float>(screenWidth / screenWidth);
 
     obstacles[10].pos.x = static_cast<float>(screenWidth / 1.4f);
-    obstacles[10].pos.y = static_cast<float>(screenWidth / screenWidth);
 }
 
 void InitPlatforms(int screenWidth, int screenHeight)
@@ -634,7 +623,7 @@ void Draw()
         }
     }
 
-    DrawPlayer(player);
+    DrawPlayer(player, pause);
 
     //Enemy
     //Lv2
@@ -1382,7 +1371,7 @@ void RestartGame()
 
     for (int i = 0; i < maxObstacles; i++)
     {
-        obstacles[i].pos.y = static_cast<float>(GetScreenWidth() / GetScreenWidth());
+        obstacles[i].pos.y = -150;
     }
 
     player.isActive = true;

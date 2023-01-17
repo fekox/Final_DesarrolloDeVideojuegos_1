@@ -50,7 +50,7 @@ struct Player
 
 Player CreatePlayer(int screenWidth, int screenHeight);
 
-void DrawPlayer(Player& player);
+void DrawPlayer(Player& player, bool& pause);
 
 void InitAnimations(Player& player);
 

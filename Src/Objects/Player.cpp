@@ -77,7 +77,7 @@ void InitAnimations(Player& player)
 	}
 }
 
-void DrawPlayer(Player& player)
+void DrawPlayer(Player& player, bool& pause)
 {
 	int texLimitWidth = 1070;
 	int texLimitHeight = 17;
@@ -85,92 +85,94 @@ void DrawPlayer(Player& player)
 	int repoTexX = 0;
 	int repoTexY = 0;
 
-	if (IsKeyDown(KEY_A))
+	if (pause == false)
 	{
-		repoTexX = 50;
-		repoTexY = 40;
-		player.goRight = false;
-		player.goLeft = true;
+		if (IsKeyDown(KEY_A))
+		{
+			repoTexX = 50;
+			repoTexY = 40;
+			player.goRight = false;
+			player.goLeft = true;
 
-		DrawTextureRec(player.texWalkLeft, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY}, WHITE);
-	}
+			DrawTextureRec(player.texWalkLeft, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+		}
 
-	if (IsKeyDown(KEY_D))
-	{
-		repoTexX = 60;
-		repoTexY = 40;
-		player.goRight = true;
-		player.goLeft = false;
-
-		DrawTextureRec(player.texWalkRight, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
-	}
-
-	if (IsKeyDown(KEY_W))
-	{
-		if (player.goRight == true)
+		if (IsKeyDown(KEY_D))
 		{
 			repoTexX = 60;
 			repoTexY = 40;
+			player.goRight = true;
+			player.goLeft = false;
 
-			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
-				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			DrawTextureRec(player.texWalkRight, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
 		}
 
-		if (player.goLeft == true)
+		if (IsKeyDown(KEY_W))
 		{
-			repoTexX = 55;
-			repoTexY = 40;
+			if (player.goRight == true)
+			{
+				repoTexX = 60;
+				repoTexY = 40;
 
-			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
-				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
+
+			if (player.goLeft == true)
+			{
+				repoTexX = 55;
+				repoTexY = 40;
+
+				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
 		}
-	}
 
-	if (IsKeyDown(KEY_S))
-	{
-		if (player.goRight == true)
+		if (IsKeyDown(KEY_S))
 		{
-			repoTexX = 60;
-			repoTexY = 40;
+			if (player.goRight == true)
+			{
+				repoTexX = 60;
+				repoTexY = 40;
 
-			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
-				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
+
+			if (player.goLeft == true)
+			{
+				repoTexX = 55;
+				repoTexY = 40;
+
+				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
 		}
 
-		if (player.goLeft == true)
+		if (!IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_S))
 		{
-			repoTexX = 55;
-			repoTexY = 40;
+			if (player.goRight == true)
+			{
+				repoTexX = 60;
+				repoTexY = 40;
 
-			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
-				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
+
+			if (player.goLeft == true)
+			{
+				repoTexX = 55;
+				repoTexY = 40;
+
+				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
+					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			}
+
 		}
-	}
-
-	if (!IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_S))
-	{
-		if (player.goRight == true)
-		{
-			repoTexX = 60;
-			repoTexY = 40;
-
-			DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
-				Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
-		}
-
-		if (player.goLeft == true)
-		{
-			repoTexX = 55;
-			repoTexY = 40;
-
-			DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
-			Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
-		}
-		
 	}
 
 	DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), BLANK);
-
 }
 
 void AddDead(Player& player)
