@@ -14,6 +14,9 @@ struct MenuButton
 
 	bool isActive;
 
+	int repoTexX;
+	int repoTexY;
+
 	Texture texture;
 
 	Color color;
