@@ -15,6 +15,7 @@
 #include "Objects/Enemy.h"
 #include "Objects/Obstacle.h"
 #include "Objects/Mouse.h"
+#include "Objects/Background.h"
 
 using namespace std;
 
@@ -134,6 +135,9 @@ int const maxPlatformsLv8 = 34;
 int const maxWalls = 2;
 Wall wall[maxWalls];
 
+//Background
+Background background;
+
 //Mouse
 Mouse mouse;
 
@@ -205,6 +209,15 @@ void InitGame(int screenWidth, int screenHeight)
     {
         wall[i] = CreateWall();
     }
+
+    //Background
+    background = CreateBackground();
+    
+    background.pos.x = 200;
+    background.pos.y = 0;
+    
+    background.width = 630;
+    background.height = 730;
 
     //Right Wall
     wall[0].pos.x = static_cast<float>(screenWidth / 1.25f);
@@ -550,6 +563,8 @@ void Draw()
     BeginDrawing();
 
     ClearBackground(BLACK);
+
+    DrawBackground(background, lvCounter);
     
     //Level 1
     if (lv1.isLvActive == true)
@@ -1407,6 +1422,9 @@ void UnloadData()
     {
         UnloadTexture(obstacles[i].tex);
     }
+
+    UnloadTexture(background.tex);
+    UnloadTexture(background.tex2);
 
     UnloadMusicStream(music);
 }

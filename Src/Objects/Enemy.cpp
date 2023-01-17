@@ -13,7 +13,7 @@ Enemy CreateEnemy()
 	enemy.hitPos.x = 0;
 	enemy.hitPos.y = 0;
 
-	enemy.widthHit = 80;
+	enemy.widthHit = 100;
 	enemy.heightHit = 20;
 
 	enemy.dir = MoveDir::Right;
@@ -26,7 +26,7 @@ Enemy CreateEnemy()
 	enemy.texWalkRight = LoadTexture("resources/Sprites/Seal_Right.png");
 
 	enemy.color = BLANK;
-	enemy.hitColor = BLANK;
+	enemy.hitColor = ORANGE;
 
 	return enemy;
 }
