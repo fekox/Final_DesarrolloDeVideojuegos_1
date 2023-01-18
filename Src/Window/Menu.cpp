@@ -300,7 +300,7 @@ void DrawControlls(Font gameFont, Texture subMenusBackground)
 
 	DrawTextEx(gameFont, "Controlls", { static_cast<float>(GetScreenWidth() / 2.8) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
 
-	DrawTextEx(gameFont, "PLAYER ONE", { static_cast<float>(GetScreenWidth() / 12) , static_cast<float>(GetScreenHeight() / 5) }, 50, 0, GOLD);
+	DrawTextEx(gameFont, "PLAYER", { static_cast<float>(GetScreenWidth() / 7) , static_cast<float>(GetScreenHeight() / 5) }, 50, 0, GOLD);
 
 	//Player One
 	DrawTextEx(gameFont, "move\tA D", { static_cast<float>(GetScreenWidth() / 8) , static_cast<float>(GetScreenHeight() / 3.5) }, 50, 0, WHITE);
