@@ -146,6 +146,12 @@ Mouse mouse;
 
 //Music
 Music music;
+float musicPitch = 0.9f;
+
+Sound nexLevel;
+Sound playerJump;
+Sound hitEnemy;
+Sound playerDead;
 
 //Font
 Font gameFont;
@@ -180,6 +186,25 @@ void InitGame(int screenWidth, int screenHeight)
     //Ui
     ui = CreateUi();
 
+    //Music and SFX
+    InitAudioDevice();
+
+    music = LoadMusicStream("resources/Music/Music.mp3");
+    music.looping = true;
+    PlayMusicStream(music);
+    SetMusicVolume(music, 0.5f);
+
+    nexLevel = LoadSound("resources/Music/Next_Level.mp3");
+    SetSoundVolume(nexLevel, 0.5f);
+
+    playerJump = LoadSound("resources/Music/Jump.mp3");
+    SetSoundVolume(playerJump, 0.5f);
+
+    hitEnemy = LoadSound("resources/Music/Hit_Enemy.mp3");
+    SetSoundVolume(hitEnemy, 0.5f);
+
+    playerDead = LoadSound("resources/Music/Player_Dead.mp3");
+    SetSoundVolume(playerDead, 0.5f);
 
     //Player
     player = CreatePlayer(screenWidth, screenHeight);
@@ -465,6 +490,9 @@ void GameLoop()
     {
         while (!WindowShouldClose() && gameOn)
         {
+            UpdateMusicStream(music);
+            SetMusicPitch(music, musicPitch);
+
             MouseMovement();
             MenuCollisions(mouse, optionSelect);
             MenuInputs(mouse, optionSelect, playGame);
@@ -894,6 +922,7 @@ void PlayerCollisionLimitUpAndDown(Player& players, int screenHeight)
 
     if (players.pos.y < static_cast<float>(screenHeight / screenHeight))
     {
+        PlaySound(nexLevel);
         players.pos.y = static_cast<float>(screenHeight);
     }
 }
@@ -932,11 +961,13 @@ void PlayerEnemyCollision(Player& players, Level& lvs, Enemy& enemy)
         {
             if (CheckCollisionRecRec(players.pos, players.width, players.height, enemy.hitPos, enemy.widthHit, enemy.heightHit))
             {
+                PlaySound(hitEnemy);
                 enemy.isActive = false;
             }
 
             if (CheckCollisionRecRec(players.pos, players.width, players.height, enemy.pos, enemy.width, enemy.height))
             {
+                PlaySound(playerDead);
                 players.isActive = false;
                 AddDead(players);
                 RestartGame();
@@ -951,6 +982,7 @@ void PlayerObstacleCollision(Player& players, Level& lvs, Obstacle& obstacle)
     {
         if (CheckCollisionRecRec(players.pos, players.width, players.height, obstacle.pos, obstacle.width, obstacle.height))
         {
+            PlaySound(playerDead);
             players.isActive = false;
             AddDead(players);
             RestartGame();
@@ -1021,6 +1053,7 @@ void PlayerMovement(Player& players)
         if (IsKeyDown(KEY_W))
         {
             players.canJump = false;
+            PlaySound(playerJump);
 
             if (players.canJump == false && cont > 0)
             {
@@ -1447,6 +1480,10 @@ void UnloadData()
 
     UnloadTexture(menuButton);
 
-
     UnloadMusicStream(music);
+
+    UnloadSound(playerJump);
+    UnloadSound(hitEnemy);
+    UnloadSound(nexLevel);
+    UnloadSound(playerDead);
 }

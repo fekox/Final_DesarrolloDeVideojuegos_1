@@ -60,6 +60,7 @@ void PauseMenusInputs(bool& gameOn, bool& playGame, int& optionSelect, bool& pau
         {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
+
                 pause = false;
                 pauseMenu.isActive = false;
                 ResumeMusicStream(music);
