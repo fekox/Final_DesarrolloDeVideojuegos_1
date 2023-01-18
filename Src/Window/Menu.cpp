@@ -328,7 +328,7 @@ void DrawRules(Font gameFont, Texture subMenusBackground)
 
 	DrawTextEx(gameFont, "RULES", { static_cast<float>(GetScreenWidth() / 2.5) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
 
-	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles\nand reach the finish line.",
+	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles,\nclimb the platforms and reach the top of the abyss.",
 		{ static_cast<float>(GetScreenWidth() / 12) , static_cast<float>(GetScreenHeight() / 4) }, 50, 0, WHITE);
 
 	//ReturnMenu Button
@@ -350,12 +350,24 @@ void DrawCredits(Font gameFont, Texture subMenusBackground)
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.5), static_cast<int>(GetScreenHeight() / 3.8), static_cast<int>(ichiolinkF.width), static_cast<int>(ichiolinkF.height), BLANK);
 	DrawTextEx(gameFont, "ITCH.IO", ichiolinkF.pos, static_cast<float>(ichiolinkF.size), 0, ichiolinkF.color);
 
-	DrawTextEx(gameFont, "FONT", { static_cast<float>(GetScreenWidth() / 2.3) , static_cast<float>(GetScreenHeight() / 2.6) }, 30, 0, GOLD);
+	DrawTextEx(gameFont, "FONT", { static_cast<float>(GetScreenWidth() / 6.5) , static_cast<float>(GetScreenHeight() / 2.6) }, 30, 0, GOLD);
 
-	DrawTextEx(gameFont, "SPRITES", { static_cast<float>(GetScreenWidth() / 2.6) , static_cast<float>(GetScreenHeight() / 1.9) }, 30, 0, GOLD);
+	DrawTextEx(gameFont, "https://www.dafont.com/es/rocket-vintage.font", { static_cast<float>(GetScreenWidth() / 12) , static_cast<float>(GetScreenHeight() / 2.3) }, 20, 0, WHITE);
+
+	DrawTextEx(gameFont, "SPRITES", { static_cast<float>(GetScreenWidth() / 1.3) , static_cast<float>(GetScreenHeight() / 2.6) }, 30, 0, GOLD);
+
+	DrawTextEx(gameFont, "https://www.pinterest.cl/pin/725149977490142903/", { static_cast<float>(GetScreenWidth() / 1.6) , static_cast<float>(GetScreenHeight() / 2.3) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://ar.pinterest.com/pin/640637115762309743/", { static_cast<float>(GetScreenWidth() / 1.6) , static_cast<float>(GetScreenHeight() / 2.15) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://spelunky.fyi/mods/m/penguin-skin-sprite-sheet/", { static_cast<float>(GetScreenWidth() / 1.6) , static_cast<float>(GetScreenHeight() / 2) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://forums.rpgmakerweb.com/index.php?threads/looking-for-sea-mammal-sprites.67753/#post-644773", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 1.9) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://www.deviantart.com/redballbomb/art/Giga-water-ice-effects-sprite-sheet-788776529", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 1.8) }, 20, 0, WHITE);
 
 	DrawTextEx(gameFont, "MUSIC", { static_cast<float>(GetScreenWidth() / 2.4) , static_cast<float>(GetScreenHeight() / 1.5) }, 30, 0, GOLD);
-
+	DrawTextEx(gameFont, "https://pixabay.com/music/christmas-sleigh-ride-snowflake-swing-10951/", { static_cast<float>(GetScreenWidth() / 4.5) , static_cast<float>(GetScreenHeight() / 1.4) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://www.youtube.com/watch?v=MFw3E6X5aoA", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 1.35) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://pixabay.com/sound-effects/cartoon-jump-6462/", { static_cast<float>(GetScreenWidth() / 3.4) , static_cast<float>(GetScreenHeight() / 1.3) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://pixabay.com/sound-effects/wrong-answer-126515/", { static_cast<float>(GetScreenWidth() / 3.4) , static_cast<float>(GetScreenHeight() / 1.25) }, 20, 0, WHITE);
+	DrawTextEx(gameFont, "https://pixabay.com/sound-effects/punch-2-37333/", { static_cast<float>(GetScreenWidth() / 3.4) , static_cast<float>(GetScreenHeight() / 1.2) }, 20, 0, WHITE);
 
 	//ReturnMenu Button
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.6), static_cast<int>(GetScreenHeight() / 1.12), static_cast<int>(returnMenu.width), static_cast<int>(returnMenu.height), BLANK);
