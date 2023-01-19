@@ -9,8 +9,6 @@ struct Wall
 	float width;
 	float height;
 
-	Texture tex;
-
 	Color color;
 };
 

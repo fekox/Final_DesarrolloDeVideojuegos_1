@@ -108,4 +108,76 @@
       <Filter>Src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Sprites\Background.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Background2.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Button.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Cursor.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\LeftBackground.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\MenuBackGround.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\PauseButtonOff.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\PauseButtonOn.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Penguin_Walk_Left.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Penguin_Walk_Right.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\RestartGameMenu.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\RightBackground.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Seal_Left.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Seal_Right.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\Stalactite.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="Resources\Sprites\SubMenusBackground.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Music\Hit_Enemy.mp3">
+      <Filter>Resources\Music</Filter>
+    </Media>
+    <Media Include="Resources\Music\Jump.mp3">
+      <Filter>Resources\Music</Filter>
+    </Media>
+    <Media Include="Resources\Music\Music.mp3">
+      <Filter>Resources\Music</Filter>
+    </Media>
+    <Media Include="Resources\Music\Next_Level.mp3">
+      <Filter>Resources\Music</Filter>
+    </Media>
+    <Media Include="Resources\Music\Player_Dead.mp3">
+      <Filter>Resources\Music</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Font\Rocket Vintage.otf">
+      <Filter>Resources\Font</Filter>
+    </Font>
+  </ItemGroup>
 </Project>

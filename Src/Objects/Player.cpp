@@ -71,9 +71,6 @@ void InitAnimations(Player& player)
 			player.frameSpeed = 1;
 
 			break;
-
-		default:
-		break;
 	}
 }
 

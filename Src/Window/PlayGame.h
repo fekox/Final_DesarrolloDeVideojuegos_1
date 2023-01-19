@@ -1,6 +1,18 @@
 #pragma once
 #include "raylib.h"
 
+enum class Levels
+{
+    one = 1,
+    two,
+    three,
+    four,
+    five, 
+    six,
+    seven,
+    eight
+};
+
 struct SubMenu
 {
     Vector2 pos;

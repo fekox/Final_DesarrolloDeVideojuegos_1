@@ -49,6 +49,34 @@
     <ClInclude Include="Src\Window\RestartMenu.h" />
     <ClInclude Include="Src\Window\Ui.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Sprites\Background.png" />
+    <Image Include="Resources\Sprites\Background2.png" />
+    <Image Include="Resources\Sprites\Button.png" />
+    <Image Include="Resources\Sprites\Cursor.png" />
+    <Image Include="Resources\Sprites\LeftBackground.png" />
+    <Image Include="Resources\Sprites\MenuBackGround.png" />
+    <Image Include="Resources\Sprites\PauseButtonOff.png" />
+    <Image Include="Resources\Sprites\PauseButtonOn.png" />
+    <Image Include="Resources\Sprites\Penguin_Walk_Left.png" />
+    <Image Include="Resources\Sprites\Penguin_Walk_Right.png" />
+    <Image Include="Resources\Sprites\RestartGameMenu.png" />
+    <Image Include="Resources\Sprites\RightBackground.png" />
+    <Image Include="Resources\Sprites\Seal_Left.png" />
+    <Image Include="Resources\Sprites\Seal_Right.png" />
+    <Image Include="Resources\Sprites\Stalactite.png" />
+    <Image Include="Resources\Sprites\SubMenusBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Music\Hit_Enemy.mp3" />
+    <Media Include="Resources\Music\Jump.mp3" />
+    <Media Include="Resources\Music\Music.mp3" />
+    <Media Include="Resources\Music\Next_Level.mp3" />
+    <Media Include="Resources\Music\Player_Dead.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Font\Rocket Vintage.otf" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

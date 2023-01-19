@@ -51,9 +51,9 @@ void PreviusLevel(int screenHeight);
 //Menu
 int optionSelect = 0;
 bool playGame = false;
+
 Texture menuBackground;
 Texture menuButton;
-
 Texture subMenusBackground;
 
 //Pause
@@ -148,7 +148,7 @@ Mouse mouse;
 Music music;
 float musicPitch = 0.9f;
 
-Sound nexLevel;
+Sound nextLevel;
 Sound playerJump;
 Sound hitEnemy;
 Sound playerDead;
@@ -194,8 +194,8 @@ void InitGame(int screenWidth, int screenHeight)
     PlayMusicStream(music);
     SetMusicVolume(music, 0.5f);
 
-    nexLevel = LoadSound("resources/Music/Next_Level.mp3");
-    SetSoundVolume(nexLevel, 0.5f);
+    nextLevel = LoadSound("resources/Music/Next_Level.mp3");
+    SetSoundVolume(nextLevel, 0.5f);
 
     playerJump = LoadSound("resources/Music/Jump.mp3");
     SetSoundVolume(playerJump, 0.5f);
@@ -922,7 +922,7 @@ void PlayerCollisionLimitUpAndDown(Player& players, int screenHeight)
 
     if (players.pos.y < static_cast<float>(screenHeight / screenHeight))
     {
-        PlaySound(nexLevel);
+        PlaySound(nextLevel);
         players.pos.y = static_cast<float>(screenHeight);
     }
 }
@@ -1008,6 +1008,8 @@ void PlayerMovement(Player& players)
     int texWidthLimitRight = 1070;
     int texWidthLimitLeft = 1070;
 
+    int frames = 60;
+
     players.frameCounter++;
 
     if (players.isActive == true && pause == false)
@@ -1016,7 +1018,7 @@ void PlayerMovement(Player& players)
         {
             players.pos.x -= players.speed * GetFrameTime();
 
-            if (players.frameCounter >= (60 / players.frameSpeed))
+            if (players.frameCounter >= (frames / players.frameSpeed))
             {
                 players.frameCounter = 0;
 
@@ -1035,7 +1037,7 @@ void PlayerMovement(Player& players)
         {
             players.pos.x += players.speed * GetFrameTime();
 
-            if (players.frameCounter >= (60 / players.frameSpeed))
+            if (players.frameCounter >= (frames / players.frameSpeed))
             {
                 players.frameCounter = 0;
 
@@ -1053,12 +1055,16 @@ void PlayerMovement(Player& players)
         if (IsKeyDown(KEY_W))
         {
             players.canJump = false;
-            PlaySound(playerJump);
 
             if (players.canJump == false && cont > 0)
             {
                 PlayerJump(player);
             }
+        }
+
+        if (IsKeyPressed(KEY_W))
+        {
+            PlaySound(playerJump);
         }
 
         if (player.canGoDown == true)
@@ -1186,8 +1192,11 @@ void NextLevel(int screenHeight)
     {
         lvCounter++;
 
-        if (lvCounter == 2)
+        switch (lvCounter)
         {
+
+        case static_cast<int>(Levels::two):
+
             lv1.isLvActive = false;
             lv2.isLvActive = true;
             lv3.isLvActive = false;
@@ -1196,10 +1205,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 3)
-        {
+            break;
+
+        case static_cast<int>(Levels::three):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = true;
@@ -1208,10 +1218,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 4)
-        {
+            break;
+
+        case static_cast<int>(Levels::four):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1220,10 +1231,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 5)
-        {
+            break;
+
+        case static_cast<int>(Levels::five):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1232,10 +1244,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 6)
-        {
+            break;
+
+        case static_cast<int>(Levels::six):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1244,10 +1257,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = true;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 7)
-        {
+            break;
+
+        case static_cast<int>(Levels::seven):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1256,10 +1270,11 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = true;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 8)
-        {
+            break;
+
+        case static_cast<int>(Levels::eight):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1268,6 +1283,8 @@ void NextLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = true;
+
+            break;
         }
     }
 }
@@ -1278,8 +1295,11 @@ void PreviusLevel(int screenHeight)
     {
         lvCounter--;
 
-        if (lvCounter == 1)
+        switch (lvCounter)
         {
+        
+        case static_cast<int>(Levels::one):
+
             lv1.isLvActive = true;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1288,10 +1308,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 2)
-        {
+            break;
+
+        case static_cast<int>(Levels::two):
+
             lv1.isLvActive = false;
             lv2.isLvActive = true;
             lv3.isLvActive = false;
@@ -1300,10 +1321,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 3)
-        {
+            break;
+
+        case static_cast<int>(Levels::three):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = true;
@@ -1312,10 +1334,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 4)
-        {
+            break;
+
+        case static_cast<int>(Levels::four):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1324,10 +1347,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 5)
-        {
+            break;
+
+        case static_cast<int>(Levels::five):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1336,10 +1360,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 6)
-        {
+            break;
+
+        case static_cast<int>(Levels::six):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1348,10 +1373,11 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = true;
             lv7.isLvActive = false;
             lv8.isLvActive = false;
-        }
 
-        if (lvCounter == 7)
-        {
+            break;
+
+        case static_cast<int>(Levels::seven):
+
             lv1.isLvActive = false;
             lv2.isLvActive = false;
             lv3.isLvActive = false;
@@ -1360,6 +1386,8 @@ void PreviusLevel(int screenHeight)
             lv6.isLvActive = false;
             lv7.isLvActive = true;
             lv8.isLvActive = false;
+
+            break;
         }
     }
 }
@@ -1484,6 +1512,6 @@ void UnloadData()
 
     UnloadSound(playerJump);
     UnloadSound(hitEnemy);
-    UnloadSound(nexLevel);
+    UnloadSound(nextLevel);
     UnloadSound(playerDead);
 }
