@@ -14,7 +14,6 @@ MenuButton ichiolinkF;
 void InitMenu()
 {
 	//Play Button
-
 	play.pos.x = static_cast<float>(GetScreenWidth() / 12);
 	play.pos.y = static_cast<float>(GetScreenHeight() / 3.2);
 	play.width = static_cast<float>(GetScreenWidth() / 9);
@@ -27,7 +26,6 @@ void InitMenu()
 	play.color = WHITE;
 
 	//Controlls Button
-
 	controlls.pos.x = static_cast<float>(GetScreenWidth() / 20);
 	controlls.pos.y = static_cast<float>(GetScreenHeight() / 2.35);
 	controlls.width = static_cast<float>(GetScreenWidth() / 5);
@@ -38,7 +36,6 @@ void InitMenu()
 	controlls.color = WHITE;
 
 	//Rules Button
-
 	rules.pos.x = static_cast<float>(GetScreenWidth() / 12);
 	rules.pos.y = static_cast<float>(GetScreenHeight() / 1.84);
 	rules.width = static_cast<float>(GetScreenWidth() / 8);
@@ -51,7 +48,6 @@ void InitMenu()
 	rules.color = WHITE;
 
 	//Credits Button
-
 	credits.pos.x = static_cast<float>(GetScreenWidth() / 1.5);
 	credits.pos.y = static_cast<float>(GetScreenHeight() / 1.1);
 	credits.width = static_cast<float>(GetScreenWidth() / 3.25);
@@ -63,7 +59,6 @@ void InitMenu()
 	credits.color = WHITE;
 
 	//Quit Button
-
 	quit.pos.x = static_cast<float>(GetScreenWidth() / 12);
 	quit.pos.y = static_cast<float>(GetScreenHeight() / 1.53);
 	quit.width = static_cast<float>(GetScreenWidth() / 10);
@@ -76,7 +71,6 @@ void InitMenu()
 	quit.color = WHITE;
 
 	//ReturnMenu Button
-
 	returnMenu.pos.x = static_cast<float>(GetScreenWidth() / 2.5);
 	returnMenu.pos.y = static_cast<float>(GetScreenHeight() / 1.1);
 	returnMenu.width = static_cast<float>(GetScreenWidth() / 8);
@@ -87,7 +81,6 @@ void InitMenu()
 	returnMenu.color = WHITE;
 
 	//itch.io Link Feko_Games
-
 	ichiolinkF.pos.x = static_cast<float>(GetScreenWidth() / 2.4);
 	ichiolinkF.pos.y = static_cast<float>(GetScreenHeight() / 3.5);
 	ichiolinkF.width = static_cast<float>(GetScreenWidth() / 6);
@@ -262,7 +255,6 @@ void DrawMenu(Font gameFont, Texture menuBackground, Texture buttonTex)
 	DrawTextEx(gameFont, "Climber", { static_cast<float>(GetScreenWidth() / 20) , static_cast<float>(GetScreenHeight() / 7) }, 80, 0, GOLD);
 
 	//Play Button
-
 	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - play.repoTexX, static_cast<int>(GetScreenHeight() / 3.5) + play.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 3.5), static_cast<int>(play.width), static_cast<int>(play.height), BLANK);
 	DrawTextEx(gameFont, "PLAY", play.pos, static_cast<float>(play.size), 0, play.color);
@@ -273,19 +265,16 @@ void DrawMenu(Font gameFont, Texture menuBackground, Texture buttonTex)
 	DrawTextEx(gameFont, "CONTROLLS", controlls.pos, static_cast<float>(controlls.size), 0, controlls.color);
 
 	//Rules Button
-
 	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - rules.repoTexX, static_cast<int>(GetScreenHeight() / 1.94) + rules.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 1.94), static_cast<int>(rules.width), static_cast<int>(rules.height), BLANK);
 	DrawTextEx(gameFont, "RULES", rules.pos, static_cast<float>(rules.size), 0, rules.color);
 
 	//Credits Button
-
 	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 1.5) - credits.repoTexX, static_cast<int>(GetScreenHeight() / 1.13), WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 1.5), static_cast<int>(GetScreenHeight() / 1.13), static_cast<int>(credits.width), static_cast<int>(credits.height), BLANK);
 	DrawTextEx(gameFont, "CREDITS", credits.pos, static_cast<float>(credits.size), 0, credits.color);
 
 	//Quit Button
-
 	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - quit.repoTexX, static_cast<int>(GetScreenHeight() / 1.59) + quit.repoTexY, WHITE);
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 1.59), static_cast<int>(quit.width), static_cast<int>(quit.height), BLANK);
 	DrawTextEx(gameFont, "QUIT", quit.pos, static_cast<float>(quit.size), 0, quit.color);
@@ -302,11 +291,10 @@ void DrawControlls(Font gameFont, Texture subMenusBackground)
 
 	DrawTextEx(gameFont, "PLAYER", { static_cast<float>(GetScreenWidth() / 7) , static_cast<float>(GetScreenHeight() / 5) }, 50, 0, GOLD);
 
-	//Player One
+	//Player
 	DrawTextEx(gameFont, "move\tA D", { static_cast<float>(GetScreenWidth() / 8) , static_cast<float>(GetScreenHeight() / 3.5) }, 50, 0, WHITE);
 	DrawTextEx(gameFont, "jump\t  W", { static_cast<float>(GetScreenWidth() / 8) , static_cast<float>(GetScreenHeight() / 2.8) }, 50, 0, WHITE);
 	DrawTextEx(gameFont, "down\t  S", { static_cast<float>(GetScreenWidth() / 8) , static_cast<float>(GetScreenHeight() / 2.4) }, 50, 0, WHITE);
-
 
 	//Pause
 	DrawTextEx(gameFont, "PAUSE", { static_cast<float>(GetScreenWidth() / 1.5) , static_cast<float>(GetScreenHeight() / 5) }, 50, 0, GOLD);
