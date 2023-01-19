@@ -8,26 +8,26 @@ void InitRestartMenu(SubMenu& restartMenu, Button& restartButton, Button& return
     //Restart menu
     restartMenu.width = 600;
     restartMenu.height = 500;
-    restartMenu.pos.x = static_cast<float>(screenWidth / 4.5);
-    restartMenu.pos.y = static_cast<float>(screenHeight / 4.5);
+    restartMenu.pos.x = static_cast<float>(screenWidth / 4.5f);
+    restartMenu.pos.y = static_cast<float>(screenHeight / 4.5f);
     restartMenu.isActive = false;
     restartMenu.texture = LoadTexture("resources/Sprites/RestartGameMenu.png");
 
     //Restart Button
-    restartButton.width = static_cast<float>(screenWidth / 2.2);
-    restartButton.height = static_cast<float>(screenHeight / 2.1);
+    restartButton.width = static_cast<float>(screenWidth / 2.2f);
+    restartButton.height = static_cast<float>(screenHeight / 2.1f);
     restartButton.size = 50;
     restartButton.color = WHITE;
 
     //Menu Button
-    returnMenuButton.width = static_cast<float>(screenWidth / 2.1);
-    returnMenuButton.height = static_cast<float>(screenHeight / 1.65);
+    returnMenuButton.width = static_cast<float>(screenWidth / 2.1f);
+    returnMenuButton.height = static_cast<float>(screenHeight / 1.65f);
     returnMenuButton.size = 50;
     returnMenuButton.color = WHITE;
 
     //Quit Button
-    quitGameButton.width = static_cast<float>(screenWidth / 2.1);
-    quitGameButton.height = static_cast<float>(screenHeight / 1.37);
+    quitGameButton.width = static_cast<float>(screenWidth / 2.1f);
+    quitGameButton.height = static_cast<float>(screenHeight / 1.37f);
     quitGameButton.size = 50;
     quitGameButton.color = WHITE;
 }
@@ -39,7 +39,7 @@ void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& playGame, bool& 
         pause = true;
 
         //Restart Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5f), static_cast<float>(screenHeight / 2.2f), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
         {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
@@ -49,7 +49,7 @@ void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& playGame, bool& 
         }
 
         //Return Menu Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.7), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5f), static_cast<float>(screenHeight / 1.7f), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
@@ -63,7 +63,7 @@ void RestartMenuInputs(SubMenu& restartMenu, bool& pause, bool& playGame, bool& 
         }
 
         //Quit Game Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.4), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5f), static_cast<float>(screenHeight / 1.4f), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             {
@@ -78,7 +78,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
     if (restartMenu.isActive)
     {
         //Restart Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.7), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 3.2), static_cast<float>(screenHeight / 10) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.7f), static_cast<float>(screenHeight / 2.2f), static_cast<float>(screenWidth / 3.2f), static_cast<float>(screenHeight / 10) }))
         {
             restartButton.color = RED;
         }
@@ -89,7 +89,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
         }
 
         //Return Menu Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.7), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5f), static_cast<float>(screenHeight / 1.7f), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
             returnMenuButton.color = RED;
         }
@@ -100,7 +100,7 @@ void RestarGameMenuCollisions(SubMenu& restartMenu, Button& restartButton, Butto
         }
 
         //Quit Game Button
-        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.4), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+        if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5f), static_cast<float>(screenHeight / 1.4f), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
         {
             quitGameButton.color = RED;
         }
@@ -121,20 +121,20 @@ void DrawRestarGameMenu(SubMenu& restartMenu, Button& restartButton, Button& ret
 
     if (PlayerWin(player, lvCounter))
     {
-        DrawTextEx(gameFont, "YOU WIN", { static_cast<float>(screenWidth / 2.4), static_cast<float>(screenHeight / 3.1) }, 70, 0, GOLD);
+        DrawTextEx(gameFont, "YOU WIN", { static_cast<float>(screenWidth / 2.4f), static_cast<float>(screenHeight / 3.1f) }, 70, 0, GOLD);
     }
 
 
     //Restart Button
-    DrawRectangle(static_cast<int>(screenWidth / 2.7), static_cast<int>(screenHeight / 2.2), static_cast<int>(screenWidth / 3.2), static_cast<int>(screenHeight / 10), BLANK);
+    DrawRectangle(static_cast<int>(screenWidth / 2.7f), static_cast<int>(screenHeight / 2.2f), static_cast<int>(screenWidth / 3.2f), static_cast<int>(screenHeight / 10), BLANK);
     DrawTextEx(gameFont, "RESTART", { static_cast<float>(restartButton.width), static_cast<float>(restartButton.height) }, static_cast<float>(restartButton.size), 0, restartButton.color);
 
 
     //Return Menu Button
-    DrawRectangle(static_cast<int>(screenWidth / 2.5), static_cast<int>(screenHeight / 1.7), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
+    DrawRectangle(static_cast<int>(screenWidth / 2.5f), static_cast<int>(screenHeight / 1.7f), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
     DrawTextEx(gameFont, "MENU", { static_cast<float>(returnMenuButton.width), static_cast<float>(returnMenuButton.height) }, static_cast<float>(returnMenuButton.size), 0, returnMenuButton.color);
 
     //Quit Game Button
-    DrawRectangle(static_cast<int>(screenWidth / 2.5), static_cast<int>(screenHeight / 1.4), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
+    DrawRectangle(static_cast<int>(screenWidth / 2.5f), static_cast<int>(screenHeight / 1.4f), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
     DrawTextEx(gameFont, "QUIT", { static_cast<float>(quitGameButton.width), static_cast<float>(quitGameButton.height) }, static_cast<float>(quitGameButton.size), 0, quitGameButton.color);
 }

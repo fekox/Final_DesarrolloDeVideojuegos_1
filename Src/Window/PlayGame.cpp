@@ -367,7 +367,7 @@ void InitPlatforms(int screenWidth, int screenHeight)
     platforms[1].pos.x = static_cast<float>(screenWidth / 5);
     platforms[1].pos.y = static_cast<float>(screenHeight / 1.5f);
 
-    platforms[2].pos.x = static_cast<float>(screenWidth / 2.1);
+    platforms[2].pos.x = static_cast<float>(screenWidth / 2.1f);
     platforms[2].pos.y = static_cast<float>(screenHeight / 2);
 
     platforms[3].pos.x = static_cast<float>(screenWidth / 3.8f);
@@ -382,7 +382,7 @@ void InitPlatforms(int screenWidth, int screenHeight)
     platforms[5].width = 650;
 
     platforms[6].pos.x = static_cast<float>(screenWidth / 6);
-    platforms[6].pos.y = static_cast<float>(screenHeight / 2.1);
+    platforms[6].pos.y = static_cast<float>(screenHeight / 2.1f);
     platforms[6].width = 650;
 
     platforms[7].pos.x = static_cast<float>(screenWidth / 6);
@@ -486,76 +486,74 @@ void GameLoop()
 
     bool gameOn = true;
 
-    if (gameOn == true)
+    while (!WindowShouldClose() && gameOn == true)
     {
-        while (!WindowShouldClose() && gameOn)
+        UpdateMusicStream(music);
+        SetMusicPitch(music, musicPitch);
+
+        MouseMovement();
+        MenuCollisions(mouse, optionSelect);
+        MenuInputs(mouse, optionSelect, playGame);
+
+        if (playGame == true)
         {
-            UpdateMusicStream(music);
-            SetMusicPitch(music, musicPitch);
+            PauseMenusInputs(gameOn, playGame, optionSelect, pause, restartMenu, pauseMenu, pauseButtonOff, pauseButtonOn, music, mouse, GetScreenWidth(), GetScreenHeight());
+            RestartMenuInputs(restartMenu, pause, playGame, gameOn, optionSelect, mouse, GetScreenWidth(), GetScreenHeight(), player);
 
-            MouseMovement();
-            MenuCollisions(mouse, optionSelect);
-            MenuInputs(mouse, optionSelect, playGame);
-
-            if (playGame == true)
+            if (!pause)
             {
-                PauseMenusInputs(gameOn, playGame, optionSelect, pause, restartMenu, pauseMenu, pauseButtonOff, pauseButtonOn, music, mouse, GetScreenWidth(), GetScreenHeight());
-                RestartMenuInputs(restartMenu, pause, playGame, gameOn, optionSelect, mouse, GetScreenWidth(), GetScreenHeight(), player);
-
-                if (!pause)
-                {
-                    Update();
-                }
-
-                PauseMenuCollisions(pauseMenu, mouse, resumeButton, returnMenuButton, quitGameButton, GetScreenWidth(), GetScreenHeight());
-                RestarGameMenuCollisions(restartMenu, restartButton, returnMenuButton, quitGameButton, mouse, GetScreenWidth(), GetScreenHeight());
+                Update();
             }
 
-            switch (optionSelect)
-            {
-            case static_cast<int>(Menu::MainMenu):
-                BeginDrawing();
-                ClearBackground(BLACK);
-                DrawMenu(gameFont, menuBackground, menuButton);
-                DrawMouse(mouse, mouse.mouseRec);
-                player.deadCount = 0;
-                EndDrawing();
-                break;
+            PauseMenuCollisions(pauseMenu, mouse, resumeButton, returnMenuButton, quitGameButton, GetScreenWidth(), GetScreenHeight());
+            RestarGameMenuCollisions(restartMenu, restartButton, returnMenuButton, quitGameButton, mouse, GetScreenWidth(), GetScreenHeight());
+        }
 
-            case static_cast<int>(Menu::Play):
-                Draw();
-                break;
+        switch (optionSelect)
+        {
+        case static_cast<int>(Menu::MainMenu):
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawMenu(gameFont, menuBackground, menuButton);
+            DrawMouse(mouse, mouse.mouseRec);
+            player.deadCount = 0;
+            EndDrawing();
+            break;
 
-            case static_cast<int>(Menu::Controlls):
-                BeginDrawing();
-                ClearBackground(BLACK);
-                DrawControlls(gameFont, subMenusBackground);
-                DrawMouse(mouse, mouse.mouseRec);
-                EndDrawing();
-                break;
+        case static_cast<int>(Menu::Play):
+            Draw();
+            break;
 
-            case static_cast<int>(Menu::Rules):
-                BeginDrawing();
-                ClearBackground(BLACK);
-                DrawRules(gameFont, subMenusBackground);
-                DrawMouse(mouse, mouse.mouseRec);
-                EndDrawing();
-                break;
+        case static_cast<int>(Menu::Controlls):
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawControlls(gameFont, subMenusBackground);
+            DrawMouse(mouse, mouse.mouseRec);
+            EndDrawing();
+            break;
 
-            case static_cast<int>(Menu::Credits):
-                BeginDrawing();
-                ClearBackground(BLACK);
-                DrawCredits(gameFont, subMenusBackground);
-                DrawMouse(mouse, mouse.mouseRec);
-                EndDrawing();
-                break;
+        case static_cast<int>(Menu::Rules):
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawRules(gameFont, subMenusBackground);
+            DrawMouse(mouse, mouse.mouseRec);
+            EndDrawing();
+            break;
 
-            case static_cast<int>(Menu::Quit):
-                gameOn = false;
-                break;
-            }
+        case static_cast<int>(Menu::Credits):
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawCredits(gameFont, subMenusBackground);
+            DrawMouse(mouse, mouse.mouseRec);
+            EndDrawing();
+            break;
+
+        case static_cast<int>(Menu::Quit):
+            gameOn = false;
+            break;
         }
     }
+    
 
     if (!gameOn)
     {
