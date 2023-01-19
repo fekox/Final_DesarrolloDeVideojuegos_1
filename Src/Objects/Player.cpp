@@ -35,7 +35,7 @@ Player CreatePlayer(int screenWidth, int screenHeight)
 	player.texWalkRight = LoadTexture("resources/Sprites/Penguin_Walk_Right.png");
 	player.texWalkLeft = LoadTexture("resources/Sprites/Penguin_Walk_Left.png");
 
-	player.color = WHITE;
+	player.color = BLANK;
 
 	return player;
 }
@@ -92,6 +92,7 @@ void DrawPlayer(Player& player, bool& pause)
 			player.goLeft = true;
 
 			DrawTextureRec(player.texWalkLeft, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 		}
 
 		if (IsKeyDown(KEY_D))
@@ -102,6 +103,7 @@ void DrawPlayer(Player& player, bool& pause)
 			player.goLeft = false;
 
 			DrawTextureRec(player.texWalkRight, player.frameRec, Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+			DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 		}
 
 		if (IsKeyDown(KEY_W))
@@ -113,6 +115,8 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
+
 			}
 
 			if (player.goLeft == true)
@@ -122,6 +126,7 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 			}
 		}
 
@@ -134,6 +139,7 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 			}
 
 			if (player.goLeft == true)
@@ -143,6 +149,7 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 			}
 		}
 
@@ -155,6 +162,7 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkRight, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkRight.width - texLimitWidth), static_cast<float>(player.texWalkRight.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 			}
 
 			if (player.goLeft == true)
@@ -164,6 +172,7 @@ void DrawPlayer(Player& player, bool& pause)
 
 				DrawTextureRec(player.texWalkLeft, Rectangle{ 0.0f, 0.0f, static_cast<float>(player.texWalkLeft.width - texLimitWidth), static_cast<float>(player.texWalkLeft.height - texLimitHeight) },
 					Vector2{ player.pos.x - repoTexX, player.pos.y - repoTexY }, WHITE);
+				DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), static_cast<int>(player.width), static_cast<int>(player.height), player.color);
 			}
 
 		}

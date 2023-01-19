@@ -328,7 +328,7 @@ void DrawRules(Font gameFont, Texture subMenusBackground)
 
 	DrawTextEx(gameFont, "RULES", { static_cast<float>(GetScreenWidth() / 2.5) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
 
-	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles,\nclimb the platforms and reach the top of the abyss.",
+	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles,\nclimb the platforms and reach the top of the abyss.\n\nPD: If you step on an enemy you kill him.",
 		{ static_cast<float>(GetScreenWidth() / 12) , static_cast<float>(GetScreenHeight() / 4) }, 50, 0, WHITE);
 
 	//ReturnMenu Button

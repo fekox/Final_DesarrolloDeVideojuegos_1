@@ -678,7 +678,10 @@ void Draw()
         }
     }
 
-    DrawPlayer(player, pause);
+    if (player.isActive == true)
+    {
+        DrawPlayer(player, pause);
+    }
 
     //Enemy
     //Lv2
@@ -1407,7 +1410,7 @@ void RestartGame()
     lv8.isLvActive = false;
 
     player.pos.x = static_cast<float>(GetScreenWidth() / 2.1f);
-    player.pos.y = static_cast<float>(GetScreenHeight() / 1.2f);
+    player.pos.y = static_cast<float>(GetScreenHeight() / 1.24f);
 
     //Enemies
     for (int i = 0; i < maxEnemies; i++)
