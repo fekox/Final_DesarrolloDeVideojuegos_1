@@ -1,7 +1,5 @@
 #include "Window/Menu.h"
 
-#include "Window/PlayGame.h"
-
 MenuButton play;
 MenuButton controlls;
 MenuButton rules;

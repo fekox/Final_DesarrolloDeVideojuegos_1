@@ -1,7 +1,5 @@
 #include "Window/PauseMenu.h"
 
-#include "Window/RestartMenu.h"
-
 #include "Objects/Mouse.h"
 
 void InitPauseMenu(SubMenu& pauseMenu, Button& pauseButtonOff, Button& pauseButtonOn, Button& resumeButton, Button& returnMenuButton, Button& quitGameButton, int screenWidth, int screenHeight)

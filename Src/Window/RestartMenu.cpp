@@ -1,7 +1,4 @@
 #include "Window/RestartMenu.h"
-#include "Window/PlayGame.h"
-
-#include "Objects/Player.h"
 
 void InitRestartMenu(SubMenu& restartMenu, Button& restartButton, Button& returnMenuButton, Button& quitGameButton, int screenWidth, int screenHeight)
 {

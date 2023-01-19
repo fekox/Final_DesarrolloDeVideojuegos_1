@@ -1,7 +1,5 @@
 #include "Objects/Player.h"
 
-#include "Window/LevelManager.h"
-
 Player CreatePlayer(int screenWidth, int screenHeight)
 {
 	Player player;

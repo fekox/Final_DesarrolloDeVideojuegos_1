@@ -2,10 +2,6 @@
 
 #include "raylib.h"
 
-#include "Objects/Wall.h"
-
-#include "Window/LevelManager.h"
-
 enum class PlayerAnimations
 {
 	WalkRight,
