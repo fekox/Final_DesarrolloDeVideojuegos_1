@@ -38,4 +38,5 @@ struct Enemy
 };
 
 Enemy CreateEnemy();
+
 void DrawEnemy(Enemy& enemy, Level& lv);
