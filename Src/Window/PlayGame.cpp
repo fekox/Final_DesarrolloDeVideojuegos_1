@@ -45,7 +45,6 @@ void MouseMovement();
 void NextLevel(int screenHeight);
 void PreviusLevel(int screenHeight);
 
-
 //Menu
 int optionSelect = 0;
 bool playGame = false;
