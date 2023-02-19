@@ -285,7 +285,7 @@ void DrawControlls(Font gameFont, Texture subMenusBackground)
 	//Sub Menu Background
 	DrawTexture(subMenusBackground, 0, 0, WHITE);
 
-	DrawTextEx(gameFont, "Controlls", { static_cast<float>(GetScreenWidth() / 2.8f) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
+	DrawTextEx(gameFont, "Controls", { static_cast<float>(GetScreenWidth() / 2.8f) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
 
 	DrawTextEx(gameFont, "PLAYER", { static_cast<float>(GetScreenWidth() / 7) , static_cast<float>(GetScreenHeight() / 5) }, 50, 0, GOLD);
 
@@ -314,7 +314,7 @@ void DrawRules(Font gameFont, Texture subMenusBackground)
 
 	DrawTextEx(gameFont, "RULES", { static_cast<float>(GetScreenWidth() / 2.5f) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, GOLD);
 
-	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles,\nclimb the platforms and reach the top of the abyss.\n\nPD: If you step on an enemy you kill him.",
+	DrawTextEx(gameFont, "Help this little penguin to return to his family, if you\ncollide with an enemy or an obstacle you will have\nto start over. To win you must overcome all obstacles,\nclimb the platforms and reach the top of the abyss.\n\nRemember: if you step on an enemy you kill him.",
 		{ static_cast<float>(GetScreenWidth() / 12) , static_cast<float>(GetScreenHeight() / 4) }, 50, 0, WHITE);
 
 	//ReturnMenu Button
