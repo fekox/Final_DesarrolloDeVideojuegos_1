@@ -23,7 +23,7 @@ void InitMenu()
 
 	play.color = WHITE;
 
-	//Controlls Button
+	//Controls Button
 	controlls.pos.x = static_cast<float>(GetScreenWidth() / 20);
 	controlls.pos.y = static_cast<float>(GetScreenHeight() / 2.35f);
 	controlls.width = static_cast<float>(GetScreenWidth() / 5);
@@ -102,7 +102,7 @@ void MenuCollisions(Mouse& mouse, int& optionSelect)
 		play.color = WHITE;
 	}
 
-	//Controlls Button
+	//Controls Button
 	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 22), static_cast<float>(GetScreenHeight() / 2.5f), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		controlls.color = RED;
@@ -185,7 +185,7 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 			}
 		}
 
-		//Controlls Button
+		//Controls Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 22), static_cast<float>(GetScreenHeight() / 2.5f), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }))
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
@@ -257,10 +257,10 @@ void DrawMenu(Font gameFont, Texture menuBackground, Texture buttonTex)
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 14), static_cast<int>(GetScreenHeight() / 3.5), static_cast<int>(play.width), static_cast<int>(play.height), BLANK);
 	DrawTextEx(gameFont, "PLAY", play.pos, static_cast<float>(play.size), 0, play.color);
 
-	//Controlls Button
-	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 22), static_cast<int>(GetScreenHeight() / 2.5), WHITE);
-	DrawRectangle(static_cast<int>(GetScreenWidth() / 22), static_cast<int>(GetScreenHeight() / 2.5f), static_cast<int>(controlls.width), static_cast<int>(controlls.height), BLANK);
-	DrawTextEx(gameFont, "CONTROLLS", controlls.pos, static_cast<float>(controlls.size), 0, controlls.color);
+	//Controls Button
+	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 30), static_cast<int>(GetScreenHeight() / 2.5), WHITE);
+	DrawRectangle(static_cast<int>(GetScreenWidth() / 30), static_cast<int>(GetScreenHeight() / 2.5f), static_cast<int>(controlls.width), static_cast<int>(controlls.height), BLANK);
+	DrawTextEx(gameFont, "CONTROLS", controlls.pos, static_cast<float>(controlls.size), 0, controlls.color);
 
 	//Rules Button
 	DrawTexture(buttonTex, static_cast<int>(GetScreenWidth() / 14) - rules.repoTexX, static_cast<int>(GetScreenHeight() / 1.94f) + rules.repoTexY, WHITE);
