@@ -1,5 +1,5 @@
 # Pingu Climber V1.0
-College final project made whit raylib in c++.
+College final project made with raylib in c++.
 
 # Web page of the developer who work on the project:
 ## itch.io: https://feco-games.itch.io/
